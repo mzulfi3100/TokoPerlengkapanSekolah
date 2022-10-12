@@ -21,18 +21,17 @@ class Login extends BaseController
     public function process()
     {
         $users = new UsersModel();
-        $username = $this->request->getVar('username');
+        $email = $this->request->getVar('email');
         $password = $this->request->getVar('password');
         $dataUser = $users->where([
-            'username' => $username,
+            'email' => $email,
         ])->first();
         if ($dataUser) {
             if (password_verify($password, $dataUser->password)) {
                 session()->set([
-                    'username' => $dataUser->username,
-                    'name' => $dataUser->name,
-                    'telpon' => $dataUser->telpon,
                     'email' => $dataUser->email,
+                    'first' => $dataUser->first,
+                    'last' => $dataUser->last,
                     'logged_in' => TRUE
                 ]);
                 return redirect()->to(base_url('dashboard'));

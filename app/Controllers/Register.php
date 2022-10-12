@@ -12,18 +12,18 @@ class Register extends BaseController
             'title' => 'Registrasi Akun',
         ];
 
-        return view('RegisterPage/index');
+        return view('loginPage/register');
     }
  
     public function process()
     {
         if (!$this->validate([
-            'username' => [
-                'rules' => 'required|min_length[4]|max_length[20]|is_unique[users.username]',
+            'email' => [
+                'rules' => 'required|min_length[4]|max_length[40]|is_unique[users.email]',
                 'errors' => [
                     'required' => '{field} Harus diisi',
                     'min_length' => '{field} Minimal 4 Karakter',
-                    'max_length' => '{field} Maksimal 20 Karakter',
+                    'max_length' => '{field} Maksimal 40 Karakter',
                     'is_unique' => 'Username sudah digunakan sebelumnya'
                 ]
             ],
@@ -41,7 +41,7 @@ class Register extends BaseController
                     'matches' => 'Konfirmasi Password tidak sesuai dengan password',
                 ]
             ],
-            'name' => [
+            'first' => [
                 'rules' => 'required|min_length[4]|max_length[100]',
                 'errors' => [
                     'required' => '{field} Harus diisi',
@@ -49,33 +49,24 @@ class Register extends BaseController
                     'max_length' => '{field} Maksimal 100 Karakter',
                 ]
             ],
-            'telpon' => [
+            'last' => [
                 'rules' => 'required|min_length[4]|max_length[100]',
                 'errors' => [
                     'required' => '{field} Harus diisi',
                     'min_length' => '{field} Minimal 4 Karakter',
                     'max_length' => '{field} Maksimal 100 Karakter',
                 ]
-            ],
-            'email' => [
-                'rules' => 'required|min_length[4]|max_length[100]',
-                'errors' => [
-                    'required' => '{field} Harus diisi',
-                    'min_length' => '{field} Minimal 4 Karakter',
-                    'max_length' => '{field} Maksimal 100 Karakter',
-                ]
-            ],
+            ]
         ])) {
             session()->setFlashdata('error', $this->validator->listErrors());
             return redirect()->back()->withInput();
         }
         $users = new UsersModel();
         $users->insert([
-            'username' => $this->request->getVar('username'),
-            'password' => password_hash($this->request->getVar('password'), PASSWORD_BCRYPT),
-            'name' => $this->request->getVar('name'),
-            'telpon' => $this->request->getVar('telpon'),
             'email' => $this->request->getVar('email'),
+            'password' => password_hash($this->request->getVar('password'), PASSWORD_BCRYPT),
+            'first' => $this->request->getVar('first'),
+            'last' => $this->request->getVar('last'),
         ]);
         return redirect()->to('/login');
     }
