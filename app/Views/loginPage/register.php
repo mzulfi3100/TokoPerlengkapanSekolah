@@ -15,55 +15,64 @@
 </head>
 
 <body class="img js-fullheight" style="background-color:	#41b54a">
-    <section class="ftco-section">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-6 text-center mb-5">
-                    <h2 class="heading-section">Register</h2>
-                </div>
+    <?php if (!empty(session()->getFlashdata('error'))) : ?>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <h4>Periksa Kembali Entrian Form Anda !</h4>
+            </hr />
+            <?php echo session()->getFlashdata('error'); ?>
             </div>
-            <div class="row justify-content-center">
-                <div class="col-md-6 col-lg-4">
-                    <div class="login-wrap p-0">
-                        <form action="#" class="signin-form">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="First Name" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Last Name" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Email" required>
-                            </div>
-                            <div class="form-group">
-                                <input id="password-field" type="password" class="form-control" placeholder="Password"
-                                    required>
-                                <span toggle="#password-field"
-                                    class="fa fa-fw fa-eye field-icon toggle-password"></span>
-                            </div>
-                            <div class="form-group">
-                                <input id="password-field" type="password" class="form-control"
-                                    placeholder="Confirm Password" required>
-                                <span toggle="#password-field"
-                                    class="fa fa-fw fa-eye field-icon toggle-password"></span>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="form-control btn btn-primary submit px-3">Sign Up</button>
-                            </div>
-                        </form>
-                        <p class="w-100 text-center">Have an account? <a href="<?= base_url(); ?>/"> Sign
-                                Up </a> </p>
+    <?php endif; ?>
+    <form method="post" action="<?= base_url(); ?>/register/process">
+    <?= csrf_field(); ?>
+        <section class="ftco-section">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-6 text-center mb-5">
+                        <h2 class="heading-section">Register</h2>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="login-wrap p-0">
+                            <form action="#" class="signin-form">
+                                <div class="form-group">
+                                    <input id="first" name="first" type="text" class="form-control" placeholder="First Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <input id="last" name="last" type="text" class="form-control" placeholder="Last Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <input id="email" name="email" type="text" class="form-control" placeholder="Email" required>
+                                </div>
+                                <div class="form-group">
+                                    <input id="password" name="password" type="password" class="form-control" placeholder="Password"
+                                        required>
+                                    <span toggle="#password"
+                                        class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input id="password_conf" name="password_conf" type="password" class="form-control"
+                                        placeholder="Confirm Password" required>
+                                    <span toggle="#password_conf"
+                                        class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="form-control btn btn-primary submit px-3">Sign Up</button>
+                                </div>
+                            </form>
+                            <p class="w-100 text-center">Have an account? <a href="<?= base_url(); ?>/"> Sign
+                                    Up </a> </p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <script src="/Assets/js/jquery.min.js"></script>
-    <script src="/Assets/js/popper.js"></script>
-    <script src="/Assets/js/bootstrap.min.js"></script>
-    <script src="/Assets/js/main.js"></script>
-
+        <script src="/Assets/js/jquery.min.js"></script>
+        <script src="/Assets/js/popper.js"></script>
+        <script src="/Assets/js/bootstrap.min.js"></script>
+        <script src="/Assets/js/main.js"></script>
+    </form>
 </body>
 
 </html>

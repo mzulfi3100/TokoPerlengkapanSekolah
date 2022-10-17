@@ -9,7 +9,7 @@ class Users extends Migration
     public function up()
 	{
 		$this->forge->addField([
-			'username'          => [
+			'email'          => [
 				'type'           => 'VARCHAR',
 				'constraint'     => '100',
 			],
@@ -17,15 +17,11 @@ class Users extends Migration
 				'type'           => 'VARCHAR',
 				'constraint'     => '100',
 			],
-			'name'       => [
+			'first'       => [
 				'type'           => 'VARCHAR',
 				'constraint'     => '100',
 			],
-            'telpon'       => [
-				'type'           => 'VARCHAR',
-				'constraint'     => '100',
-			],
-            'email'       => [
+            'last'       => [
 				'type'           => 'VARCHAR',
 				'constraint'     => '100',
 			],
@@ -39,7 +35,7 @@ class Users extends Migration
 			]
  
 		]);
-		$this->forge->addPrimaryKey('username', true);
+		$this->forge->addPrimaryKey('email', true);
 		$this->forge->createTable('users');
 	}
  
