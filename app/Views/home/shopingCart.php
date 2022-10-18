@@ -248,18 +248,18 @@
                                     <th class="shoping__product">Products</th>
                                     <th>Price</th>
                                     <th>Quantity</th>
-                                    <th>Total</th>
+                                    <th>Sub Total</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td class="shoping__cart__item">
-                                        <img src="/Assets/img/cart/cart-1.jpg" alt="">
-                                        <h5>Vegetable’s Package</h5>
+                                        <img src="/Assets/img/featured/feature-1.jpg" alt="" width="200" height="200">
+                                        <h5>Shoes</h5>
                                     </td>
                                     <td class="shoping__cart__price">
-                                        $55.00
+                                    Rp 300.000
                                     </td>
                                     <td class="shoping__cart__quantity">
                                         <div class="quantity">
@@ -269,7 +269,7 @@
                                         </div>
                                     </td>
                                     <td class="shoping__cart__total">
-                                        $110.00
+                                    Rp 300.000
                                     </td>
                                     <td class="shoping__cart__item__close">
                                         <span class="icon_close"></span>
@@ -277,11 +277,11 @@
                                 </tr>
                                 <tr>
                                     <td class="shoping__cart__item">
-                                        <img src="/Assets/img/cart/cart-2.jpg" alt="">
-                                        <h5>Fresh Garden Vegetable</h5>
+                                        <img src="/Assets/img/featured/feature-2.jpg" alt="" width="200" height="200">
+                                        <h5>Backpack</h5>
                                     </td>
                                     <td class="shoping__cart__price">
-                                        $39.00
+                                    Rp 250.000
                                     </td>
                                     <td class="shoping__cart__quantity">
                                         <div class="quantity">
@@ -291,7 +291,7 @@
                                         </div>
                                     </td>
                                     <td class="shoping__cart__total">
-                                        $39.99
+                                    Rp 250.000
                                     </td>
                                     <td class="shoping__cart__item__close">
                                         <span class="icon_close"></span>
@@ -299,21 +299,21 @@
                                 </tr>
                                 <tr>
                                     <td class="shoping__cart__item">
-                                        <img src="/Assets/img/cart/cart-3.jpg" alt="">
-                                        <h5>Organic Bananas</h5>
+                                        <img src="/Assets/img/featured/feature-3.jpg" alt="" width="200" height="200">
+                                        <h5>Pencil</h5>
                                     </td>
                                     <td class="shoping__cart__price">
-                                        $69.00
+                                    Rp 5.000
                                     </td>
                                     <td class="shoping__cart__quantity">
                                         <div class="quantity">
                                             <div class="pro-qty">
-                                                <input type="text" value="1">
+                                                <input type="text" value="5">
                                             </div>
                                         </div>
                                     </td>
                                     <td class="shoping__cart__total">
-                                        $69.99
+                                    Rp 25.000
                                     </td>
                                     <td class="shoping__cart__item__close">
                                         <span class="icon_close"></span>
@@ -327,9 +327,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns">
-                        <a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
-                        <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
-                            Upadate Cart</a>
+                        <a href="<?= base_url(); ?>" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                        <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon-loading"></span>
+                            Update Cart</a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -347,8 +347,13 @@
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
                         <ul>
-                            <li>Subtotal <span>$454.98</span></li>
-                            <li>Total <span>$454.98</span></li>
+                            <li>Subtotal <span>Rp 300.000
+                            </span></li>
+                            <li> <span>Rp 250.000
+                            </span>
+                            <li> <span>Rp 25.000 
+                            </span>
+                            <li>Total <span>Rp 575.000</span></li>
                         </ul>
                         <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>
@@ -357,7 +362,7 @@
         </div>
     </section>
     <!-- Shoping Cart Section End -->
-
+    
     <!-- Footer Section Begin -->
     <footer class="footer spad">
         <div class="container">
