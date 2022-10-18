@@ -46,4 +46,9 @@ class PelangganController extends BaseController
 
         return view('pelanggan/index', $data);
     }
+
+    public function beli_produk()
+    {
+        return view('pelanggan/beli_produk');
+    }
 }
