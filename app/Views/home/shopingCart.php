@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zxx">
-
 <head>
     <script src="https://kit.fontawesome.com/8200f31639.js" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
