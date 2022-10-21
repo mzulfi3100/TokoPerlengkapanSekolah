@@ -52,6 +52,13 @@ $routes->get('/register', 'Register::index');
 $routes->get('/login', 'Login::index');
 $routes->post('/register/process', 'Register::process');
 $routes->post('/login/process', 'Login::process');
+$routes->get('/shopGrid', 'Home::shopGrid');
+$routes->get('/contact', 'Home::contact');
+$routes->get('/checkout', 'Home::checkout');
+$routes->get('/blog', 'Home::blog');
+$routes->get('/blogDetails', 'Home::blogDetails');
+$routes->get('/shopingCart', 'Home::shopingCart');
+$routes->get('/shopDetails', 'Home::shopDetails');
 // $routes->get('/logout', 'Login::logout');
 /*
  * --------------------------------------------------------------------

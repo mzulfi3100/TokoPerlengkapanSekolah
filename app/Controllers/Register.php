@@ -12,7 +12,7 @@ class Register extends BaseController
             'title' => 'Registrasi Akun',
         ];
 
-        return view('loginPage/register');
+        return view('home/register');
     }
  
     public function process()

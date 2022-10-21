@@ -6,10 +6,34 @@ class Home extends BaseController
 {
     public function index()
     {
-        return view('loginPage/index');
+        return view('home/landing_page');
     }
-    public function register()
+    public function shopGrid()
     {
-        return view('loginPage/register');
+        return view('home/shopGrid');
+    }
+    public function contact()
+    {
+        return view('home/contact');
+    }
+    public function blog()
+    {
+        return view('home/blog');
+    }
+    public function blogDetails()
+    {
+        return view('home/blogDetails');
+    }
+    public function checkout()
+    {
+        return view('home/checkout');
+    }
+    public function shopDetails()
+    {
+        return view('home/shopDetails');
+    }
+    public function shopingCart()
+    {
+        return view('home/shopingCart');
     }
 }

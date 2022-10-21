@@ -53,13 +53,13 @@
                 </ul>
             </div>
             <div class="header__top__right__auth">
-                <a href="<?= base_url(); ?>/loginRegister"><i class="fa fa-user"></i> Login</a>
+                <a href="<?= base_url(); ?>/login"><i class="fa fa-user"></i> Login</a>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
                 <li class="active"><a href="#">Home</a></li>
-                <li><a href="<?= base_url(); ?>/shopGrid">Shop</a></li>
+                <li><a href="<?= base_url(); ?>/dashboard">Shop</a></li>
                 <li><a href=" #">Pages</a>
                     <ul class="header__menu__dropdown">
                         <li><a href="<?= base_url(); ?>/shopDetails">Shop Details</a></li>
@@ -119,7 +119,7 @@
                                 </ul>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="<?= base_url(); ?>/loginRegister"><i class="fa fa-user"></i> Login</a>
+                                <a href="<?= base_url(); ?>/login"><i class="fa fa-user"></i> Login</a>
                             </div>
                         </div>
                     </div>
@@ -137,7 +137,7 @@
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="<?= base_url(); ?>/">Home</a></li>
-                            <li><a href="<?= base_url(); ?>/shopGrid">Shop</a></li>
+                            <li><a href="<?= base_url(); ?>/dashboard">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="<?= base_url(); ?>/shopDetails">Shop Details</a></li>
@@ -655,12 +655,12 @@
                         </div>
                         <div class="blog__item__text">
                             <ul>
-                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                                <li><i class="fa fa-calendar-o"></i> June 4,2022</li>
                                 <li><i class="fa fa-comment-o"></i> 5</li>
                             </ul>
-                            <h5><a href="<?= base_url(); ?>/blog">Cooking tips make cooking simple</a>
+                            <h5><a href="<?= base_url(); ?>/blog">Tips choosing backpack for children</a>
                             </h5>
-                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt, repellat. </p>
                         </div>
                     </div>
                 </div>

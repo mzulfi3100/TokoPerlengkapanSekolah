@@ -15,7 +15,7 @@ class Login extends BaseController
         // return view('templates/header', $data)
         // . view('loginPage/index', $data)
         // . view('templates/footer');
-        return view('loginPage/index');
+        return view('home/loginRegister');
     }
  
     public function process()
