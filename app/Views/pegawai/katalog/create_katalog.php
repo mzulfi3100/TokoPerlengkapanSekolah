@@ -6,6 +6,16 @@
       <input type="varchar" name="nama_produk" class="form-control" id="nama_produk" >
     </div>
     <div class="form-group">
+      <label for="kategori_produk">Kategori Produk</label>
+      <select class="form-control" name="kategori_produk" id="kategori_produk">
+        <option>- Pilih Kategori -</option>
+        <option value="tas">Tas</option>
+        <option value="seragam">Seragam</option>
+        <option value="sepatu">Sepatu</option>
+        <option value="alat_tulis">Alat Tulis</option>
+      </select>
+    </div>
+    <div class="form-group">
       <label for="harga_produk">Harga Produk</label>
       <input type="int" name="harga_produk" class="form-control" id="harga_produk" >
     </div>
@@ -16,6 +26,14 @@
     <div class="form-group">
       <label for="deskripsi_produk">Deskripsi Produk</label>
       <textarea type="textarea" name="deskripsi_produk" class="form-control" id="deskripsi_produk" ></textarea>
+    </div>
+    <div class="form-group">
+      <label for="featured_produk">Featured Produk</label>
+      <select class="form-control" name="featured_produk" id="featured_produk">
+        <option>- Pilih  -</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
     </div>
     <div class="form-group">
       <label for="image">Upload Gambar</label>

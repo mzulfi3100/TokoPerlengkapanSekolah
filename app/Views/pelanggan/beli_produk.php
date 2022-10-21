@@ -19,7 +19,7 @@
     <div class="card mb-3">
         <div class="row no-gutters">
             <div class="col-md-2">
-                <img src="uploads/1666314520_01616b5cec31a301d81e.jpg" style="max-width: 180px; max-height: 180px">
+                <img src="uploads/penggaris.jpg" style="max-width: 180px; max-height: 180px">
             </div>
             <div class="col-md-9">
             <div class="checkout__card__body">

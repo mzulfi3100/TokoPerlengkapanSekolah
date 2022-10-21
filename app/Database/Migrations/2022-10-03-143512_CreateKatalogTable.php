@@ -17,7 +17,11 @@ class CreateCatalogTable extends Migration
             ],
             'nama_produk' => [
                 'type'       => 'VARCHAR',
-                'constraint' => '10',
+                'constraint' => '100',
+            ],
+            'kategori_produk' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '100',
             ],
             'harga_produk' => [
                 'type'       => 'INT',
@@ -33,6 +37,10 @@ class CreateCatalogTable extends Migration
             'gambar_produk' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '255',
+            ],
+            'featured_produk' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '10',
             ]
         ]);
         $this->forge->addKey('id_produk', true);

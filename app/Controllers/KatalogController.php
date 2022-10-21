@@ -47,6 +47,7 @@ class KatalogController extends BaseController
     {
         if(!$this->validate([
             'nama_produk' => 'required|string',
+            'kategori_produk' => 'required|string',
             'harga_produk' => 'required|numeric',
             'stok_produk' => 'required|numeric',
             'deskripsi_produk' => 'required|string',
@@ -74,10 +75,12 @@ class KatalogController extends BaseController
 
         $data = [
             'nama_produk' => $this->request->getPost('nama_produk'),
+            'kategori_produk' => $this->request->getPost('kategori_produk'),
             'harga_produk' => $this->request->getPost('harga_produk'),
             'stok_produk' => $this->request->getPost('stok_produk'),
             'deskripsi_produk' => $this->request->getPost('deskripsi_produk'),
             'gambar_produk' => $gambar_produk,
+            'featured_produk' => $this->request->getPost('featured_produk'),
         ];  
         $katalogModel->save($data);
 
@@ -110,6 +113,7 @@ class KatalogController extends BaseController
     {
         if(!$this->validate([
             'nama_produk' => 'required|string',
+            'kategori_produk' => 'required|string',
             'harga_produk' => 'required|numeric',
             'stok_produk' => 'required|numeric',
             'deskripsi_produk' => 'required|string',
@@ -120,9 +124,11 @@ class KatalogController extends BaseController
         $katalogModel = new Katalog();
         $data = [
             'nama_produk' => $this->request->getPost('nama_produk'),
+            'kategori_produk' => $this->request->getPost('kategori_produk'),
             'harga_produk' => $this->request->getPost('harga_produk'),
             'stok_produk' => $this->request->getPost('stok_produk'),
             'deskripsi_produk' => $this->request->getPost('deskripsi_produk'),
+            'featured_produk' => $this->request->getPost('featured_produk'),
         ];
         $katalogModel->update($id_produk, $data);
 

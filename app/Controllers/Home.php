@@ -2,11 +2,19 @@
 
 namespace App\Controllers;
 
+use App\Models\Katalog;
+
 class Home extends BaseController
 {
     public function index()
     {
-        return view('home/landing_page');
+        $katalogModel = new Katalog();
+        $katalog = $katalogModel -> findAll();
+        $data = [
+            'katalog' => $katalog,
+        ];
+
+        return view('home/landing_page', $data);
     }
     public function shopGrid()
     {
