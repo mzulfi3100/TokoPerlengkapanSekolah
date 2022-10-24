@@ -51,4 +51,17 @@ class PelangganController extends BaseController
     {
         return view('pelanggan/beli_produk');
     }
+
+    public function kategori()
+    {
+        $katalogModel = new katalog();
+        $kategori = $this->request->getGet('kategori');
+        $katalog = $katalogModel -> where('kategori_produk', $kategori) -> findAll();
+
+        $data = [
+            'katalog' => $katalog
+        ];
+
+        return view('pelanggan/index', $data);
+    }
 }
