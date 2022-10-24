@@ -32,8 +32,6 @@ $routes->set404Override();
  * Route Definitions
  * --------------------------------------------------------------------
  */
-$routes->get('/', 'Home::index');
-$routes->get('/register', 'Home::register');
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
@@ -45,9 +43,9 @@ $routes->get('/edit_katalog/(:num)', 'KatalogController::edit_katalog/$1');
 $routes->post('/update_katalog/(:num)', 'KatalogController::update_katalog/$1');
 $routes->delete('/delete_katalog/(:num)', 'KatalogController::delete_katalog/$1');
 $routes->get('/dashboard', 'PelangganController::index');
-$routes->get('/beli_produk', 'PelangganController::beli_produk');
 $routes->get('/dashboard_cari', 'PelangganController::cari');
 $routes->post('/dashboard_search', 'PelangganController::search');
+$routes->get('/beli_produk', 'PelangganController::beli_produk');
 $routes->get('/register', 'Register::index');
 $routes->get('/login', 'Login::index');
 $routes->post('/register/process', 'Register::process');
@@ -59,7 +57,9 @@ $routes->get('/blog', 'Home::blog');
 $routes->get('/blogDetails', 'Home::blogDetails');
 $routes->get('/shopingCart', 'Home::shopingCart');
 $routes->get('/shopDetails', 'Home::shopDetails');
-// $routes->get('/logout', 'Login::logout');
+$routes->get('/dashboard_kategori', 'PelangganController::kategori');
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
