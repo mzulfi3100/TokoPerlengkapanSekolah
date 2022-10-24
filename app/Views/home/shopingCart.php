@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
-    <script src="https://kit.fontawesome.com/8200f31639.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/0cf2f14756.js" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="description" content="Ogani Template">
     <meta name="keywords" content="Ogani, unica, creative, html">
