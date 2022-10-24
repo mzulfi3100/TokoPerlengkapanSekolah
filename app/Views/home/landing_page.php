@@ -176,16 +176,25 @@
                     <div class="hero__categories">
                         <div class="hero__categories__all">
                             <i class="fa fa-bars"></i>
-                            <span>All departments</span>
+                            <span>Kategori Produk</span>
                         </div>
                         <ul>
-                            <li><a href="#">Stationery</a></li>
-                            <li><a href="#">Uniform</a></li>
-                            <li><a href="#">Shoes</a></li>
-                            <li><a href="#">Backpack</a></li>
-                            <li><a href="#">Belt</a></li>
-                            <li><a href="#">Tie</a></li>
-                            <li><a href="#">Hat</a></li>
+                            <form id="input1" action="/dashboard_kategori" method="get">
+                                <input type="hidden" name="kategori" id="kategori" value="alat_tulis">
+                                <li><a href="javascript:;" onclick="document.getElementById('input1').submit();">Alat Tulis</a></li>
+                            </form>
+                            <form id="input2" action="/dashboard_kategori" method="get">
+                                <input type="hidden" name="kategori" id="kategori" value="seragam">
+                                <li><a href="javascript:;" onclick="document.getElementById('input2').submit();">Seragam</a></li>
+                            </form>
+                            <form id="input3" action="/dashboard_kategori" method="get">
+                                <input type="hidden" name="kategori" id="kategori" value="sepatu">
+                                <li><a href="javascript:;" onclick="document.getElementById('input3').submit();">Sepatu</a></li>
+                            </form>
+                            <form id="input4" action="/dashboard_kategori" method="get">
+                                <input type="hidden" name="kategori" id="kategori" value="tas">
+                                <li><a href="javascript:;" onclick="document.getElementById('input4').submit();">Tas</a></li>
+                            </form>
                         </ul>
                     </div>
                 </div>
@@ -234,32 +243,34 @@
                 <div class="categories__slider owl-carousel">
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="/Assets/img/categories/cat-1.jpg">
-                            <h5><a href="#">Shoes</a></h5>
+                        <form id="input3" action="/dashboard_kategori" method="get">
+                                <input type="hidden" name="kategori" id="kategori" value="sepatu">
+                                <h5><a href="javascript:;" onclick="document.getElementById('input3').submit();">Sepatu</a></h5>
+                            </form>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="/Assets/img/categories/cat-2.jpg">
-                            <h5><a href="#">Stationery</a></h5>
+                        <form id="input1" action="/dashboard_kategori" method="get">
+                                <input type="hidden" name="kategori" id="kategori" value="alat_tulis">
+                                <h5><a href="javascript:;" onclick="document.getElementById('input1').submit();">Alat Tulis</a></h5>
+                            </form>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="/Assets/img/categories/cat-3.jpg">
-                            <h5><a href="#">Backpack</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="/Assets/img/categories/cat-4.jpg">
-                            <h5><a href="#">Belt</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="/Assets/img/categories/cat-5.jpg">
-                            <h5><a href="#">Hat</a></h5>
+                            <form id="input4" action="/dashboard_kategori" method="get">
+                                <input type="hidden" name="kategori" id="kategori" value="tas">
+                                <h5><a href="javascript:;" onclick="document.getElementById('input4').submit();">Tas</a></h5>
+                            </form>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="/Assets/img/categories/cat-6.jpg">
-                            <h5><a href="#">Uniform</a></h5>
+                        <form id="input2" action="/dashboard_kategori" method="get">
+                                <input type="hidden" name="kategori" id="kategori" value="seragam">
+                                <h5><a href="javascript:;" onclick="document.getElementById('input2').submit();">Seragam</a></h5>
+                            </form>
                         </div>
                     </div>
                 </div>
