@@ -352,64 +352,22 @@
                     <div class="latest-product__text">
                         <h4>Latest Products</h4>
                         <div class="latest-product__slider owl-carousel">
-                            <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="/Assets/img/latest-product/lp-1.jpg" alt="">
+                            <?php $count = 0 ?>
+                            <?php foreach($katalog as $ktg): ?>
+                            <?php if( $count =! 0){ ?>
+                                <div class="latest-product__slider__item">
+                                <a href="dashboard_cari?cari=<?= $ktg['nama_produk'] ?>" class="latest-product__item">
+                                    <div class="latest-product__item__pic"> 
+                                        <img src="/uploads/<?=$ktg['gambar_produk']?>" style="height: 110px; width: 110px;">
                                     </div>
                                     <div class="latest-product__item__text">
-                                        <h6>Rurel</h6>
-                                        <span>Rp 20.000</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="/Assets/img/latest-product/lp-2.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Book</h6>
-                                        <span>Rp 8.000</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="/Assets/img/latest-product/lp-3.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Blue Shoes</h6>
-                                        <span>Rp 220.000</span>
+                                        <h6><?= $ktg['nama_produk'] ?></h6>
+                                        <span><?= "Rp ".number_format($ktg['harga_produk'],0,',','.')?></span>
                                     </div>
                                 </a>
                             </div>
-                            <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="/Assets/img/latest-product/lp-4.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Eraser</h6>
-                                        <span>Rp 2.000</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="/Assets/img/latest-product/lp-5.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Pencil Case</h6>
-                                        <span>Rp 25.000</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="/Assets/img/latest-product/lp-6.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Sharpener</h6>
-                                        <span>Rp 15.000</span>
-                                    </div>
-                                </a>
-                            </div>
+                            <?php $count++;} ?>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                 </div>
