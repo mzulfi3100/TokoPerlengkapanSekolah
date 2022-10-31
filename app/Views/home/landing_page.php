@@ -337,14 +337,18 @@
                                     //option
                                     echo form_hidden('gambar', $ktg['gambar_produk']); ?>
                                     <div class="featured__item__pic set-bg" data-setbg="/uploads/<?=$ktg['gambar_produk']?>">
-
+                                    <ul class="featured__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                        <script src="https://kit.fontawesome.com/72ae031378.js" crossorigin="anonymous"></script>
+                                        <button type="submit"><li type="submit"><a href><i class="fa fa-shopping-cart"></i></a></li></button>
+                                    </ul>
                                     </div>
+                                    <?php echo form_close(); ?>
                                     <div class="featured__item__text">
                                         <h6><a href="#"><?= $ktg['nama_produk'] ?></a></h6>
                                         <h5><?= "Rp ".number_format($ktg['harga_produk'],0,',','.')?></h5>
-                                    <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-shopping-basket"></i>Add</button>
                                     </div>
-                                    <?php echo form_close(); ?>
                                 </div>
                             </div>
                     <?php $count++; }  ?>
