@@ -152,12 +152,27 @@
                     </nav>
                 </div>
                 <div class="col-lg-3">
+                    <?php
+                    $keranjang = $cart->contents();
+                    $jml_cartBarang = 0;
+                    foreach ($keranjang as $key){
+                        $jml_cartBarang = $jml_cartBarang + $key['qty'];
+                    }
+                    ?>
+                    <?php
+                    $keranjang = $cart->contents();
+                    $totalCart = 0;
+                    foreach ($keranjang as $dps){
+                        $totalCart = $totalCart + $dps['subtotal'];
+                    }
+                    ?>
                     <div class="header__cart">
                         <ul>
                             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="shopingCart"><i class="fa fa-shopping-bag"></i> <span><?= $jml_cartBarang ?></span></a></li>
+
                         </ul>
-                        <div class="header__cart__price">item: <span>Rp 150.000</span></div>
+                        <div class="header__cart__price"><span><?= "Rp ".number_format($totalCart,0,',','.')?></span></div>
                     </div>
                 </div>
             </div>
