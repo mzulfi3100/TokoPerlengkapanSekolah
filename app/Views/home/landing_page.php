@@ -134,6 +134,15 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
+                    <div class="col-lg-12">
+                    <?php
+                    if (session()->getflashdata('pesan')){
+                        echo'<div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
+                        echo session()->getflashdata('pesan').(' Berhasil Dimasukkan Kedalam Keranjang');
+                        echo'</div>';
+                    }?>
+                    </div>
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="<?= base_url(); ?>/">Home</a></li>
