@@ -181,7 +181,7 @@
                             <li><a href="shopingCart"><i class="fa fa-shopping-bag"></i> <span><?= $jml_cartBarang ?></span></a></li>
 
                         </ul>
-                        <div class="header__cart__price"><span><?= "Rp ".number_format($totalCart,0,',','.')?></span></div>
+                        <div class="header__cart__price"><span><?= " Total Harga (Rp ".number_format($totalCart,0,',','.').")"?></span></div>
                     </div>
                 </div>
             </div>
