@@ -324,22 +324,27 @@
                 </div>
             </div>
             <div class="row featured__filter">
-                <?php $count = 1 ?>
-                <?php foreach($katalog as $ktg) : ?>
+            <?php $count = 1 ?>
+                <?php foreach($katalog as $ktg ) : ?>
                     <?php 
                         if($ktg['featured_produk'] == "yes" && $count <= 20){ ?>
                             <div class="col-lg-3 col-md-4 col-sm-6 mix <?= ($ktg['kategori_produk']) ?>">
                                 <div class="featured__item">
+                                    <?php echo form_open('home/add');
+                                    echo form_hidden('id', $ktg['id_produk']);
+                                    echo form_hidden('price', $ktg['harga_produk']);
+                                    echo form_hidden('name', $ktg['nama_produk']);
+                                    //option
+                                    echo form_hidden('gambar', $ktg['gambar_produk']); ?>
                                     <div class="featured__item__pic set-bg" data-setbg="/uploads/<?=$ktg['gambar_produk']?>">
-                                        <ul class="featured__item__pic__hover">
-                                            <li><a href="/beli_produk"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <li><a href="/shopDetails"><i class="fa fa-info-circle"></i></a></li>
-                                        </ul>
+
                                     </div>
                                     <div class="featured__item__text">
                                         <h6><a href="#"><?= $ktg['nama_produk'] ?></a></h6>
                                         <h5><?= "Rp ".number_format($ktg['harga_produk'],0,',','.')?></h5>
+                                    <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-shopping-basket"></i>Add</button>
                                     </div>
+                                    <?php echo form_close(); ?>
                                 </div>
                             </div>
                     <?php $count++; }  ?>
