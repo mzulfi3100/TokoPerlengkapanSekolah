@@ -7,6 +7,11 @@ use App\Models\Katalog;
 
 class PelangganController extends BaseController
 {
+    public function __construct()
+    {
+        helper(['form', 'url']);
+    }
+
     public function index()
     {
         $katalogModel = new Katalog();
@@ -18,7 +23,8 @@ class PelangganController extends BaseController
             'section_navbar_title3' => null,
             'section_navbar_title4' => null,
             'section_navbar_title5' => null,
-            'katalog' => $katalog
+            'katalog' => $katalog,
+            'cart' => \Config\Services::cart(),
         ];
 
         return view('pelanggan/index', $data);
@@ -36,7 +42,8 @@ class PelangganController extends BaseController
             'section_navbar_title3' => null,
             'section_navbar_title4' => null,
             'section_navbar_title5' => null,
-            'katalog' => $katalog
+            'katalog' => $katalog,
+            'cart' => \Config\Services::cart(),
         ];
 
         return view('pelanggan/index', $data);
@@ -56,7 +63,8 @@ class PelangganController extends BaseController
             'section_navbar_title3' => null,
             'section_navbar_title4' => null,
             'section_navbar_title5' => null,
-            'katalog' => $katalog
+            'katalog' => $katalog,
+            'cart' => \Config\Services::cart(),
         ];
 
         return view('pelanggan/index', $data);
@@ -86,7 +94,8 @@ class PelangganController extends BaseController
             'section_navbar_title3' => null,
             'section_navbar_title4' => null,
             'section_navbar_title5' => null,
-            'katalog' => $katalog
+            'katalog' => $katalog,
+            'cart' => \Config\Services::cart(),
         ];
 
         return view('pelanggan/index', $data);

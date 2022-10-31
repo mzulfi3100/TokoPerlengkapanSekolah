@@ -45,7 +45,6 @@ $routes->delete('/delete_katalog/(:num)', 'KatalogController::delete_katalog/$1'
 $routes->get('/dashboard', 'PelangganController::index');
 $routes->get('/dashboard_cari', 'PelangganController::cari');
 $routes->post('/dashboard_search', 'PelangganController::search');
-$routes->get('/beli_produk', 'PelangganController::beli_produk');
 $routes->get('/register', 'Register::index');
 $routes->get('/login', 'Login::index');
 $routes->post('/register/process', 'Register::process');

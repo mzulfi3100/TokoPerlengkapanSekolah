@@ -45,8 +45,16 @@
                             <h8 class="mt-3 text-primary"><?= "Stok: ".$ktg['stok_produk'] ?></h8>
                         </div>
                         <div class="card-footer">
-                            <a href="/beli_produk" style="width:100%" class="btn btn-primary">Beli</a>
-                            <a href="/shopDetails" style="width:100%" class="mt-3 btn btn-success">Detail</a>
+                            <?php echo form_open('home/add');
+                                echo form_hidden('id', $ktg['id_produk']);
+                                echo form_hidden('price', $ktg['harga_produk']);
+                                echo form_hidden('name', $ktg['nama_produk']);
+                                //option
+                                echo form_hidden('gambar', $ktg['gambar_produk']); ?>
+                                <button type="submit" class="mt-3 btn-success" style="width:100%">Tambah Keranjang</button>
+                                <a href="/shopDetails" style="width:100%" class="mt-3 btn btn-success">Detail</a>
+                            <?php echo form_close(); ?>
+                            
                         </div>
                     </div>
                 </div>
