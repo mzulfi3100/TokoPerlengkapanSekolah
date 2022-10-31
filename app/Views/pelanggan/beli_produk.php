@@ -1,4 +1,4 @@
-<?= $this->extend('pelanggan/topnav')?>
+<?= $this->extend('layout/template')?>
 <?= $this->section('content')?>
 <!DOCTYPE html>
 <html lang="zxx">

@@ -13,6 +13,11 @@ class PelangganController extends BaseController
         $katalog = $katalogModel -> findAll();
 
         $data = [
+            'section_navbar_title1' => null,
+            'section_navbar_title2' => 'active',
+            'section_navbar_title3' => null,
+            'section_navbar_title4' => null,
+            'section_navbar_title5' => null,
             'katalog' => $katalog
         ];
 
@@ -26,6 +31,11 @@ class PelangganController extends BaseController
         $katalog = $katalogModel->where('nama_produk', $cari)->findAll();
 
         $data = [
+            'section_navbar_title1' => null,
+            'section_navbar_title2' => 'active',
+            'section_navbar_title3' => null,
+            'section_navbar_title4' => null,
+            'section_navbar_title5' => null,
             'katalog' => $katalog
         ];
 
@@ -41,6 +51,11 @@ class PelangganController extends BaseController
         $katalog = $katalogModel->where($sql)->findAll();
 
         $data = [
+            'section_navbar_title1' => null,
+            'section_navbar_title2' => 'active',
+            'section_navbar_title3' => null,
+            'section_navbar_title4' => null,
+            'section_navbar_title5' => null,
             'katalog' => $katalog
         ];
 
@@ -49,7 +64,14 @@ class PelangganController extends BaseController
 
     public function beli_produk()
     {
-        return view('pelanggan/beli_produk');
+        $data = [
+            'section_navbar_title1' => null,
+            'section_navbar_title2' => 'active',
+            'section_navbar_title3' => null,
+            'section_navbar_title4' => null,
+            'section_navbar_title5' => null,
+        ];
+        return view('pelanggan/beli_produk', $data);
     }
 
     public function kategori()
@@ -59,6 +81,11 @@ class PelangganController extends BaseController
         $katalog = $katalogModel -> where('kategori_produk', $kategori) -> findAll();
 
         $data = [
+            'section_navbar_title1' => null,
+            'section_navbar_title2' => 'active',
+            'section_navbar_title3' => null,
+            'section_navbar_title4' => null,
+            'section_navbar_title5' => null,
             'katalog' => $katalog
         ];
 

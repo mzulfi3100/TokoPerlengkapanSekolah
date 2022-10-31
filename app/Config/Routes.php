@@ -58,6 +58,15 @@ $routes->get('/blogDetails', 'Home::blogDetails');
 $routes->get('/shopingCart', 'Home::shopingCart');
 $routes->get('/shopDetails', 'Home::shopDetails');
 $routes->get('/dashboard_kategori', 'PelangganController::kategori');
+$routes->get('/admin', 'Home::admin');
+$routes->get('/categoriesSection', 'Home::categoriesSection');
+$routes->get('/data_categories/(:num)', 'Home::data_categories/$1');
+$routes->get('/edit_categories/(:num)', 'Home::edit_categories/$1');
+$routes->get('/delete_categories/(:num)', 'Home::delete_categories/$1');
+$routes->post('/update_categories', 'Home::update_categories');
+$routes->get('/add_categories', 'Home::add_categories');
+$routes->post('/categories_proses', 'Home::categories_proses');
+$routes->post('/categories_update_proses', 'Home::categories_update_proses');
 
 
 /*

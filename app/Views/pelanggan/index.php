@@ -1,10 +1,11 @@
-<?= $this->extend('pelanggan/topnav')?>
+<?= $this->extend('/layout/template')?>
 <?= $this->section('content')?>
 <!doctype html>
 <html>
 <head>
 </head>
 <body>
+    <div class="p-5">
     <div class="container">
         <div class="row">
             <div class="col-md-2 bg-light bg-white">
@@ -51,5 +52,7 @@
                 </div>
             <?php endforeach; ?>
         </div>
+    </div>
+    </div>
 </body>
 <?= $this->endSection() ?>
