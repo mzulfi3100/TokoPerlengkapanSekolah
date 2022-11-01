@@ -14,10 +14,10 @@ class productsfoundController extends BaseController
 
         $data = [
             'section_navbar_title1' => null,
-            'section_navbar_title2' => 'active',
+            'section_navbar_title2' => null,
             'section_navbar_title3' => null,
             'section_navbar_title4' => null,
-            'section_navbar_title5' => null,
+            'section_navbar_title5' => 'active',
             'file' => $file,
         ];
         return view('productFound/foundSection', $data);
