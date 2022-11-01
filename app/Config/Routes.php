@@ -50,11 +50,11 @@ $routes->get('/login', 'Login::index');
 $routes->post('/register/process', 'Register::process');
 $routes->post('/login/process', 'Login::process');
 $routes->get('/shopGrid', 'Home::shopGrid');
+$routes->get('/shopingCart', 'ShopingCartController::index');
 $routes->get('/contact', 'Home::contact');
 $routes->get('/checkout', 'Home::checkout');
 $routes->get('/blog', 'Home::blog');
 $routes->get('/blogDetails', 'Home::blogDetails');
-$routes->get('/shopingCart', 'Home::shopingCart');
 $routes->get('/shopDetails', 'Home::shopDetails');
 $routes->get('/dashboard_kategori', 'PelangganController::kategori');
 $routes->get('/admin', 'Home::admin');
@@ -68,7 +68,7 @@ $routes->post('/categories_proses', 'Home::categories_proses');
 $routes->post('/categories_update_proses', 'Home::categories_update_proses');
 $routes->get('/getcity', 'Home::getCity');
 $routes->get('/getcost', 'Home::getCost');
-//Crud Shopping Cart
+
 $routes->get('home', 'Home::index');
 $routes->post('home', 'Home::index');
 $routes->get('home/cek', 'Home::cek');
@@ -81,6 +81,7 @@ $routes->get('/cek', 'Home::cek');
 $routes->post('/cek', 'Home::cek');
 $routes->get('/add', 'Home::add');
 $routes->post('/add', 'Home::add');
+
 
 
 /*
