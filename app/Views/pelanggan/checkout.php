@@ -137,10 +137,6 @@
                 <div class="row">
                     <div class="col-lg-8 col-md-6">
                         <div class="checkout__input">
-                            <p>Jumlah Pembelian<span>*</span></p>
-                            <input type="number" min="1" placeholder="Jumlah Pembelian">
-                        </div>
-                        <div class="checkout__input">
                             <p>Alamat<span>*</span></p>
                             <input type="text" placeholder="Jalan" class="checkout__input__add">
                             <input type="text" placeholder="Keterangan (opsional)">
@@ -172,12 +168,12 @@
                             <h4>Pesananmu</h4>
                             <div class="checkout__order__products">Produk <span>Total</span></div>
                             <ul>
-                                <li>Ongkir <span>Rp 15.000</span></li>
-                                <li>Harga Produk<span>Rp 200.000</span></li>
-                                <li>Jumlah Pembelian<span>5 </span></li>
+                                <li>Ongkir <span id="total_ongkir"> </span></li>
+
+                                <li>Produk <span>Rp 200.000</span></li>
                             </ul>
                             <div class="checkout__order__subtotal">Total Harga <span>1.015.000</span></div>
-                            <button type="submit" class="site-btn">PESAN</button>
+                            <button type="submit" class="site-btn">BAYAR</button>
                         </div>
                     </div>
                 </div>
@@ -188,77 +184,77 @@
 
 <!-- Footer Section Begin -->
 <footer class="footer spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="footer__about">
-                        <div class="footer__about__logo">
-                            <a href="#"><img src="/Assets/img/logo.png" alt=""></a>
-                        </div>
-                        <ul>
-                            <li>Address: Bandarlampung</li>
-                            <li>Phone: +62 851 6233 6233</li>
-                            <li>Email: schoolshop@gmail.com</li>
-                        </ul>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="footer__about">
+                    <div class="footer__about__logo">
+                        <a href="#"><img src="/Assets/img/logo.png" alt=""></a>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
-                    <div class="footer__widget">
-                        <h6>Useful Links</h6>
-                        <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">About Our Shop</a></li>
-                            <li><a href="#">Secure Shopping</a></li>
-                            <li><a href="#">Delivery infomation</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Our Sitemap</a></li>
-                        </ul>
-                        <ul>
-                            <li><a href="#">Who We Are</a></li>
-                            <li><a href="#">Our Services</a></li>
-                            <li><a href="#">Projects</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">Innovation</a></li>
-                            <li><a href="#">Testimonials</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12">
-                    <div class="footer__widget">
-                        <h6>Join Our Newsletter Now</h6>
-                        <p>Get E-mail updates about our latest shop and special offers.</p>
-                        <form action="#">
-                            <input type="text" placeholder="Enter your mail">
-                            <button type="submit" class="site-btn">Subscribe</button>
-                        </form>
-                        <div class="footer__widget__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
-                        </div>
-                    </div>
+                    <ul>
+                        <li>Address: Bandarlampung</li>
+                        <li>Phone: +62 851 6233 6233</li>
+                        <li>Email: schoolshop@gmail.com</li>
+                    </ul>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="footer__copyright">
-                        <div class="footer__copyright__text">
-                            <p>
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                Copyright &copy;<script>
-                                document.write(new Date().getFullYear());
-                                </script> All rights reserved | This page is made with <i class="fa fa-heart"
-                                    aria-hidden="true"></i> by <a href="#" target="_blank">SCHOOLSHOP</a>
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            </p>
-                        </div>
-                        <div class="footer__copyright__payment"><img src="/Assets/img/payment-item.png" alt=""></div>
+            <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+                <div class="footer__widget">
+                    <h6>Useful Links</h6>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">About Our Shop</a></li>
+                        <li><a href="#">Secure Shopping</a></li>
+                        <li><a href="#">Delivery infomation</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Our Sitemap</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="#">Who We Are</a></li>
+                        <li><a href="#">Our Services</a></li>
+                        <li><a href="#">Projects</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Innovation</a></li>
+                        <li><a href="#">Testimonials</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="footer__widget">
+                    <h6>Join Our Newsletter Now</h6>
+                    <p>Get E-mail updates about our latest shop and special offers.</p>
+                    <form action="#">
+                        <input type="text" placeholder="Enter your mail">
+                        <button type="submit" class="site-btn">Subscribe</button>
+                    </form>
+                    <div class="footer__widget__social">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-pinterest"></i></a>
                     </div>
                 </div>
             </div>
         </div>
-    </footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="footer__copyright">
+                    <div class="footer__copyright__text">
+                        <p>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;<script>
+                            document.write(new Date().getFullYear());
+                            </script> All rights reserved | This page is made with <i class="fa fa-heart"
+                                aria-hidden="true"></i> by <a href="#" target="_blank">SCHOOLSHOP</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                    <div class="footer__copyright__payment"><img src="/Assets/img/payment-item.png" alt=""></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
     <!-- Footer Section End -->
     
     <!-- Js Plugins -->
@@ -273,6 +269,7 @@
 
     <script>
     $('document').ready(function(){
+        var ongkir = 0;
         $("#provinsi").on('change', function(){
             $('#kabupaten').empty();
             var id_province = $(this).val();
@@ -291,9 +288,42 @@
                         $('#kabupaten').append($("<option>").val(results[i]['city_id']).text(results[i]['city_name']));
                     }   
 
-                }
+                },
             });
-        })
+        });
+        $('#kabupaten').on('change', function(){
+            var id_city = $(this).val();
+            $.ajax({
+                url : "<?= base_url('getcost')?>",
+                type : 'GET',
+                data : {
+                    'origin': 21,
+                    'destination': id_city,
+                    'weight': 1000,
+                    'courier': 'jne',
+                },
+                dataType : 'json',
+                success : function(data){
+                    console.log(data);
+                    var results = data["rajaongkir"]["results"][0]["costs"];
+					for(var i = 0; i<results.length; i++)
+					{
+						var text = results[i]["description"]+"("+results[i]["service"]+")";
+						$("#jasa").append($('<option>',{
+							value : results[i]["cost"][0]["value"],
+							text : text,
+							etd : results[i]["cost"][0]["etd"]
+						}));
+					}
+                    
+                },
+            });
+        });
+        $('#jasa').on('change', function(){
+            var estimasi = $('option:selected', this).attr('etd');
+            ongkir = parseInt($(this).val());
+            $("#total_ongkir").append("Rp " + ongkir);
+        });
     });
     </script>
 
