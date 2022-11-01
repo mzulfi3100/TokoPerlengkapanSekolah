@@ -66,6 +66,7 @@ $routes->post('/update_categories', 'Home::update_categories');
 $routes->get('/add_categories', 'Home::add_categories');
 $routes->post('/categories_proses', 'Home::categories_proses');
 $routes->post('/categories_update_proses', 'Home::categories_update_proses');
+$routes->get('/getcity', 'Home::getCity');
 
 
 /*

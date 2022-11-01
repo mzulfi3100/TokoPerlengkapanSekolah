@@ -3,13 +3,18 @@
 namespace App\Controllers;
 
 use App\Models\Katalog;
+use App\Models\categoriesModel;
 
 class Home extends BaseController
 {
+    private $url = "https://api.rajaongkir.com/starter/";
+    private $apiKey = "4b577fa60db320c4445ae5adae4fbb73";
+
     public function __construct()
     {
         helper(['form', 'url']);
     }
+    
     public function index()
     {
         $katalogModel = new Katalog();
@@ -34,6 +39,7 @@ class Home extends BaseController
             'section_navbar_title3' => null,
             'section_navbar_title4' => null,
             'section_navbar_title5' => null,
+            'cart' => \Config\Services::cart(),
         ];
         return view('home/shopGrid', $data);
     }
@@ -45,6 +51,7 @@ class Home extends BaseController
             'section_navbar_title3' => 'active',
             'section_navbar_title4' => null,
             'section_navbar_title5' => null,
+            'cart' => \Config\Services::cart(),
         ];
         return view('home/contact', $data);
     }
@@ -56,6 +63,7 @@ class Home extends BaseController
             'section_navbar_title3' => null,
             'section_navbar_title4' => 'active',
             'section_navbar_title5' => null,
+            'cart' => \Config\Services::cart(),
         ];
         return view('home/blog', $data);
     }
@@ -67,20 +75,66 @@ class Home extends BaseController
             'section_navbar_title3' => null,
             'section_navbar_title4' => 'active',
             'section_navbar_title5' => null,
+            'cart' => \Config\Services::cart(),
         ];
         return view('home/blogDetails', $data);
     }
     public function checkout()
     {
+        $provinsi = $this->rajaongkir('province');
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => 'active',
             'section_navbar_title3' => null,
             'section_navbar_title4' => null,
             'section_navbar_title5' => null,
+            'cart' => \Config\Services::cart(),
+            'provinsi' => json_decode($provinsi)->rajaongkir->results,
         ];
-        return view('home/checkout', $data);
+        return view('pelanggan/checkout', $data);
     }
+
+    public function getCity()
+    {
+        if ($this->request->isAJAX()){
+			$id_province = $this->request->getGet('id_province');
+			$data = $this->rajaongkir('city', $id_province);
+			return $this->response->setJSON($data);
+		}
+    }
+
+    private function rajaongkir($method, $id_province=null)
+	{
+		$endPoint = $this->url.$method;
+
+		if($id_province!=null)
+		{
+			$endPoint = $endPoint."?province=".$id_province;
+		}
+
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+		  CURLOPT_URL => $endPoint,
+		  CURLOPT_RETURNTRANSFER => true,
+		  CURLOPT_ENCODING => "",
+		  CURLOPT_MAXREDIRS => 10,
+		  CURLOPT_TIMEOUT => 30,
+		  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		  CURLOPT_CUSTOMREQUEST => "GET",
+		  CURLOPT_HTTPHEADER => array(
+		    "key: ".$this->apiKey
+		  ),
+		));
+
+		$response = curl_exec($curl);
+		$err = curl_error($curl);
+
+		curl_close($curl);
+
+        return $response;        
+	}
+    
     public function shopDetails()
     {
         $data = [
@@ -89,6 +143,7 @@ class Home extends BaseController
             'section_navbar_title3' => null,
             'section_navbar_title4' => null,
             'section_navbar_title5' => null,
+            'cart' => \Config\Services::cart(),
         ];
         return view('home/shopDetails', $data);
     }
@@ -101,6 +156,7 @@ class Home extends BaseController
             'section_navbar_title3' => null,
             'section_navbar_title4' => null,
             'section_navbar_title5' => null,
+            'cart' => \Config\Services::cart(),
         ];
         return view('home/shopingCart', $data);
     }
@@ -120,6 +176,7 @@ class Home extends BaseController
             'section_navbar_title3' => null,
             'section_navbar_title4' => null,
             'section_navbar_title5' => 'active',
+            'cart' => \Config\Services::cart(),
         ];
         return view('home/admin', $data);
     }
@@ -135,6 +192,7 @@ class Home extends BaseController
             'section_navbar_title4' => null,
             'section_navbar_title5' => 'active',
             'all_data' => $all_data,
+            'cart' => \Config\Services::cart(),
         ];
         return view('home/categoriesSection', $data);
     }
@@ -150,6 +208,7 @@ class Home extends BaseController
             'section_navbar_title4' => null,
             'section_navbar_title5' => 'active',
             'data_categories' => $data_categories,
+            
         ];
         return view('home/edit_categories', $data);
     }
