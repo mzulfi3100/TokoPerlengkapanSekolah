@@ -68,6 +68,19 @@ $routes->post('/categories_proses', 'Home::categories_proses');
 $routes->post('/categories_update_proses', 'Home::categories_update_proses');
 $routes->get('/getcity', 'Home::getCity');
 $routes->get('/getcost', 'Home::getCost');
+//Crud Shopping Cart
+$routes->get('home', 'Home::index');
+$routes->post('home', 'Home::index');
+$routes->get('home/cek', 'Home::cek');
+$routes->post('home/cek', 'Home::cek');
+$routes->get('home/add', 'Home::add');
+$routes->post('home/add', 'Home::add');
+$routes->get('home/clear', 'Home::clear');
+$routes->post('home/clear', 'Home::clear');
+$routes->get('/cek', 'Home::cek');
+$routes->post('/cek', 'Home::cek');
+$routes->get('/add', 'Home::add');
+$routes->post('/add', 'Home::add');
 
 
 /*
