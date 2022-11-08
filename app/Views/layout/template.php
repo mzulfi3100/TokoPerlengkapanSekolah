@@ -99,7 +99,7 @@
                                     <li><a href="<?= base_url(); ?>/blogDetails">Blog Details</a></li>
                                 </ul>
                             </li>
-                            <li class="<?= $section_navbar_title4; ?>"><a href="<?= base_url(); ?>/blog">Blog</a></li>
+                            <li class="<?= $section_navbar_title4; ?>"><a href="<?= base_url('/profile'); ?>">Profile</a></li>
                             <li class="<?= $section_navbar_title5; ?>"><a href="<?= base_url(); ?>/admin">Admin</a></li>
                         </ul>
                     </nav>
