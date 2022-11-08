@@ -51,6 +51,7 @@ $routes->post('/register/process', 'Register::process');
 $routes->post('/login/process', 'Login::process');
 $routes->get('/shopGrid', 'Home::shopGrid');
 $routes->get('/shopingCart', 'ShopingCartController::index');
+$routes->get('/profile', 'Home::profile');
 $routes->get('/contact', 'Home::contact');
 $routes->get('/checkout', 'Home::checkout');
 $routes->get('/blog', 'Home::blog');
