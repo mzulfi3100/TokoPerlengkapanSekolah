@@ -33,6 +33,19 @@ class Home extends BaseController
 
         return view('home/landing_page', $data);
     }
+    
+    public function profile()
+    {
+        $data = [
+            'section_navbar_title1' => null,
+            'section_navbar_title2' => null,
+            'section_navbar_title3' => null,
+            'section_navbar_title4' => 'active',
+            'section_navbar_title5' => null,
+            'cart' => \Config\Services::cart(),
+        ];
+        return view('home/profile', $data);
+    }
     public function shopGrid()
     {
         $data = [
