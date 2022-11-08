@@ -1,49 +1,5 @@
 <?= $this->extend('/layout/template'); ?>
 <?= $this->section('content'); ?>
-<!-- Hero Section Begin -->
-<section class="hero hero-normal">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3">
-                <div class="hero__categories">
-                    <div class="hero__categories__all">
-                        <i class="fa fa-bars"></i>
-                        <span>All departments</span>
-                    </div>
-                    <ul>
-                        <li><a href="#">Stationery</a></li>
-                        <li><a href="#">Uniforms</a></li>
-                        <li><a href="#">Shoes</a></li>
-                        <li><a href="#">Backpack</a></li>
-                        <li><a href="#">Belt</a></li>
-                        <li><a href="#">Tie</a></li>
-                        <li><a href="#">Hat</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-9">
-                <div class="hero__search">
-                    <div class="hero__search__form">
-                        <form action="#">
-                            <input type="text" placeholder="What do yo u need?">
-                            <button type="submit" class="site-btn">SEARCH</button>
-                        </form>
-                    </div>
-                    <div class="hero__search__phone">
-                        <div class="hero__search__phone__icon">
-                            <i class="fa fa-phone"></i>
-                        </div>
-                        <div class="hero__search__phone__text">
-                            <h5>+62 8516233 6233</h5>
-                            <span>support 24/7 time</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Hero Section End -->
 
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-section set-bg" data-setbg="/Assets/img/breadcrumb.jpg">
@@ -72,13 +28,13 @@
                     <div class="sidebar__item">
                         <h4>Department</h4>
                         <ul>
-                            <li><a href="#">Stationery</a></li>
-                            <li><a href="#">Uniforms</a></li>
-                            <li><a href="#">Shoes</a></li>
-                            <li><a href="#">Backpack</a></li>
-                            <li><a href="#">Belt</a></li>
-                            <li><a href="#">Tie</a></li>
-                            <li><a href="#">Hat</a></li>
+                            <li><a href="<?= base_url('stationery') ?>">Stationery</a></li>
+                            <li><a href="<?= base_url('uniforms') ?>">Uniforms</a></li>
+                            <li><a href="<?= base_url('shoes') ?>">Shoes</a></li>
+                            <li><a href="<?= base_url('backpack') ?>">Backpack</a></li>
+                            <li><a href="<?= base_url('belt') ?>">Belt</a></li>
+                            <li><a href="<?= base_url('tie') ?>">Tie</a></li>
+                            <li><a href="<?= base_url('hat') ?>">Hat</a></li>
                         </ul>
                     </div>
                 </div>
@@ -102,9 +58,9 @@
                                         </ul>
                                     </div>
                                     <div class="product__discount__item__text">
-                                        <span>Dried Fruit</span>
-                                        <h5><a href="#">Raisin’n’nuts</a></h5>
-                                        <div class="product__item__price">$30.00 <span>$36.00</span></div>
+                                        <span>Shoes</span>
+                                        <h5><a href="#">Shoes</a></h5>
+                                        <div class="product__item__price">Rp 160.000 <span>Rp 200.000</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -120,9 +76,9 @@
                                         </ul>
                                     </div>
                                     <div class="product__discount__item__text">
-                                        <span>Vegetables</span>
-                                        <h5><a href="#">Vegetables’package</a></h5>
-                                        <div class="product__item__price">$30.00 <span>$36.00</span></div>
+                                        <span>Stationery</span>
+                                        <h5><a href="#">Hat</a></h5>
+                                        <div class="product__item__price">Rp 8.000 <span>Rp 10.000</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -138,9 +94,9 @@
                                         </ul>
                                     </div>
                                     <div class="product__discount__item__text">
-                                        <span>Dried Fruit</span>
-                                        <h5><a href="#">Mixed Fruitss</a></h5>
-                                        <div class="product__item__price">$30.00 <span>$36.00</span></div>
+                                        <span>Stationery</span>
+                                        <h5><a href="#">Belt</a></h5>
+                                        <div class="product__item__price">Rp 12.000 <span>Rp 15.000</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -156,9 +112,9 @@
                                         </ul>
                                     </div>
                                     <div class="product__discount__item__text">
-                                        <span>Dried Fruit</span>
-                                        <h5><a href="#">Raisin’n’nuts</a></h5>
-                                        <div class="product__item__price">$30.00 <span>$36.00</span></div>
+                                        <span>Stationery</span>
+                                        <h5><a href="#">Eraser</a></h5>
+                                        <div class="product__item__price">Rp 4.000 <span>Rp 5.000</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -174,9 +130,9 @@
                                         </ul>
                                     </div>
                                     <div class="product__discount__item__text">
-                                        <span>Dried Fruit</span>
-                                        <h5><a href="#">Raisin’n’nuts</a></h5>
-                                        <div class="product__item__price">$30.00 <span>$36.00</span></div>
+                                        <span>Stationery</span>
+                                        <h5><a href="#">Pencil</a></h5>
+                                        <div class="product__item__price">Rp 8.000 <span>Rp 10.000</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -192,9 +148,9 @@
                                         </ul>
                                     </div>
                                     <div class="product__discount__item__text">
-                                        <span>Dried Fruit</span>
-                                        <h5><a href="#">Raisin’n’nuts</a></h5>
-                                        <div class="product__item__price">$30.00 <span>$36.00</span></div>
+                                        <span>Backpack</span>
+                                        <h5><a href="#">Backpack</a></h5>
+                                        <div class="product__item__price">Rp 280.000 <span>Rp 350.000</span></div>
                                     </div>
                                 </div>
                             </div>

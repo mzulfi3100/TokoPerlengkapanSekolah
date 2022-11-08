@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Models\categoriesModel;
-use App\Models\LatestProductsModel;
 use App\Models\productsfoundModel;
 
 
@@ -11,8 +10,6 @@ class Home extends BaseController
 {
     public function index()
     {
-        $LatestProducts = new LatestProductsModel();
-        $all_latest_product = $LatestProducts->findAll();
         $categories = new categoriesModel();
         $all_data = $categories->findAll();
 
@@ -20,10 +17,8 @@ class Home extends BaseController
             'section_navbar_title1' => 'active',
             'section_navbar_title2' => null,
             'section_navbar_title3' => null,
-            'section_navbar_title4' => null,
-            'section_navbar_title5' => null,
+            'hero' => 'hero hero-normal',
             'all_data' => $all_data,
-            'all_latest_product' => $all_latest_product,
         ];
 
         return view('home/landing_page', $data);
@@ -36,44 +31,10 @@ class Home extends BaseController
             'section_navbar_title1' => null,
             'section_navbar_title2' => 'active',
             'section_navbar_title3' => null,
-            'section_navbar_title4' => null,
-            'section_navbar_title5' => null,
+            'hero' => 'hero hero-normal',
             'file' => $file
         ];
         return view('home/shopGrid', $data);
-    }
-    public function contact()
-    {
-        $data = [
-            'section_navbar_title1' => null,
-            'section_navbar_title2' => null,
-            'section_navbar_title3' => 'active',
-            'section_navbar_title4' => null,
-            'section_navbar_title5' => null,
-        ];
-        return view('home/contact', $data);
-    }
-    public function blog()
-    {
-        $data = [
-            'section_navbar_title1' => null,
-            'section_navbar_title2' => null,
-            'section_navbar_title3' => null,
-            'section_navbar_title4' => 'active',
-            'section_navbar_title5' => null,
-        ];
-        return view('home/blog', $data);
-    }
-    public function blogDetails()
-    {
-        $data = [
-            'section_navbar_title1' => null,
-            'section_navbar_title2' => null,
-            'section_navbar_title3' => null,
-            'section_navbar_title4' => 'active',
-            'section_navbar_title5' => null,
-        ];
-        return view('home/blogDetails', $data);
     }
     public function checkout()
     {
@@ -81,8 +42,7 @@ class Home extends BaseController
             'section_navbar_title1' => null,
             'section_navbar_title2' => 'active',
             'section_navbar_title3' => null,
-            'section_navbar_title4' => null,
-            'section_navbar_title5' => null,
+            'hero' => 'hero hero-normal',
         ];
         return view('home/checkout', $data);
     }
@@ -90,10 +50,9 @@ class Home extends BaseController
     {
         $data = [
             'section_navbar_title1' => null,
-            'section_navbar_title2' => 'active',
+            'section_navbar_title2' => null,
             'section_navbar_title3' => null,
-            'section_navbar_title4' => null,
-            'section_navbar_title5' => null,
+            'hero' => 'hero hero-normal',
         ];
         return view('home/shopDetails', $data);
     }
@@ -104,8 +63,7 @@ class Home extends BaseController
             'section_navbar_title1' => null,
             'section_navbar_title2' => null,
             'section_navbar_title3' => null,
-            'section_navbar_title4' => null,
-            'section_navbar_title5' => null,
+            'hero' => 'hero hero-normal',
         ];
         return view('home/shopingCart', $data);
     }
@@ -122,9 +80,8 @@ class Home extends BaseController
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => null,
-            'section_navbar_title3' => null,
-            'section_navbar_title4' => null,
-            'section_navbar_title5' => 'active',
+            'section_navbar_title3' => 'active',
+            'hero' => 'hero hero-normal',
         ];
         return view('home/admin', $data);
     }
@@ -136,9 +93,8 @@ class Home extends BaseController
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => null,
-            'section_navbar_title3' => null,
-            'section_navbar_title4' => null,
-            'section_navbar_title5' => 'active',
+            'section_navbar_title3' => 'active',
+            'hero' => 'hero hero-normal',
             'all_data' => $all_data,
         ];
         return view('home/categoriesSection', $data);
@@ -151,9 +107,8 @@ class Home extends BaseController
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => null,
-            'section_navbar_title3' => null,
-            'section_navbar_title4' => null,
-            'section_navbar_title5' => 'active',
+            'section_navbar_title3' => 'active',
+            'hero' => 'hero hero-normal',
             'data_categories' => $data_categories,
         ];
         return view('home/edit_categories', $data);
@@ -163,9 +118,8 @@ class Home extends BaseController
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => null,
-            'section_navbar_title3' => null,
-            'section_navbar_title4' => null,
-            'section_navbar_title5' => 'active',
+            'section_navbar_title3' => 'active',
+            'hero' => 'hero hero-normal',
 
         ];
         return view('home/add_categories', $data);

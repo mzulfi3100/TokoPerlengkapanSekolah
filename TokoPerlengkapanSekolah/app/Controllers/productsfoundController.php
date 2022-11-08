@@ -15,9 +15,8 @@ class productsfoundController extends BaseController
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => null,
-            'section_navbar_title3' => null,
-            'section_navbar_title4' => null,
-            'section_navbar_title5' => 'active',
+            'section_navbar_title3' => 'active',
+            'hero' => 'hero hero-normal',
             'file' => $file,
         ];
         return view('productFound/foundSection', $data);
@@ -30,9 +29,8 @@ class productsfoundController extends BaseController
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => null,
-            'section_navbar_title3' => null,
-            'section_navbar_title4' => null,
-            'section_navbar_title5' => 'active',
+            'section_navbar_title3' => 'active',
+            'hero' => 'hero hero-normal',
             'data_files' => $data_files,
         ];
         return view('productFound/edit_product', $data);
@@ -46,9 +44,8 @@ class productsfoundController extends BaseController
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => null,
-            'section_navbar_title3' => null,
-            'section_navbar_title4' => null,
-            'section_navbar_title5' => 'active',
+            'section_navbar_title3' => 'active',
+            'hero' => 'hero hero-normal',
             'file' => $file,
         ];
         return view('productFound/add_product', $data);
@@ -79,24 +76,6 @@ class productsfoundController extends BaseController
             ],
         ]);
 
-        // if (!$validate) {
-        //     //dd($this->request->getFile('image_product'));
-        //     return redirect()->back()->withInput();
-        // }
-        // $files = $this->request->getFile('image_product');
-        // //dd($files);
-        // $files->move('Assets/img/product', $files->getName());
-
-        // $data = [
-        //     'image_product' => $files->getName(),
-        //     'name_product' => $this->request->getPost('name_product'),
-        //     'price_product' => $this->request->getPost('price_product'),
-        // ];
-
-        // $productFound = new productsfoundModel();
-        // $productFound->insert($data);
-
-        // return redirect()->to(base_url('/Found'));
         if (!$validate) {
             //dd($this->request->getFile('image_product'));
             return redirect()->to('add_product')->withInput();

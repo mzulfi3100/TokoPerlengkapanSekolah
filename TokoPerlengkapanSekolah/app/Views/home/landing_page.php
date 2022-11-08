@@ -7,45 +7,8 @@
 <section class="hero">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3">
-                <div class="hero__categories">
-                    <div class="hero__categories__all">
-                        <i class="fa fa-bars"></i>
-                        <span>All departments</span>
-                    </div>
-                    <ul>
-                        <li><a href="#">Stationery</a></li>
-                        <li><a href="#">Uniform</a></li>
-                        <li><a href="#">Shoes</a></li>
-                        <li><a href="#">Backpack</a></li>
-                        <li><a href="#">Belt</a></li>
-                        <li><a href="#">Tie</a></li>
-                        <li><a href="#">Hat</a></li>
-                    </ul>
-                </div>
-            </div>
+            <div class="col-lg-3"></div>
             <div class="col-lg-9">
-                <div class="hero__search">
-                    <div class="hero__search__form">
-                        <form action="#">
-                            <!-- <div class="hero__search__categories">
-                                    All Categories
-                                    <span></span>
-                                </div> -->
-                            <input type="text" placeholder="What do yo u need?">
-                            <button type="submit" class="site-btn">SEARCH</button>
-                        </form>
-                    </div>
-                    <div class="hero__search__phone">
-                        <div class="hero__search__phone__icon">
-                            <i class="fa fa-phone"></i>
-                        </div>
-                        <div class="hero__search__phone__text">
-                            <h5>+62 851 6233 6233</h5>
-                            <span>support 24/7 time</span>
-                        </div>
-                    </div>
-                </div>
                 <div class="hero__item set-bg" data-setbg="/Assets/img/hero/banner.jpg">
                     <div class="hero__text">
                         <span>
@@ -53,7 +16,7 @@
                         </span>
                         <h2>Product <br />100% Originals</h2>
                         <p>Free Pickup and Delivery Available</p>
-                        <a href="#" class="primary-btn">SHOP NOW</a>
+                        <a href="<?= base_url('shopGrid') ?>" class="primary-btn">SHOP NOW</a>
                     </div>
                 </div>
             </div>
@@ -69,13 +32,12 @@
             <div class="categories__slider owl-carousel">
                 <?php
                 foreach ($all_data as $t) : ?>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="/Assets/img/categories/<?= $t->images; ?>"
-                        name="images">
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="/Assets/img/categories/<?= $t->images; ?>" name="images">
 
-                        <h5><a href="#"><?= $t->name; ?></a></h5>
+                            <h5><a href="#"><?= $t->name; ?></a></h5>
+                        </div>
                     </div>
-                </div>
                 <?php
                 endforeach ?>
 

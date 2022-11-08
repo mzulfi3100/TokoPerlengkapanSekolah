@@ -79,19 +79,10 @@
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li class="<?= $section_navbar_title1; ?>"><a href="<?= base_url(); ?>/">Home</a></li>
-                            <li class="<?= $section_navbar_title2; ?>"><a href="<?= base_url(); ?>/shopGrid">Shop</a>
+                            <li class="<?= $section_navbar_title1; ?>"><a href="<?= base_url(''); ?>">Home</a></li>
+                            <li class="<?= $section_navbar_title2; ?>"><a href="<?= base_url('shopGrid'); ?>">Shop</a>
                             </li>
-                            <!-- <li class="<?= $section_navbar_title3; ?>"><a href="#">Pages</a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="<?= base_url(); ?>/shopDetails">Shop Details</a></li>
-                                    <li><a href="<?= base_url(); ?>/shopingCart">Shoping Cart</a></li>
-                                    <li><a href="<?= base_url(); ?>/checkout">Check Out</a></li>
-                                    <li><a href="<?= base_url(); ?>/blogDetails">Blog Details</a></li>
-                                </ul>
-                            </li> 
-                            <li class="<?= $section_navbar_title4; ?>"><a href="<?= base_url(); ?>/blog">Blog</a></li> -->
-                            <li class="<?= $section_navbar_title5; ?>"><a href="<?= base_url('admin'); ?>">Admin</a>
+                            <li class="<?= $section_navbar_title3; ?>"><a href="<?= base_url('admin'); ?>">Admin</a>
                             </li>
                         </ul>
                     </nav>
@@ -113,6 +104,50 @@
         </div>
     </header>
     <!-- Header Section End -->
+    <!-- Hero Section Begin -->
+    <section class=" <?= $hero; ?>">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="hero__categories">
+                        <div class="hero__categories__all">
+                            <i class="fa fa-bars"></i>
+                            <span>All departments</span>
+                        </div>
+                        <ul>
+                            <li><a href="<?= base_url('stationery') ?>">Stationery</a></li>
+                            <li><a href="<?= base_url('uniforms') ?>">Uniforms</a></li>
+                            <li><a href="<?= base_url('shoes') ?>">Shoes</a></li>
+                            <li><a href="<?= base_url('backpack') ?>">Backpack</a></li>
+                            <li><a href="<?= base_url('belt') ?>">Belt</a></li>
+                            <li><a href="<?= base_url('tie') ?>">Tie</a></li>
+                            <li><a href="<?= base_url('hat') ?>">Hat</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="hero__search">
+                        <div class="hero__search__form">
+                            <form action="#">
+                                <input type="text" placeholder="What do yo u need?">
+                                <button type="submit" class="site-btn">SEARCH</button>
+                            </form>
+                        </div>
+                        <div class="hero__search__phone">
+                            <div class="hero__search__phone__icon">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="hero__search__phone__text">
+                                <h5>+62 8516233 6233</h5>
+                                <span>support 24/7 time</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
 
     <?= $this->renderSection('content'); ?>
 
@@ -149,18 +184,17 @@
                             <li><a href="#">Projects</a></li>
                             <li><a href="#">Contact</a></li>
                             <li><a href="#">Innovation</a></li>
-                            <li><a href="#">Testimonials</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-12">
                     <div class="footer__widget">
-                        <h6>Join Our Newsletter Now</h6>
-                        <p>Get E-mail updates about our latest shop and special offers.</p>
+                        <h6 class="mb-4">Follow Us On</h6>
+                        <!-- <p>Get E-mail updates about our latest shop and special offers.</p>
                         <form action="#">
                             <input type="text" placeholder="Enter your mail">
                             <button type="submit" class="site-btn">Subscribe</button>
-                        </form>
+                        </form> -->
                         <div class="footer__widget__social">
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-instagram"></i></a>
