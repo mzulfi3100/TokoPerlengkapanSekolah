@@ -75,14 +75,17 @@ $routes->get('home/cek', 'Home::cek');
 $routes->post('home/cek', 'Home::cek');
 $routes->get('home/add', 'Home::add');
 $routes->post('home/add', 'Home::add');
+$routes->get('home/update', 'Home::update');
+$routes->post('home/update', 'Home::update');
+$routes->get('home/delete/(:any)', 'Home::delete/$1');
 $routes->get('home/clear', 'Home::clear');
 $routes->post('home/clear', 'Home::clear');
 $routes->get('/cek', 'Home::cek');
 $routes->post('/cek', 'Home::cek');
 $routes->get('/add', 'Home::add');
 $routes->post('/add', 'Home::add');
-
-
+$routes->post('/add_wishlist', 'Home::add_wishlist');
+$routes->post('/store_checkout', 'Home::add_checkout');
 
 /*
  * --------------------------------------------------------------------

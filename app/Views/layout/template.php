@@ -61,7 +61,7 @@
                                 </ul>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i>
+                                <a href="/login"><i class="fa fa-user"></i>
                                     Login</a>
                             </div>
                         </div>
@@ -109,7 +109,7 @@
                         $keranjang = $cart->contents();
                         $jml_cartBarang = 0;
                         foreach ($keranjang as $key){
-                            $jml_cartBarang = $jml_cartBarang + $key['qty'];
+                            $jml_cartBarang = $jml_cartBarang + 1;
                         }
                         ?>
                         <?php
@@ -211,9 +211,9 @@
         </div>
     </footer>
     <!-- Footer Section End -->
-
+    
     <!-- Js Plugins -->
-    <script src="/Assets/js/js/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="/Assets/js/js/bootstrap.min.js"></script>
     <script src="/Assets/js/js/jquery.nice-select.min.js"></script>
     <script src="/Assets/js/js/jquery-ui.min.js"></script>
@@ -223,7 +223,7 @@
     <script src="/Assets/js/js/main.js"></script>
     <script src="https://kit.fontawesome.com/72ae031378.js" crossorigin="anonymous"></script>
 
-
+    <?= $this->renderSection('script') ?>
 
 </body>
 

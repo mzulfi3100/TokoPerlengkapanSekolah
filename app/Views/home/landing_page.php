@@ -147,16 +147,18 @@
                                     echo form_hidden('gambar', $ktg['gambar_produk']); ?>
                                     <div class="featured__item__pic set-bg" data-setbg="/uploads/<?=$ktg['gambar_produk']?>">
                                     <ul class="featured__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                                         <script src="https://kit.fontawesome.com/72ae031378.js" crossorigin="anonymous"></script>
-                                        <button type="submit"><li type="submit"><a href><i class="fa fa-shopping-cart"></i></a></li></button>
+                                        <button type="submit"><li type="submit"><i class="fa fa-shopping-cart"></i></a></li></button>
+                                        <?php echo form_close(); ?>
+                                        <form action="/add_wishlist" method="post" enctype="multipart/form-data">
+                                            <input type="hidden" id="id_produk" name="id_produk" value=<?= $ktg['id_produk'] ?>>
+                                            <input type="hidden" id="harga_produk" name="harga_produk" value=<?= $ktg['harga_produk'] ?>>
+                                            <input type="hidden" id="nama_produk" name="nama_produk" value=<?= $ktg['nama_produk'] ?>>
+                                            <input type="hidden" id="gambar_produk" name="gambar_produk" value=<?= $ktg['gambar_produk'] ?>>
+                                            <button type="submit"><li type="submit"><i class="fa fa-heart"></i></a></li></button>
+                                        </form>
                                     </ul>
-                                    </div>
-                                    <?php echo form_close(); ?>
-                                    <div class="featured__item__text">
-                                        <h6><a href="#"><?= $ktg['nama_produk'] ?></a></h6>
-                                        <h5><?= "Rp ".number_format($ktg['harga_produk'],0,',','.')?></h5>
                                     </div>
                                 </div>
                             </div>
@@ -210,136 +212,6 @@
                             </div>
                             <?php $count++;} ?>
                             <?php endforeach; ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="latest-product__text">
-                        <h4>Top Rated Products</h4>
-                        <div class="latest-product__slider owl-carousel">
-                            <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="/Assets/img/latest-product/lp-7.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Tie</h6>
-                                        <span>Rp 7.500</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="/Assets/img/latest-product/lp-8.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crayons</h6>
-                                        <span>Rp 29.000</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="/Assets/img/latest-product/lp-9.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Paper Clip</h6>
-                                        <span>Rp 4.500</span>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="/Assets/img/latest-product/lp-10.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Binder Clip</h6>
-                                        <span>Rp 13.500</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="/Assets/img/latest-product/lp-11.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Sock</h6>
-                                        <span>Rp 18.000</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="/Assets/img/latest-product/lp-12.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Highlighter</h6>
-                                        <span>Rp 10.000</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="latest-product__text">
-                        <h4>Review Products</h4>
-                        <div class="latest-product__slider owl-carousel">
-                            <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="/Assets/img/latest-product/lp-11.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Sock</h6>
-                                        <span>Rp 18.000</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="/Assets/img/latest-product/lp-4.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Eraser</h6>
-                                        <span>Rp 2.000</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="/Assets/img/latest-product/lp-10.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Binder Clip</h6>
-                                        <span>Rp 13.500</span>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="latest-prdouct__slider__item">
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="/Assets/img/latest-product/lp-7.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Tie</h6>
-                                        <span>Rp 7.500</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="/Assets/img/latest-product/lp-9.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Paper Clip</h6>
-                                        <span>Rp 4.500</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="/Assets/img/latest-product/lp-8.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crayons</h6>
-                                        <span>Rp 29.000</span>
-                                    </div>
-                                </a>
-                            </div>
                         </div>
                     </div>
                 </div>

@@ -140,6 +140,13 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
+                    <?php
+                        if (session()->getflashdata('pesan')){
+                            echo'<div class="alert alert-success alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
+                            echo session()->getflashdata('pesan').(' Berhasil Dimasukkan Kedalam Keranjang');
+                            echo'</div>';
+                        }?>
                     <nav class="header__menu">
                         <ul>
                             <li><a href="<?= base_url(); ?>/">Home</a></li>
@@ -162,7 +169,7 @@
                     $keranjang = $cart->contents();
                     $jml_cartBarang = 0;
                     foreach ($keranjang as $key){
-                        $jml_cartBarang = $jml_cartBarang + $key['qty'];
+                        $jml_cartBarang = $jml_cartBarang + 1;
                     }
                     ?>
                     <?php
@@ -260,6 +267,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shoping__cart__table">
+                        <?php echo form_open('home/update')?>
                         <table>
                             <thead>
                                 <tr>
@@ -271,8 +279,8 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            <?php $countCart = 0; $i = 1; ?>
 
-                            <?php $countCart = 0 ?>
                             <?php foreach($keranjang as $pdf ) : ?>
                                 <?php 
                                     if($pdf['id'] =! 0){ ?>
@@ -287,7 +295,7 @@
                                     <td class="shoping__cart__quantity">
                                         <div class="quantity">
                                             <div class="pro-qty">
-                                                <input type="text" value="<?= $pdf['qty'] ?>">
+                                                <input type="number" name="qty<?= $i++ ?>" value="<?= $pdf['qty'] ?>">
                                             </div>
                                         </div>
                                     </td>
@@ -295,49 +303,49 @@
                                     <?= "Rp ".number_format($pdf['subtotal'],0,',','.')?>
                                     </td>
                                     <td class="shoping__cart__item__close">
-                                        <a method="post" class="btn btn-sm btn-danger"><i class="fa fa-trash" style="color:white"></i></a>
+                                        <a  href="<?= base_url('home/delete/'.$pdf['rowid'])?>" class="btn btn-sm btn-danger"><i class="fa fa-trash" style="color:white"></i></a>
                                     </td>
                                 </tr>
                             <?php $countCart++; }  ?>
-                            <?php endforeach; ?>
-                                
+                            <?php endforeach; ?>   
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </div>  
             </div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns">
-                        <a href="<?= base_url(); ?>" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
-                        <button><a class="primary-btn cart-btn cart-btn-right"><span class="icon-loading"></span>
-                            Update Cart</a></button>
+                        <button class="primary-btn ">Update Cart</button>
+                        <a  href="<?= base_url('home/clear') ?>" class="primary-btn ">Clear Cart</a>
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="shoping__continue">
-                        <div class="shoping__discount">
-                            <h5>Discount Codes</h5>
-                            <form action="#">
-                                <input type="text" placeholder="Enter your coupon code">
-                                <button type="submit" class="site-btn">APPLY COUPON</button>
-                            </form>
-                        </div>
-                    </div>
+                    <?php echo form_close(); ?>
                 </div>
                 <div class="col-lg-6">
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
                         <ul>
-                            <li>Subtotal <span>Rp 300.000
-                            </span></li>
-                            <li> <span>Rp 250.000
-                            </span>
-                            <li> <span>Rp 25.000 
-                            </span>
-                            <li>Total <span>Rp 575.000</span></li>
+                            <?php $countCart = 0 ?>
+                            
+                            <?php foreach($keranjang as $pdf ) : ?>
+                                <?php if($pdf['id'] =! 0){ ?>
+                                    <?php if($countCart == 0): ?>
+                                        <li>Subtotal<span><?= "Rp ".number_format($pdf['subtotal'],0,',','.')?></span></li>
+                                    <?php elseif($countCart != 0): ?>
+                                        <li><span><?= "Rp ".number_format($pdf['subtotal'],0,',','.')?></span></li>
+                                    <?php endif; ?>
+                                <?php $countCart++; }  ?>
+                            <?php endforeach; ?>
+                            <?php
+                                $keranjang = $cart->contents();
+                                $totalCart = 0;
+                                foreach ($keranjang as $dps){
+                                    $totalCart = $totalCart + $dps['subtotal'];
+                                }
+                            ?>
+                            <li>Total <span><?= "Rp ".number_format($totalCart,0,',','.') ?></span></li>
                         </ul>
-                        <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
+                        <a href="/checkout" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>
                 </div>
             </div>

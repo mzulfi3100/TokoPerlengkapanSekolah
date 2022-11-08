@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\Katalog;
+use App\Models\Checkout;
+use App\Models\wishlistModel;
 use App\Models\categoriesModel;
 
 class Home extends BaseController
@@ -311,5 +313,71 @@ class Home extends BaseController
     public function clear(){
         $cart = \Config\Services::cart();
         $cart->destroy();
+        return redirect()->to(base_url('shopingCart'));
+    }
+
+    public function delete($rowid)
+    {
+        $cart = \Config\Services::cart();
+        $cart->remove($rowid);
+        return redirect()->to(base_url('shopingCart'));
+    }
+
+    public function update()
+    {
+        $cart = \Config\Services::cart();
+        $i = 1;
+        $keranjang = $cart->contents();
+        foreach($keranjang as $key) {
+            $cart->update(array(
+                'rowid' => $key['rowid'] ,
+                'qty' => $this->request->getPost('qty'.$i++),
+            ));
+        } 
+        session()->setflashdata('pesan' , 'Data Keranjang Berhasil di Update');
+        return redirect()->to(base_url('shopingCart'));
+    }
+
+    public function add_wishlist()
+    {
+        $wishlistModel = new wishlistModel();
+        $id_produk = $this->request->getPost('id_produk');
+        $nama_produk = $this->request->getPost('nama_produk');
+        $harga_produk = $this->request->getPost('harga_produk');
+        $gambar_produk = $this->request->getPost('gambar_produk');
+        $data = [
+            'id_produk' => $id_produk,
+            'nama_produk' => $nama_produk,
+            'harga_produk' => $harga_produk,
+            'gambar_produk' => $gambar_produk,
+        ];
+        $wishlistModel->save($data);
+        return redirect()->to(base_url('home'));
+    }
+
+    public function add_checkout()
+    {
+        $checkoutModel = new Checkout();
+        $ongkir = $this->request->getPost('ongkir');
+        $total_keranjang = $this->request->getPost('total_keranjang');
+        $alamat = $this->request->getPost('alamat');
+        $keterangan = $this->request->getPost('keterangan');
+        $provinsi = $this->request->getPost('provinsi');
+        $kabupaten = $this->request->getPost('kabupaten');
+        $ongkir = $this->request->getPost('jasa');
+        $kurir = $this->request->getPost('kurir');
+        $status = $this->request->getPost('status');
+        $data = [
+            'ongkir' => $ongkir,
+            'total_keranjang' => $total_keranjang,
+            'alamat' => $alamat,
+            'keterangan' => $keterangan,
+            'provinsi' => $provinsi,
+            'kabupaten' => $kabupaten,
+            'kurir' => $kurir,
+            'status' => $status,
+        ];
+        $checkoutModel->save($data);
+        return redirect()->to(base_url('home'));
     }
 }
