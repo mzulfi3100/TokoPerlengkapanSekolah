@@ -1,6 +1,5 @@
 <?= $this->extend('/layout/template'); ?>
 <?= $this->section('content'); ?>
-
     <!-- Hero Section Begin -->
     <section class="hero">
         <div class="container">
@@ -60,7 +59,7 @@
                             </span>
                             <h2>Product <br />100% Originals</h2>
                             <p>Free Pickup and Delivery Available</p>
-                            <a href="#" class="primary-btn">SHOP NOW</a>
+                            <a href="<?= base_url('shopGrid') ?>" class="primary-btn">SHOP NOW</a>
                         </div>
                     </div>
                 </div>
