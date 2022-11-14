@@ -121,7 +121,7 @@
                     ?>
                     <div class="header__cart">
                         <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                            <li><a href="/view_wishlist"><i class="fa fa-heart"></i></a></li>
                             <li><a href="shopingCart"><i class="fa fa-shopping-bag"></i> <span><?= $jml_cartBarang ?></span></a></li>
                         </ul>
                         <div class="header__cart__price"><span><?= "Rp ".number_format($totalCart,0,',','.')?></span></div>
