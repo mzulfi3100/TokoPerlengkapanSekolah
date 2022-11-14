@@ -86,6 +86,8 @@ $routes->post('/cek', 'Home::cek');
 $routes->get('/add', 'Home::add');
 $routes->post('/add', 'Home::add');
 $routes->post('/add_wishlist', 'Home::add_wishlist');
+$routes->get('/view_wishlist', 'Home::view_wishlist');
+$routes->get('/delete_wishlist/(:num)', 'Home::delete_wishlist/$1');
 $routes->post('/store_checkout', 'Home::add_checkout');
 
 /*
