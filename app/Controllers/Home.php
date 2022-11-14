@@ -368,6 +368,24 @@ class Home extends BaseController
         return redirect()->to(base_url('home'));
     }
 
+    public function view_wishlist()
+    {
+        $wishlistModel = new wishlistModel();
+        $wishlist = $wishlistModel->findAll();
+        $data = [
+            'wishlist' => $wishlist,
+            'cart' => \Config\Services::cart()      
+        ]; 
+        return view('home/view_wishlist', $data);
+    }
+
+    public function delete_wishlist($id_wishlist)
+    {
+        $wishlistModel = new wishlistModel();
+        $wishlistModel->delete($id_wishlist);
+        return redirect()->to(base_url('/view_wishlist'));
+    }
+
     public function add_checkout()
     {
         $checkoutModel = new Checkout();
