@@ -871,7 +871,7 @@ ol {
 .featured__item__pic__hover {
 	position: absolute;
 	left: 0;
-	bottom: -50px;
+	bottom: -100px;
 	width: 100%;
 	text-align: center;
 	-webkit-transition: all, 0.5s;
@@ -2066,6 +2066,35 @@ ol {
 .shoping__checkout .primary-btn {
 	display: block;
 	text-align: center;
+}
+
+/*
+	Order
+*/
+
+.shoping__cart__table table tbody tr td.order__item__no{
+	width: 100px;
+}
+
+.shoping__cart__table table tbody tr td.order__item__tgl{
+	width: 300px;
+}
+
+.shoping__cart__table table tbody tr td.order__item__price{
+	width: 200px;
+}
+
+.shoping__cart__table table tbody tr td.order__item__sts{
+	width: 200px;
+}
+
+/*
+	Invoice
+*/
+
+.content-invoice{
+	margin-left: 150px ;
+	margin-right: 150px ;
 }
 
 /*---------------------
