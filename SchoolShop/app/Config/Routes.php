@@ -35,10 +35,6 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-
-
-//Home Routes
-
 $routes->get('/', 'Home::index');
 $routes->get('/shopGrid', 'Home::shopGrid');
 $routes->get('/contact', 'Home::contact');
@@ -47,25 +43,25 @@ $routes->get('/blog', 'Home::blog');
 $routes->get('/blogDetails', 'Home::blogDetails');
 $routes->get('/shopingCart', 'Home::shopingCart');
 $routes->get('/shopDetails', 'Home::shopDetails');
-$routes->get('/admin', 'Home::admin');
-$routes->get('/categoriesSection', 'Home::categoriesSection');
-$routes->get('/data_categories/(:num)', 'Home::data_categories/$1');
-$routes->get('/edit_categories/(:num)', 'Home::edit_categories/$1');
-$routes->get('/delete_categories/(:num)', 'Home::delete_categories/$1');
-$routes->post('/update_categories', 'Home::update_categories');
-$routes->get('/add_categories', 'Home::add_categories');
-$routes->post('/categories_update_proses', 'Home::categories_update_proses');
-$routes->post('/categories_proses', 'Home::categories_proses');
-$routes->get('/dashboard', 'adminController::dashboard');
+$routes->get('/admin', 'Home::admin', ['filter' => 'role:super_admin']);
+$routes->get('/categoriesSection', 'Home::categoriesSection', ['filter' => 'role:super_admin']);
+$routes->get('/data_categories/(:num)', 'Home::data_categories/$1', ['filter' => 'role:super_admin']);
+$routes->get('/edit_categories/(:num)', 'Home::edit_categories/$1', ['filter' => 'role:super_admin']);
+$routes->get('/delete_categories/(:num)', 'Home::delete_categories/$1', ['filter' => 'role:super_admin']);
+$routes->post('/update_categories', 'Home::update_categories', ['filter' => 'role:super_admin']);
+$routes->get('/add_categories', 'Home::add_categories', ['filter' => 'role:super_admin']);
+$routes->post('/categories_update_proses', 'Home::categories_update_proses', ['filter' => 'role:super_admin']);
+$routes->post('/categories_proses', 'Home::categories_proses', ['filter' => 'role:super_admin']);
+$routes->get('/dashboard', 'adminController::dashboard', ['filter' => 'role:super_admin']);
 
 // Products Found Routes
 
-$routes->get('/Found', 'productsfoundController::Found');
-$routes->get('/delete_Product/(:num)', 'productsfoundController::delete_Product/$1');
-$routes->get('/edit_product/(:num)', 'productsfoundController::edit_product/$1');
-$routes->get('/add_product', 'productsfoundController::add_product');
-$routes->post('/update', 'productsfoundController::update');
-$routes->post('/store', 'productsfoundController::store');
+$routes->get('/Found', 'productsfoundController::Found', ['filter' => 'role:super_admin']);
+$routes->get('/delete_Product/(:num)', 'productsfoundController::delete_Product/$1', ['filter' => 'role:super_admin']);
+$routes->get('/edit_product/(:num)', 'productsfoundController::edit_product/$1', ['filter' => 'role:super_admin']);
+$routes->get('/add_product', 'productsfoundController::add_product', ['filter' => 'role:super_admin']);
+$routes->post('/update', 'productsfoundController::update', ['filter' => 'role:super_admin']);
+$routes->post('/store', 'productsfoundController::store', ['filter' => 'role:super_admin']);
 
 // department routes
 
@@ -77,10 +73,6 @@ $routes->get('/stationery', 'department::stationery');
 $routes->get('/tie', 'department::tie');
 $routes->get('/uniforms', 'department::uniforms');
 
-//form routes
-
-$routes->get('/login', 'form::login');
-$routes->get('/register', 'form::register');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

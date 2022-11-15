@@ -51,7 +51,7 @@
                                 <a href="#"><i class="fa fa-linkedin"></i></a>
                                 <a href="#"><i class="fa fa-pinterest-p"></i></a>
                             </div>
-                            <div class="header__top__right__language">
+                            <!-- <div class="header__top__right__language">
                                 <img src="/Assets/img/language.png" alt="">
                                 <div>English</div>
                                 <span class="arrow_carrot-down"></span>
@@ -59,10 +59,18 @@
                                     <li><a href="#">Spanis</a></li>
                                     <li><a href="#">English</a></li>
                                 </ul>
+                            </div> -->
+                            <div class="header__top__right__language">
+                                <div><i class="fa fa-user"></i>
+                                    &ensp; <?= user()->username; ?></div>
+                                <!-- <a href="#"></a> -->
+                                <ul>
+                                    <li><a href="#">My Account</a></li>
+                                    <li><a href="<?= base_url('logout') ?>">Logout</a></li>
+                                </ul>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i>
-                                    Login</a>
+
                             </div>
                         </div>
                     </div>
@@ -82,8 +90,10 @@
                             <li class="<?= $section_navbar_title1; ?>"><a href="<?= base_url(''); ?>">Home</a></li>
                             <li class="<?= $section_navbar_title2; ?>"><a href="<?= base_url('shopGrid'); ?>">Shop</a>
                             </li>
+                            <?php if (in_groups('super_admin')) :  ?>
                             <li class="<?= $section_navbar_title3; ?>"><a href="<?= base_url('admin'); ?>">Admin</a>
                             </li>
+                            <?php endif; ?>
                         </ul>
                     </nav>
                 </div>
