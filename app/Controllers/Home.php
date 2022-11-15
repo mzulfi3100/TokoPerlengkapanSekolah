@@ -390,6 +390,7 @@ class Home extends BaseController
     {
         $checkoutModel = new Checkout();
         $ongkir = $this->request->getPost('ongkir');
+        $nama = $this->request->getPost('nama');
         $total_keranjang = $this->request->getPost('total_keranjang');
         $alamat = $this->request->getPost('alamat');
         $keterangan = $this->request->getPost('keterangan');
@@ -398,8 +399,12 @@ class Home extends BaseController
         $ongkir = $this->request->getPost('jasa');
         $kurir = $this->request->getPost('kurir');
         $status = $this->request->getPost('status');
+        $id_bank = $this->request->getPost('bank');
+        $id_user = user()->id;
+        
         $data = [
             'ongkir' => $ongkir,
+            'nama' => $nama,
             'total_keranjang' => $total_keranjang,
             'alamat' => $alamat,
             'keterangan' => $keterangan,
@@ -407,8 +412,119 @@ class Home extends BaseController
             'kabupaten' => $kabupaten,
             'kurir' => $kurir,
             'status' => $status,
+            'tgl_pesan' => date('Y-m-d H:i:s'),
+            'batas_bayar' => date('Y-m-d H:i:s', mktime(date('H'), date('i'), date('s'), date('m'), date('d') + 1, date('Y'))),
+            'id_bank' => $id_bank,
+            'id_user' => $id_user,
         ];
         $checkoutModel->save($data);
-        return redirect()->to(base_url('home'));
+
+        $cart = \Config\Services::cart();
+        $pesananModel = new Pesanan();
+        foreach($cart->contents() as $item){
+            $data = [
+                'id_checkout' => $checkoutModel->getInsertID(),
+                'id_barang' => $item['id'],
+                'nama_barang' => $item['name'],
+                'jumlah' => $item['qty'],
+                'harga' => $item['price'],
+            ];
+            $pesananModel->save($data);
+        }
+
+        $cart = \Config\Services::cart();
+        $cart->destroy();
+        return redirect()->to(base_url('/view_order'));
+    }
+
+    public function view_order()
+    {
+        $checkoutModel = new checkout();
+        $checkout = $checkoutModel->where('id_user', user()->id)->findAll();
+        $db = \Config\Database::connect();
+        $sql = "SELECT nama_bank, no_rek
+                FROM bank, checkout
+                WHERE checkout.id_bank = bank.id";
+        $query   = $db->query($sql);
+        $results = $query->getResultArray();
+        $data = [
+            'section_navbar_title1' => null,
+            'section_navbar_title2' => null,
+            'section_navbar_title3' => null,
+            'hero' => 'hero hero-normal',
+            'checkout' => $checkout,
+            'bank' => $results,
+            'cart' => \Config\Services::cart()      
+        ]; 
+        return view('home/view_order', $data);
+    }
+
+    public function delete_order($id_order)
+    {
+        $checkoutModel = new Checkout();
+        $data = $checkoutModel->delete($id_order);
+        return redirect()->to('/view_order');
+    }
+
+    public function detail_order($id_order)
+    {
+        $checkoutModel = new Checkout();
+        $db = \config\Database::connect();
+        $sql_tgl = "SELECT date_format(tgl_pesan, ('%d-%m-%Y')) as tanggal_pesan, date_format(batas_bayar, ('%d-%m-%Y')) as batas_bayar
+                FROM checkout
+                WHERE checkout.id = ".$id_order;
+        $query_tgl   = $db->query($sql_tgl);
+        $tgl = $query_tgl->getResultArray();
+
+        $builder = $db->table('pesanan');
+        $builder->select('*');
+        $builder->where('id_checkout', $id_order);
+        $query_psn = $builder->get();
+
+        $pesananModel = new Pesanan();
+        $bankModel = new Bank();
+        $data = [
+            'section_navbar_title1' => null,
+            'section_navbar_title2' => null,
+            'section_navbar_title3' => null,
+            'hero' => 'hero hero-normal',
+            'cart' => \Config\Services::cart(),
+            'checkout' => $checkoutModel->find($id_order),
+            'pesanan' => $query_psn->getResult(),
+            'bank' => $bankModel->findAll(),
+            'tgl' => $tgl,
+        ];
+        return view('home/invoice', $data);
+    }
+
+    public function invoice_print($id_order)
+    {
+        $checkoutModel = new Checkout();
+        $db = \config\Database::connect();
+        $sql_tgl = "SELECT date_format(tgl_pesan, ('%d-%m-%Y')) as tanggal_pesan, date_format(batas_bayar, ('%d-%m-%Y')) as batas_bayar
+                FROM checkout
+                WHERE checkout.id = ".$id_order;
+        $query_tgl   = $db->query($sql_tgl);
+        $tgl = $query_tgl->getResultArray();
+
+        $builder = $db->table('pesanan');
+        $builder->select('*');
+        $builder->where('id_checkout', $id_order);
+        $query_psn = $builder->get();
+
+        $pesananModel = new Pesanan();
+        $bankModel = new Bank();
+        $data = [
+            'section_navbar_title1' => null,
+            'section_navbar_title2' => null,
+            'section_navbar_title3' => null,
+            'hero' => 'hero hero-normal',
+            'cart' => \Config\Services::cart(),
+            'checkout' => $checkoutModel->find($id_order),
+            'pesanan' => $query_psn->getResult(),
+            'bank' => $bankModel->findAll(),
+            'tgl' => $tgl,
+        ];
+        return view('home/invoice_print', $data);
     }
 }

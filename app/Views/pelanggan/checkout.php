@@ -93,8 +93,8 @@
                                     <li><a href="<?= base_url(); ?>/blogDetails">Blog Details</a></li>
                                 </ul>
                             </li>
-                            <li class="<?= $section_navbar_title4; ?>"><a href="<?= base_url(); ?>/blog">Blog</a></li>
-                            <li class="<?= $section_navbar_title5; ?>"><a href="<?= base_url(); ?>/admin">Admin</a></li>
+                            <li><a href="<?= base_url(); ?>/profile">Profile</a></li>
+                            <li><a href="<?= base_url(); ?>/admin">Admin</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -137,8 +137,12 @@
                 <div class="row">
                     <div class="col-lg-8 col-md-6">
                         <div class="checkout__input">
+                            <p>Nama<span>*</span></p>
+                            <input type="text" name="nama" id="nama" placeholder="Masukkan Nama" class="checkout__input__add">
+                        </div>
+                        <div class="checkout__input">
                             <p>Alamat<span>*</span></p>
-                            <input type="text" name="alamat" id="alamat" placeholder="a" class="checkout__input__add">
+                            <input type="text" name="alamat" id="alamat" placeholder="Masukkan Alamat" class="checkout__input__add">
                             <input type="text" name="keterangan" id="keterangan" placeholder="Keterangan (opsional)">
                         </div>
                         <div class="checkout__input">
@@ -162,6 +166,15 @@
                                 <option>Select Jasa Pengiriman</option>
                             </select>
                         </div>
+                        <div class="checkout__input">
+                            <p>Pilih Pembayaran<span>*</span></p>
+                            <select class="checkout__input__select" id="bank" name="bank">
+                                <option>Select Pembayaran</option>
+                                <?php foreach($bank as $b) : ?>
+                                    <option value="<?= $b['id'] ?>"><?= $b['nama_bank']."(No Rek: ".$b['no_rek'].")" ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="checkout__order">
@@ -169,6 +182,9 @@
                             <div class="checkout__order__products">Produk <span>Total</span></div>
                             <ul>
                                 <li>Ongkir <span id="total_ongkir"> </span></li>
+                                <?php foreach($cart->contents() as $item){ ?>
+                                    <li> <?= $item['name']." (x".$item['qty'].")" ?><span>  <?= $item['price']*$item['qty'] ?></span></li>
+                                <?php } ?>
                             </ul>
                             <?php
                                 $keranjang = $cart->contents();
@@ -178,7 +194,7 @@
                                 }
                             ?>
                             <input type="hidden" name="kurir" id="kurir" value="JNE">
-                            <input type="hidden" name="status" id="status" value="belum dibayar">
+                            <input type="hidden" name="status" id="status" value="Menunggu Pembayaran">
                             <input type="hidden" name="total_keranjang" id="total_keranjang" value="<?=$totalCart?>">
                             <div class="checkout__order__subtotal">Total Keranjang <span><?= "Rp ".number_format($totalCart,0,',','.') ?></span></div>
                             <button class="primary-btn">PESAN</button>

@@ -4,14 +4,14 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Checkout extends Model
+class Pesanan extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'checkout';
+    protected $table            = 'pesanan';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
-    protected $allowedFields    = ['ongkir', 'nama','tgl_pesan', 'batas_bayar', 'total_keranjang', 'alamat', 'keterangan', 'provinsi', 'kabupaten', 'jasa_pengiriman', 'kurir', 'status', 'id_bank','id_user'];
-    protected $useTimestamps = false; 
+    protected $allowedFields    = ['id_barang', 'id_checkout', 'jumlah', 'nama_barang', 'harga'];
+    protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

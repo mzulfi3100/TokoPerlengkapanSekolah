@@ -61,8 +61,7 @@
                                 </ul>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="/login"><i class="fa fa-user"></i>
-                                    Login</a>
+                                <a href="/login"><i class="fa fa-user"></i>Login</a>
                             </div>
                         </div>
                     </div>
@@ -88,19 +87,19 @@
                     </div>
                     <nav class="header__menu">
                         <ul>
-                            <li class="<?= $section_navbar_title1; ?>"><a href="<?= base_url(); ?>/">Home</a></li>
-                            <li class="<?= $section_navbar_title2; ?>"><a href="<?= base_url(); ?>/dashboard">Shop</a>
+                            <li class="<?= $section_navbar_title1; ?>"><a href="<?= base_url(''); ?>">Home</a></li>
+                            <li class="<?= $section_navbar_title2; ?>"><a href="<?= base_url('shopGrid'); ?>">Shop</a>
                             </li>
                             <li class="<?= $section_navbar_title3; ?>"><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="<?= base_url(); ?>/shopDetails">Shop Details</a></li>
                                     <li><a href="<?= base_url(); ?>/shopingCart">Shoping Cart</a></li>
                                     <li><a href="<?= base_url(); ?>/checkout">Check Out</a></li>
-                                    <li><a href="<?= base_url(); ?>/blogDetails">Blog Details</a></li>
+                                    <li><a href="<?= base_url(); ?>/view_order">Order</a></li>
                                 </ul>
                             </li>
-                            <li class="<?= $section_navbar_title4; ?>"><a href="<?= base_url('/profile'); ?>">Profile</a></li>
-                            <li class="<?= $section_navbar_title5; ?>"><a href="<?= base_url(); ?>/admin">Admin</a></li>
+                            <li ><a href="<?= base_url('/profile'); ?>">Profile</a></li>
+                            <li ><a href="<?= base_url(); ?>/admin">Admin</a></li>\
                         </ul>
                     </nav>
                 </div>
@@ -121,7 +120,7 @@
                     ?>
                     <div class="header__cart">
                         <ul>
-                            <li><a href="/view_wishlist"><i class="fa fa-heart"></i></a></li>
+                        <li><a href="/view_wishlist"><i class="fa fa-heart"></i></a></li>
                             <li><a href="shopingCart"><i class="fa fa-shopping-bag"></i> <span><?= $jml_cartBarang ?></span></a></li>
                         </ul>
                         <div class="header__cart__price"><span><?= "Rp ".number_format($totalCart,0,',','.')?></span></div>

@@ -90,6 +90,11 @@ $routes->get('/view_wishlist', 'Home::view_wishlist');
 $routes->get('/delete_wishlist/(:num)', 'Home::delete_wishlist/$1');
 $routes->post('/store_checkout', 'Home::add_checkout');
 
+$routes->get('/view_order', 'home::view_order');
+$routes->get('/delete_order/(:num)', 'Home::delete_order/$1');
+$routes->get('/detail_order/(:num)', 'Home::detail_order/$1');
+$routes->get('/invoice_print/(:num)', 'Home::invoice_print/$1');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
