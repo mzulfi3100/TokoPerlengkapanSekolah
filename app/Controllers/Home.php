@@ -589,6 +589,37 @@ class Home extends BaseController
         return redirect()->to('/view_order');
     }
 
+    public function pesanan_masuk()
+    {
+        $checkoutModel = new Checkout();
+        $checkout = $checkoutModel->findAll();
+        $data = [
+            'checkout' => $checkout,
+        ];
+        return view('pegawai/pesanan/list_pesanan', $data);
+    }
+
+    public function status_pesanan()
+    {
+        $checkoutModel = new Checkout();
+        $id = $this->request->getPost('id');
+        $status = $this->request->getPost('status');
+        $data = array(
+            'status' => $status,
+        );
+        $checkoutModel->update($id, $data);
+        return redirect()->to("/pesanan_masuk");
+
+    }
+
+    public function delete_pesanan($id_order)
+    {
+        $checkoutModel = new Checkout();
+        $checkoutModel->delete($id_order);
+        return redirect()->to("/pesanan_masuk");
+
+    }
+
     public function finish_order($id_order)
     {
         $checkoutModel = new Checkout();
@@ -598,6 +629,37 @@ class Home extends BaseController
         $checkoutModel->update($id_order, $data);
         return redirect()->to("/view_order");
 
+    }
+
+    public function detail_pesanan($id_order)
+    {
+        $checkoutModel = new Checkout();
+        $db = \config\Database::connect();
+        $sql_tgl = "SELECT date_format(tgl_pesan, ('%d-%m-%Y')) as tanggal_pesan, date_format(batas_bayar, ('%d-%m-%Y')) as batas_bayar
+                FROM checkout
+                WHERE checkout.id = ".$id_order;
+        $query_tgl   = $db->query($sql_tgl);
+        $tgl = $query_tgl->getResultArray();
+
+        $builder = $db->table('pesanan');
+        $builder->select('*');
+        $builder->where('id_checkout', $id_order);
+        $query_psn = $builder->get();
+
+        $pesananModel = new Pesanan();
+        $bankModel = new Bank();
+        $data = [
+            'section_navbar_title1' => null,
+            'section_navbar_title2' => null,
+            'section_navbar_title3' => null,
+            'hero' => 'hero hero-normal',
+            'cart' => \Config\Services::cart(),
+            'checkout' => $checkoutModel->find($id_order),
+            'pesanan' => $query_psn->getResult(),
+            'bank' => $bankModel->findAll(),
+            'tgl' => $tgl,
+        ];
+        return view('pegawai/pesanan/invoice', $data);
     }
 
     public function list_user()
