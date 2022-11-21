@@ -33,7 +33,6 @@
                                     <th>Tanggal Pesan</th>
                                     <th>Batas Bayar</th>
                                     <th>Total</th>
-                                    <th>Transfer Ke</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -55,17 +54,21 @@
                                     <td class="order__item__price">
                                         <h5><?= "Rp ".number_format($cot['total_keranjang']+$cot['ongkir'],0,',','.')?></h5>
                                     </td>
-                                    <?php foreach($bank as $b ) : ?>
-                                        <td class="order__item__sts">
-                                            <h5><?= $b['nama_bank']."(No Rek: ".$b['no_rek'].")" ?></h5>
-                                        </td>
-                                    <?php endforeach; ?>
                                     <td class="order__item__sts">
                                         <h5><?= $cot['status'] ?></h5>
                                     </td>
-                                    <td>
-                                        <a href="/detail_order/<?= $cot["id"] ?> " method="get" class="btn btn-sm btn-primary">Detail</a>
-                                        <a  href="<?= base_url('delete_order/'.$cot['id'])?>" class="btn btn-sm btn-danger">Hapus</a>
+                                    <td class="order__item__aksi">
+                                        <?php if($cot['bukti_bayar'] == null ): ?>
+                                            <a  href="<?= base_url('bukti_bayar/'.$cot['id'])?>" class="btn btn-sm btn-info">Upload Bukti Bayar</a>
+                                        <?php elseif($cot['status'] == "Menunggu Pembayaran"): ?>
+                                            <a  href="<?= base_url('update_bukti_bayar/'.$cot['id'])?>" class="btn btn-sm btn-info">Update Bukti Bayar</a>
+                                        <?php endif; ?>
+                                        <a href="/detail_order/<?= $cot["id"] ?> " method="get" class="btn btn-sm btn-warning">Detail</a>
+                                        <?php if($cot['status'] == "Menunggu Pembayaran"): ?>
+                                            <a  href="<?= base_url('delete_order/'.$cot['id'])?>" class="btn btn-sm btn-danger">Batalkan</a>
+                                        <?php elseif($cot['status'] == "Dalam Proses Pengiriman"): ?>
+                                            <a  href="<?= base_url('finish_order/'.$cot['id'])?>" class="btn btn-sm btn-danger">Selesai</a>
+                                        <?php endif; ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

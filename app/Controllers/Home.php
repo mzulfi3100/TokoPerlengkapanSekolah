@@ -404,11 +404,13 @@ class Home extends BaseController
         $alamat = $this->request->getPost('alamat');
         $keterangan = $this->request->getPost('keterangan');
         $provinsi = $this->request->getPost('provinsi');
+        $nama_provinsi = $this->request->getPost('nama_provinsi');
         $kabupaten = $this->request->getPost('kabupaten');
+        $nama_kabupaten = $this->request->getPost('nama_kabupaten');
+        $service = $this->request->getPost('service');
         $ongkir = $this->request->getPost('jasa');
         $kurir = $this->request->getPost('kurir');
         $status = $this->request->getPost('status');
-        $id_bank = $this->request->getPost('bank');
         $id_user = user()->id;
         
         $data = [
@@ -418,12 +420,14 @@ class Home extends BaseController
             'alamat' => $alamat,
             'keterangan' => $keterangan,
             'provinsi' => $provinsi,
+            'nama_provinsi' => $nama_provinsi,
             'kabupaten' => $kabupaten,
+            'nama_kabupaten' => $nama_kabupaten,
+            'service' => $service,
             'kurir' => $kurir,
             'status' => $status,
             'tgl_pesan' => date('Y-m-d H:i:s'),
             'batas_bayar' => date('Y-m-d H:i:s', mktime(date('H'), date('i'), date('s'), date('m'), date('d') + 1, date('Y'))),
-            'id_bank' => $id_bank,
             'id_user' => $id_user,
         ];
         $checkoutModel->save($data);
@@ -450,19 +454,12 @@ class Home extends BaseController
     {
         $checkoutModel = new checkout();
         $checkout = $checkoutModel->where('id_user', user()->id)->findAll();
-        $db = \Config\Database::connect();
-        $sql = "SELECT nama_bank, no_rek
-                FROM bank, checkout
-                WHERE checkout.id_bank = bank.id";
-        $query   = $db->query($sql);
-        $results = $query->getResultArray();
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => null,
             'section_navbar_title3' => null,
             'hero' => 'hero hero-normal',
             'checkout' => $checkout,
-            'bank' => $results,
             'cart' => \Config\Services::cart()      
         ]; 
         return view('home/view_order', $data);
@@ -535,6 +532,72 @@ class Home extends BaseController
             'tgl' => $tgl,
         ];
         return view('home/invoice_print', $data);
+    }
+
+    public function bukti_bayar($id_order)
+    {
+        $data = [
+            'section_navbar_title1' => null,
+            'section_navbar_title2' => null,
+            'section_navbar_title3' => null,
+            'hero' => 'hero hero-normal',
+            'cart' => \Config\Services::cart(),
+            'id_order' => $id_order,
+        ];
+        return view('home/bukti_bayar', $data);
+    }
+
+    public function update_bukti_bayar($id_order)
+    {
+        $checkoutModel = new Checkout();
+        $checkout = $checkoutModel->where('id', $id_order)->findAll();
+        $data = [
+            'section_navbar_title1' => null,
+            'section_navbar_title2' => null,
+            'section_navbar_title3' => null,
+            'hero' => 'hero hero-normal',
+            'cart' => \Config\Services::cart(),
+            'id_order' => $id_order,
+            'checkout' => $checkout,
+        ];
+        return view('home/update_bukti_bayar', $data);
+    }
+
+    public function upload_bukti_bayar($id_order)
+    {
+        $checkoutModel = new Checkout();
+        $validated = $this->validate([
+            'bukti' => [
+                'label' => 'Image File',
+                'rules' => 'uploaded[bukti]'
+                    . '|is_image[bukti]'
+                    . '|mime_in[bukti,image/jpg,image/jpeg,image/gif,image/png,image/webp]'
+                    . '|max_size[bukti,1000]',
+            ],
+        ]);
+        if(!$validated){
+            return redirect()->back()->withInput();
+        }
+
+        $bukti = $this->request->getFile('bukti');
+        $bukti->move('uploads/bukti', $bukti->getName());
+        $data = [
+            'bukti_bayar' => $bukti->getName(),
+        ];
+        $checkoutModel->update($id_order, $data);
+
+        return redirect()->to('/view_order');
+    }
+
+    public function finish_order($id_order)
+    {
+        $checkoutModel = new Checkout();
+        $data = [
+            'status' => "Selesai"
+        ];
+        $checkoutModel->update($id_order, $data);
+        return redirect()->to("/view_order");
+
     }
 
     public function list_user()

@@ -10,7 +10,7 @@ class Checkout extends Model
     protected $table            = 'checkout';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
-    protected $allowedFields    = ['ongkir', 'nama','tgl_pesan', 'batas_bayar', 'total_keranjang', 'alamat', 'keterangan', 'provinsi', 'kabupaten', 'jasa_pengiriman', 'kurir', 'status', 'id_bank','id_user'];
+    protected $allowedFields    = ['ongkir', 'nama','tgl_pesan', 'batas_bayar', 'total_keranjang', 'alamat', 'keterangan', 'provinsi', 'nama_provinsi', 'kabupaten', 'nama_kabupaten', 'service', 'kurir', 'status', 'bukti_bayar', 'id_bank','id_user'];
     protected $useTimestamps = false; 
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';

@@ -111,6 +111,10 @@ $routes->get('/view_order', 'home::view_order');
 $routes->get('/delete_order/(:num)', 'Home::delete_order/$1');
 $routes->get('/detail_order/(:num)', 'Home::detail_order/$1');
 $routes->get('/invoice_print/(:num)', 'Home::invoice_print/$1');
+$routes->get('/bukti_bayar/(:num)', 'Home::bukti_bayar/$1');
+$routes->post('/upload_bukti_bayar/(:num)', 'Home::upload_bukti_bayar/$1');
+$routes->get('/update_bukti_bayar/(:num)', 'Home::update_bukti_bayar/$1');
+$routes->get('/finish_order/(:num)', 'Home::finish_order/$1');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

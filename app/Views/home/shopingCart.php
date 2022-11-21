@@ -295,7 +295,7 @@
                                     <td class="shoping__cart__quantity">
                                         <div class="quantity">
                                             <div class="pro-qty">
-                                                <input type="number" name="qty<?= $i++ ?>" value="<?= $pdf['qty'] ?>">
+                                                <input type="number" min="1" name="qty<?= $i++ ?>" value="<?= $pdf['qty'] ?>">
                                             </div>
                                         </div>
                                     </td>
@@ -345,7 +345,11 @@
                             ?>
                             <li>Total <span><?= "Rp ".number_format($totalCart,0,',','.') ?></span></li>
                         </ul>
-                        <a href="/checkout" class="primary-btn">PROCEED TO CHECKOUT</a>
+                        <?php foreach($keranjang as $pdf ) : ?>
+                            <?php if($pdf['id'] =! 0){ ?>
+                                <a href="/checkout" class="primary-btn">PROCEED TO CHECKOUT</a
+                            <?php }  ?>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
