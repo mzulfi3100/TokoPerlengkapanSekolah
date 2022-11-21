@@ -3,9 +3,12 @@
 namespace App\Controllers;
 
 use App\Models\Katalog;
+use App\Models\Bank;
+use App\Models\Pesanan;
 use App\Models\Checkout;
 use App\Models\wishlistModel;
 use App\Models\categoriesModel;
+use App\Models\productsfoundModel;
 
 class Home extends BaseController
 {
@@ -19,21 +22,23 @@ class Home extends BaseController
     
     public function index()
     {
+        $categories = new categoriesModel();
+        $all_data = $categories->findAll();
         $katalogModel = new Katalog();
         $katalog = $katalogModel -> findAll();
         $data = [
             'section_navbar_title1' => 'active',
             'section_navbar_title2' => null,
             'section_navbar_title3' => null,
-            'section_navbar_title4' => null,
-            'section_navbar_title5' => null,
+            'hero' => 'hero hero-normal',
+            'all_data' => $all_data,
             'katalog' => $katalog,
             'cart' => \Config\Services::cart(),
         ];
 
         return view('home/landing_page', $data);
     }
-    
+
     public function profile()
     {
         $data = [
@@ -46,64 +51,33 @@ class Home extends BaseController
         ];
         return view('home/profile', $data);
     }
+
     public function shopGrid()
     {
+        $productFound = new productsfoundModel();
+        $file = $productFound->findAll();
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => 'active',
             'section_navbar_title3' => null,
             'section_navbar_title4' => null,
             'section_navbar_title5' => null,
+            'file' => $file,
             'cart' => \Config\Services::cart(),
         ];
         return view('home/shopGrid', $data);
     }
-    public function contact()
-    {
-        $data = [
-            'section_navbar_title1' => null,
-            'section_navbar_title2' => null,
-            'section_navbar_title3' => 'active',
-            'section_navbar_title4' => null,
-            'section_navbar_title5' => null,
-            'cart' => \Config\Services::cart(),
-        ];
-        return view('home/contact', $data);
-    }
-    public function blog()
-    {
-        $data = [
-            'section_navbar_title1' => null,
-            'section_navbar_title2' => null,
-            'section_navbar_title3' => null,
-            'section_navbar_title4' => 'active',
-            'section_navbar_title5' => null,
-            'cart' => \Config\Services::cart(),
-        ];
-        return view('home/blog', $data);
-    }
-    public function blogDetails()
-    {
-        $data = [
-            'section_navbar_title1' => null,
-            'section_navbar_title2' => null,
-            'section_navbar_title3' => null,
-            'section_navbar_title4' => 'active',
-            'section_navbar_title5' => null,
-            'cart' => \Config\Services::cart(),
-        ];
-        return view('home/blogDetails', $data);
-    }
     public function checkout()
     {
+        $bankModel = new Bank();
         $provinsi = $this->rajaongkir('province');
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => 'active',
             'section_navbar_title3' => null,
-            'section_navbar_title4' => null,
-            'section_navbar_title5' => null,
+            'hero' => 'hero hero-normal',
             'cart' => \Config\Services::cart(),
+            'bank' => $bankModel->findAll(),
             'provinsi' => json_decode($provinsi)->rajaongkir->results,
         ];
         return view('pelanggan/checkout', $data);
@@ -194,10 +168,9 @@ class Home extends BaseController
     {
         $data = [
             'section_navbar_title1' => null,
-            'section_navbar_title2' => 'active',
+            'section_navbar_title2' => null,
             'section_navbar_title3' => null,
-            'section_navbar_title4' => null,
-            'section_navbar_title5' => null,
+            'hero' => 'hero hero-normal',
             'cart' => \Config\Services::cart(),
         ];
         return view('home/shopDetails', $data);
@@ -207,10 +180,9 @@ class Home extends BaseController
     {
         $data = [
             'section_navbar_title1' => null,
-            'section_navbar_title2' => 'active',
+            'section_navbar_title2' => null,
             'section_navbar_title3' => null,
-            'section_navbar_title4' => null,
-            'section_navbar_title5' => null,
+            'hero' => 'hero hero-normal',
             'cart' => \Config\Services::cart(),
         ];
         return view('home/shopingCart', $data);
@@ -228,9 +200,8 @@ class Home extends BaseController
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => null,
-            'section_navbar_title3' => null,
-            'section_navbar_title4' => null,
-            'section_navbar_title5' => 'active',
+            'section_navbar_title3' => 'active',
+            'hero' => 'hero hero-normal',
             'cart' => \Config\Services::cart(),
         ];
         return view('home/admin', $data);
@@ -243,9 +214,8 @@ class Home extends BaseController
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => null,
-            'section_navbar_title3' => null,
-            'section_navbar_title4' => null,
-            'section_navbar_title5' => 'active',
+            'section_navbar_title3' => 'active',
+            'hero' => 'hero hero-normal',
             'all_data' => $all_data,
             'cart' => \Config\Services::cart(),
         ];
@@ -259,11 +229,10 @@ class Home extends BaseController
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => null,
-            'section_navbar_title3' => null,
-            'section_navbar_title4' => null,
-            'section_navbar_title5' => 'active',
+            'section_navbar_title3' => 'active',
+            'hero' => 'hero hero-normal',
             'data_categories' => $data_categories,
-            
+            'cart' => \Config\Services::cart(),
         ];
         return view('home/edit_categories', $data);
     }
@@ -272,9 +241,9 @@ class Home extends BaseController
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => null,
-            'section_navbar_title3' => null,
-            'section_navbar_title4' => null,
-            'section_navbar_title5' => 'active',
+            'section_navbar_title3' => 'active',
+            'hero' => 'hero hero-normal',
+            'cart' => \Config\Services::cart(),
 
         ];
         return view('home/add_categories', $data);
@@ -288,9 +257,42 @@ class Home extends BaseController
     }
     public function categories_proses()
     {
+        $validate = $this->validate([
+            'name' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'You Have to Fill This Field',
+                ],
+            ],
+            'images' => [
+                'label' => 'Images',
+                'rules' => 'uploaded[images]|max_size[images,5120]|is_image[images]|mime_in[images,image/jpg,image/jpeg,image/png]',
+                'errors' => [
+                    'uploaded' => 'You must choose an image',
+                    'max_size' => 'Maximum File 5 Mb',
+                    'is_image' => 'Only images files',
+                    'mime_in' =>
+                    'Only images file',
+                ],
+            ],
+        ]);
+        if (!$validate) {
+
+            return redirect()->back()->withInput();
+        }
+        $file_images = $this->request->getFile('images');
+        // dd($file_images);
+        $file_images->move('Assets/img/categories', $file_images->getName());
+
+        $data = [
+            'images' =>
+            $file_images->getName(),
+            'name' => $this->request->getPost('name'),
+        ];
+
 
         $categories = new categoriesModel();
-        $categories->insert($this->request->getPost());
+        $categories->insert($data);
 
         return redirect()->to(base_url('/categoriesSection'));
     }
@@ -358,21 +360,28 @@ class Home extends BaseController
         $nama_produk = $this->request->getPost('nama_produk');
         $harga_produk = $this->request->getPost('harga_produk');
         $gambar_produk = $this->request->getPost('gambar_produk');
+        $id_user = user()->id;
         $data = [
             'id_produk' => $id_produk,
             'nama_produk' => $nama_produk,
             'harga_produk' => $harga_produk,
             'gambar_produk' => $gambar_produk,
+            'id_user' => $id_user,
         ];
         $wishlistModel->save($data);
-        return redirect()->to(base_url('home'));
+        return redirect()->to(base_url('/view_wishlist'));
     }
 
     public function view_wishlist()
     {
         $wishlistModel = new wishlistModel();
-        $wishlist = $wishlistModel->findAll();
+        $wishlist = $wishlistModel->where('id_user', user()->id)->findAll();
+       
         $data = [
+            'section_navbar_title1' => null,
+            'section_navbar_title2' => null,
+            'section_navbar_title3' => null,
+            'hero' => 'hero hero-normal',
             'wishlist' => $wishlist,
             'cart' => \Config\Services::cart()      
         ]; 
@@ -526,5 +535,26 @@ class Home extends BaseController
             'tgl' => $tgl,
         ];
         return view('home/invoice_print', $data);
+    }
+
+    public function list_user()
+    {
+        $db = \config\Database::connect();
+        $builder = $db->table('users');
+        $builder->select('users.id as userid, username, email, name');
+        $builder->join('auth_groups_users', 'auth_groups_users.user_id = users.id');
+        $builder->join('auth_groups', 'auth_groups.id = auth_groups_users.group_id');
+        $query = $builder->get();
+        // $users = new \Myth\Auth\Models\UserModel();
+        $data = [
+            'section_navbar_title1' => null,
+            'section_navbar_title2' => null,
+            'section_navbar_title3' => null,
+            'hero' => 'hero hero-normal',
+            'cart' => \Config\Services::cart(),
+            // 'users' => $users->findAll(),
+            'users' => $query->getResult(),
+        ];
+        return view('home/list_user', $data);
     }
 }

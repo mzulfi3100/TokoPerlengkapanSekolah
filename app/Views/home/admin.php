@@ -98,50 +98,41 @@
                         <th scope="row">1</th>
                         <td>Categories</td>
                         <td>
-                            <a href="<?= base_url('/categoriesSection') ?>"><button type="button" class="btn btn-info btn-sm">
-                                    <i class="fa-solid fa-circle-info"></i></button></a>
+                            <a href="<?= base_url('/categoriesSection') ?>"><button type="button"
+                                    class="btn btn-info btn-sm"> Detail</button></a>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">2</th>
                         <td>Featured Product</td>
                         <td>
-                            <a href="<?= base_url('#') ?>"><button type="button" class="btn btn-info btn-sm">
-                                    <i class="fa-solid fa-circle-info"></i></button></a>
+                            <a href="<?= base_url('') ?>"><button type="button"
+                                    class="btn btn-info btn-sm">Detail</button></a>
                         </td>
                     </tr>
-
                     <tr>
                         <th scope="row">3</th>
-                        <td>Featured Product</td>
+                        <td>Product Found</td>
                         <td>
-                            <a href="<?= base_url('#') ?>"><button type="button" class="btn btn-info btn-sm">
-                                    <i class="fa-solid fa-circle-info"></i></button></a>
+                            <a href="<?= base_url('Found') ?>"><button type="button"
+                                    class="btn btn-info btn-sm">Detail</button></a>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">4</th>
-                        <td>Featured Product</td>
+                        <td>User List</td>
                         <td>
-                            <a href="<?= base_url('#') ?>"><button type="button" class="btn btn-info btn-sm">
-                                    <i class="fa-solid fa-circle-info"></i></button></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">5</th>
-                        <td>Featured Product</td>
-                        <td>
-                            <a href="<?= base_url('#') ?>"><button type="button" class="btn btn-info btn-sm">
-                                    <i class="fa-solid fa-circle-info"></i></button></a>
+                            <a href="<?= base_url('/user_list') ?>"><button type="button"
+                                    class="btn btn-info btn-sm">Detail</button></a>
                         </td>
                     </tr>
                 </tbody>
             </table>
             <!-- table end -->
-
         </div>
     </div>
 </section>
 <!-- Checkout Section End -->
+
 
 <?= $this->endSection(); ?>

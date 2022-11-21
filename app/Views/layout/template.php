@@ -61,7 +61,11 @@
                                 </ul>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="/login"><i class="fa fa-user"></i>Login</a>
+                                <?php if(logged_in()): ?>
+                                    <a href="/logout"><i class="fa fa-user"></i>Logout</a>
+                                <?php else: ?>
+                                    <a href="/login"><i class="fa fa-user"></i>Login</a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -99,7 +103,9 @@
                                 </ul>
                             </li>
                             <li ><a href="<?= base_url('/profile'); ?>">Profile</a></li>
-                            <li ><a href="<?= base_url(); ?>/admin">Admin</a></li>\
+                            <?php if(in_groups('admin')): ?>
+                                <li ><a href="<?= base_url(); ?>/admin">Admin</a></li>
+                            <?php endif; ?>
                         </ul>
                     </nav>
                 </div>

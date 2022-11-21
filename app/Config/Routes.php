@@ -36,17 +36,18 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+$routes->get('/pegawai/dashboard', 'KatalogController::index');
 $routes->get('/list_katalog', 'KatalogController::list_katalog');
 $routes->get('/create_katalog', 'KatalogController::create_katalog');
 $routes->post('/store_katalog', 'KatalogController::store_katalog');
 $routes->get('/edit_katalog/(:num)', 'KatalogController::edit_katalog/$1');
 $routes->post('/update_katalog/(:num)', 'KatalogController::update_katalog/$1');
-$routes->delete('/delete_katalog/(:num)', 'KatalogController::delete_katalog/$1');
+$routes->get('/delete_katalog/(:num)', 'KatalogController::delete_katalog/$1');
 $routes->get('/dashboard', 'PelangganController::index');
 $routes->get('/dashboard_cari', 'PelangganController::cari');
 $routes->post('/dashboard_search', 'PelangganController::search');
-$routes->get('/register', 'Register::index');
-$routes->get('/login', 'Login::index');
+// $routes->get('/register', 'Register::index');
+// $routes->get('/login', 'Login::index');
 $routes->post('/register/process', 'Register::process');
 $routes->post('/login/process', 'Login::process');
 $routes->get('/shopGrid', 'Home::shopGrid');
@@ -58,15 +59,25 @@ $routes->get('/blog', 'Home::blog');
 $routes->get('/blogDetails', 'Home::blogDetails');
 $routes->get('/shopDetails', 'Home::shopDetails');
 $routes->get('/dashboard_kategori', 'PelangganController::kategori');
-$routes->get('/admin', 'Home::admin');
-$routes->get('/categoriesSection', 'Home::categoriesSection');
-$routes->get('/data_categories/(:num)', 'Home::data_categories/$1');
-$routes->get('/edit_categories/(:num)', 'Home::edit_categories/$1');
-$routes->get('/delete_categories/(:num)', 'Home::delete_categories/$1');
-$routes->post('/update_categories', 'Home::update_categories');
-$routes->get('/add_categories', 'Home::add_categories');
-$routes->post('/categories_proses', 'Home::categories_proses');
-$routes->post('/categories_update_proses', 'Home::categories_update_proses');
+$routes->get('/admin', 'Home::admin', ['filter' => 'role:admin']); 
+$routes->get('/categoriesSection', 'Home::categoriesSection', ['filter' => 'role:admin']);
+$routes->get('/data_categories/(:num)', 'Home::data_categories/$1', ['filter' => 'role:admin']);
+$routes->get('/edit_categories/(:num)', 'Home::edit_categories/$1', ['filter' => 'role:admin']);
+
+$routes->get('/delete_categories/(:num)', 'Home::delete_categories/$1', ['filter' => 'role:admin']);
+$routes->post('/update_categories', 'Home::update_categories', ['filter' => 'role:admin']);
+$routes->get('/add_categories', 'Home::add_categories', ['filter' => 'role:admin'] );
+$routes->post('/categories_update_proses', 'Home::categories_update_proses', ['filter' => 'role:admin']);
+$routes->post('/categories_proses', 'Home::categories_proses', ['filter' => 'role:admin']);
+$routes->get('/dashboard', 'adminController::dashboard');
+
+$routes->get('/Found', 'productsfoundController::Found', ['filter' => 'role:admin']);
+$routes->get('/delete_Product/(:num)', 'productsfoundController::delete_Product/$1', ['filter' => 'role:admin']);
+$routes->get('/edit_product/(:num)', 'productsfoundController::edit_product/$1', ['filter' => 'role:admin']);
+$routes->get('/add_product', 'productsfoundController::add_product', ['filter' => 'role:admin']);
+$routes->post('/update', 'productsfoundController::update', ['filter' => 'role:admin']);
+$routes->post('/store', 'productsfoundController::store', ['filter' => 'role:admin']);
+
 $routes->get('/getcity', 'Home::getCity');
 $routes->get('/getcost', 'Home::getCost');
 
@@ -90,11 +101,16 @@ $routes->get('/view_wishlist', 'Home::view_wishlist');
 $routes->get('/delete_wishlist/(:num)', 'Home::delete_wishlist/$1');
 $routes->post('/store_checkout', 'Home::add_checkout');
 
+//form routes
+
+$routes->get('/login', 'form::login');
+$routes->get('/register', 'form::register');
+
+$routes->get('/user_list', 'home::list_user');
 $routes->get('/view_order', 'home::view_order');
 $routes->get('/delete_order/(:num)', 'Home::delete_order/$1');
 $routes->get('/detail_order/(:num)', 'Home::detail_order/$1');
 $routes->get('/invoice_print/(:num)', 'Home::invoice_print/$1');
-
 /*
  * --------------------------------------------------------------------
  * Additional Routing
