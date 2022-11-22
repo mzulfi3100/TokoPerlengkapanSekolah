@@ -102,7 +102,7 @@
                                     <li><a href="<?= base_url(); ?>/view_order">Order</a></li>
                                 </ul>
                             </li>
-                            <li ><a href="<?= base_url('/profile'); ?>">Profile</a></li>
+                            <li ><a href="/list_user/">Profile</a></li>
                             <?php if(in_groups('admin')): ?>
                                 <li ><a href="<?= base_url(); ?>/admin">Admin</a></li>
                             <?php endif; ?>
