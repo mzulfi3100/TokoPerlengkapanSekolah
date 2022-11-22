@@ -62,7 +62,7 @@
                             </div>
                             <div class="header__top__right__auth">
                                 <?php if(logged_in()): ?>
-                                    <a href="/logout"><i class="fa fa-user"></i>Logout</a>
+                                    <a href="/logout"><i class="fa fa-user"> <?= user()->nama_lengkap; ?></i>Logout</a>
                                 <?php else: ?>
                                     <a href="/login"><i class="fa fa-user"></i>Login</a>
                                 <?php endif; ?>
