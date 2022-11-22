@@ -119,6 +119,12 @@ $routes->get('/bukti_bayar/(:num)', 'Home::bukti_bayar/$1');
 $routes->post('/upload_bukti_bayar/(:num)', 'Home::upload_bukti_bayar/$1');
 $routes->get('/update_bukti_bayar/(:num)', 'Home::update_bukti_bayar/$1');
 $routes->get('/finish_order/(:num)', 'Home::finish_order/$1');
+
+//profile user/delete akun (Admin)
+$routes->get('/list_user', 'ProfileController::list_user', ['filter' => 'role:admin']);
+$routes->get('/edit_user/(:num)', 'ProfileController::edit_user/$1', ['filter' => 'role:admin']);
+$routes->post('/update_user/(:num)', 'ProfileController::update_user/$1', ['filter' => 'role:admin']);
+$routes->delete('/delete_user/(:num)', 'ProfileController::delete_user/$1', ['filter' => 'role:admin']);
 /*
  * --------------------------------------------------------------------
  * Additional Routing
