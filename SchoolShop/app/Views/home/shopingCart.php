@@ -127,7 +127,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="shoping__cart__btns">
-                    <a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                    <a href="<?= base_url('') ?>" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
                     <a href="#" class="primary-btn cart-btn cart-btn-right"><span></span>
                         Update Cart</a>
                 </div>
