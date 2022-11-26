@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\Katalog;
 use App\Models\Checkout;
+use App\Models\categoriesModel;
 
 class KatalogController extends BaseController
 {
@@ -30,9 +31,15 @@ class KatalogController extends BaseController
     {
         $katalogModel = new Katalog();
         $katalog = $katalogModel->findAll();
+        $db = \config\Database::connect();
+        $sql = "SELECT *
+                FROM categories_home, katalog
+                WHERE categories_home.id = katalog.id_kategori ";
+        $query   = $db->query($sql);
+        $result = $query->getResultArray();
 
         $data = [
-            'katalog' => $katalog
+            'katalog' => $result,
         ];
 
         return view('pegawai/katalog/list_katalog', $data);
@@ -40,16 +47,21 @@ class KatalogController extends BaseController
 
     public function create_katalog()
     {
-        return view('pegawai/katalog/create_katalog');
+        $categories = new categoriesModel();
+        $all_data = $categories->findAll();
+        $data = [
+            'all_data' => $all_data,
+        ];
+        return view('pegawai/katalog/create_katalog', $data);
     }
 
     public function store_katalog()
     {
         if(!$this->validate([
             'nama_produk' => 'required|string',
-            'kategori_produk' => 'required|string',
+            'kategori_produk' => 'required|numeric',
             'harga_produk' => 'required|numeric',
-            'stok_produk' => 'required|numeric',
+            'berat_produk' => 'required|numeric',
             'deskripsi_produk' => 'required|string',
         ])){
             return redirect()->to('/create_katalog');
@@ -77,10 +89,9 @@ class KatalogController extends BaseController
             'nama_produk' => $this->request->getPost('nama_produk'),
             'kategori_produk' => $this->request->getPost('kategori_produk'),
             'harga_produk' => $this->request->getPost('harga_produk'),
-            'stok_produk' => $this->request->getPost('stok_produk'),
+            'berat_produk' => $this->request->getPost('berat_produk'),
             'deskripsi_produk' => $this->request->getPost('deskripsi_produk'),
             'gambar_produk' => $gambar_produk,
-            'featured_produk' => $this->request->getPost('featured_produk'),
         ];  
         $katalogModel->save($data);
 
@@ -99,21 +110,23 @@ class KatalogController extends BaseController
     {
         $katalogModel = new Katalog();
         $katalog = $katalogModel->find($id_produk);
-
+        $categories = new categoriesModel();
+        $all_data = $categories->findAll();
         $data = [
-            'title' => "Edit Katalog"
+            'title' => "Edit Katalog",
+            'all_data' => $all_data,
         ];
-
-        return view('pegawai/katalog/edit_katalog', $katalog);
+        return view('temps/header', $data)
+        .view('pegawai/katalog/edit_katalog', $katalog);
     }
 
     public function update_katalog($id_produk)
     {
         if(!$this->validate([
             'nama_produk' => 'required|string',
-            'kategori_produk' => 'required|string',
+            'kategori_produk' => 'required|numeric',
             'harga_produk' => 'required|numeric',
-            'stok_produk' => 'required|numeric',
+            'berat_produk' => 'required|numeric',
             'deskripsi_produk' => 'required|string',
         ])){
             return redirect()->to('/edit_katalog/'.$id_produk);
@@ -136,10 +149,9 @@ class KatalogController extends BaseController
             'nama_produk' => $this->request->getPost('nama_produk'),
             'kategori_produk' => $this->request->getPost('kategori_produk'),
             'harga_produk' => $this->request->getPost('harga_produk'),
-            'stok_produk' => $this->request->getPost('stok_produk'),
+            'berat_produk' => $this->request->getPost('stok_produk'),
             'deskripsi_produk' => $this->request->getPost('deskripsi_produk'),
             'gambar_produk' => $gambar_produk,
-            'featured_produk' => $this->request->getPost('featured_produk'),
         ];
         $katalogModel->update($id_produk, $data);
 

@@ -18,36 +18,37 @@ class Login extends BaseController
         return view('home/loginRegister');
     }
  
-    public function process()
-    {
-        $users = new UsersModel();
-        $email = $this->request->getVar('email');
-        $password = $this->request->getVar('password');
-        $dataUser = $users->where([
-            'email' => $email,
-        ])->first();
-        if ($dataUser) {
-            if (password_verify($password, $dataUser->password)) {
-                session()->set([
-                    'email' => $dataUser->email,
-                    'first' => $dataUser->first,
-                    'last' => $dataUser->last,
-                    'logged_in' => TRUE
-                ]);
-                return redirect()->to(base_url('dashboard'));
-            } else {
-                session()->setFlashdata('error', 'Username & Password Salah !');
-                return redirect()->back();
-            }
-        } else {
-            session()->setFlashdata('error', 'Username & Password Salah !');
-            return redirect()->back();
-        }
-    }
+    // public function process()
+    // {
+    //     $users = new UsersModel();
+    //     $email = $this->request->getVar('email');
+    //     $password = $this->request->getVar('password');
+    //     $dataUser = $users->where([
+    //         'email' => $email,
+    //     ])->first();
+    //     if ($dataUser) {
+    //         if (password_verify($password, $dataUser->password)) {
+    //             session()->set([
+    //                 'email' => $dataUser->email,
+    //                 'role' => $dataUser->role,
+    //                 'logged_in' => TRUE
+    //             ]);
+    //             if($dataUser->role == "pegawai"){
+    //                 return redirect()->to('/pegawai/dashboard');
+    //             }
+    //         } else {
+    //             session()->setFlashdata('error', 'Username & Password Salah !');
+    //             return redirect()->back();
+    //         }
+    //     } else {
+    //         session()->setFlashdata('error', 'Username & Password Salah !');
+    //         return redirect()->back();
+    //     }
+    // }
  
-    function logout()
-    {
-        session()->destroy();
-        return redirect()->to('/login');
-    }
+    // function logout()
+    // {
+    //     session()->destroy();
+    //     return redirect()->to('/login');
+    // }
 }

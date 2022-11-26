@@ -40,22 +40,6 @@ class Register extends BaseController
                 'errors' => [
                     'matches' => 'Konfirmasi Password tidak sesuai dengan password',
                 ]
-            ],
-            'first' => [
-                'rules' => 'required|min_length[4]|max_length[100]',
-                'errors' => [
-                    'required' => '{field} Harus diisi',
-                    'min_length' => '{field} Minimal 4 Karakter',
-                    'max_length' => '{field} Maksimal 100 Karakter',
-                ]
-            ],
-            'last' => [
-                'rules' => 'required|min_length[4]|max_length[100]',
-                'errors' => [
-                    'required' => '{field} Harus diisi',
-                    'min_length' => '{field} Minimal 4 Karakter',
-                    'max_length' => '{field} Maksimal 100 Karakter',
-                ]
             ]
         ])) {
             session()->setFlashdata('error', $this->validator->listErrors());
@@ -65,8 +49,7 @@ class Register extends BaseController
         $users->insert([
             'email' => $this->request->getVar('email'),
             'password' => password_hash($this->request->getVar('password'), PASSWORD_BCRYPT),
-            'first' => $this->request->getVar('first'),
-            'last' => $this->request->getVar('last'),
+            'role' => 'pelanggan',
         ]);
         return redirect()->to('/login');
     }

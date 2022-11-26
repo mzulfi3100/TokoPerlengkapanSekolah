@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use \Myth\Auth\Models\UserModel;
+use App\Models\WishlistModel;
 use App\Models\ProfileModel;
 
 class ProfileController extends BaseController
@@ -21,6 +23,8 @@ class ProfileController extends BaseController
     {
         $profileModel = new ProfileModel();
         $userProfile = $profileModel -> findAll();
+        $wishlistModel = new WishlistModel();
+        $wishlist = $wishlistModel -> findAll();
 
         $data = [
             'section_navbar_title1' => null,
@@ -30,6 +34,7 @@ class ProfileController extends BaseController
             'section_navbar_title5' => null,
             'cart' => \Config\Services::cart(),
             'userProfile' => $userProfile,
+            'wishlist' => $wishlist,
             'title' => 'User Profile',
         ];
 
@@ -46,8 +51,10 @@ class ProfileController extends BaseController
 
     public function edit_user($id)
     {
+        $wishlistModel = new WishlistModel();
+        $wishlist = $wishlistModel -> findAll();
         $profileModel = new ProfileModel();
-        $userProfile = $profileModel->find($id);
+        $userProfile = $profileModel -> find($id);
 
         $data = [
             'section_navbar_title1' => null,
@@ -56,10 +63,11 @@ class ProfileController extends BaseController
             'section_navbar_title4' => 'active',
             'section_navbar_title5' => null,
             'cart' => \Config\Services::cart(),
-            'title' => "Edit Profil"
+            'wishlist' => $wishlist,
+            'title' => "Edit Profil",
         ];
         return view('temps/header', $data)
-        . view('profile/edit_user', $userProfile);
+        .view('profile/edit_user', $userProfile);
     }
 
     public function update_user($id)
@@ -86,6 +94,6 @@ class ProfileController extends BaseController
         ];
         $profileModel->update($id, $data);
         return redirect()->to('/list_user');
-        
+
     }
 }

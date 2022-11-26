@@ -29,15 +29,36 @@
                     <div class="sidebar__item">
                         <h4>Department</h4>
                         <ul>
-                            <li><a href="<?= base_url('stationery') ?>">Stationery</a></li>
-                            <li><a href="<?= base_url('uniforms') ?>">Uniforms</a></li>
-                            <li><a href="<?= base_url('shoes') ?>">Shoes</a></li>
-                            <li><a href="<?= base_url('backpack') ?>">Backpack</a></li>
-                            <li><a href="<?= base_url('belt') ?>">Belt</a></li>
-                            <li><a href="<?= base_url('tie') ?>">Tie</a></li>
-                            <li><a href="<?= base_url('hat') ?>">Hat</a></li>
+                            <?php $no = 1; foreach($all_data as $all): ?>
+                                <form id="input<?= $no ?>" action="/dashboard_kategori" method="get">
+                                    <input type="hidden" name="kategori" id="kategori" value="<?= $all->id ?>">
+                                    <li><a href="javascript:;" onclick="document.getElementById('input<?= $no ?>').submit();"><?= $all->name ?></a></li>
+                                </form>
+                                <?php $no++ ?>
+                            <?php endforeach; ?>
                         </ul>
                     </div>
+                    <div class="ml-3 mt-2">
+                    Filter
+                    </div>
+                    <hr />
+                    <br>
+                    <div class="">
+                    Harga
+                    </div>
+                    <form action="/dashboard_search" method="post">
+                        <div class="row">
+                            <div class="col-mr-5 p-2 ml-2">
+                                <input type="text" id="min" name="min" placeholder="min" style="width:60px">
+                            </div>
+                            <div class="col-md-2 p-2">
+                                <input type="text" id="max" name="max" placeholder="max" style="width:60px">
+                            </div>
+                        </div>
+                        <div class="">
+                            <button class="btn btn-primary btn-sm" type="submit" style="width:135px">Cari</button>
+                        </div>  
+                    </form>
                 </div>
             </div>
             <div class="col-lg-9 col-md-7">
@@ -184,35 +205,78 @@
                     </div>
                 </div>
                 <div class="row">
+                    <?php $count = 0; foreach($wishlist as $wish): ?>
+                        <?php $count++ ?>
+                    <?php endforeach; ?>
                     <?php
                     $no = 1;
-                    foreach ($file as $f) : ?>
+                    foreach ($katalog as $ktg) : ?>
                     <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg"
-                                data-setbg="/Assets/img/product/<?= $f->image_product; ?>">
-                                <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                        <?php $sudah = 0;if($ktg['product_found'] == "yes"): ?>
+                        <div class="featured__item">
+                            <?php echo form_open('home/add');
+                                echo form_hidden('id', $ktg['id_produk']);
+                                echo form_hidden('price', $ktg['harga_produk']);
+                                echo form_hidden('name', $ktg['nama_produk']);
+                                //option
+                                echo form_hidden('gambar', $ktg['gambar_produk']); 
+                                echo form_hidden('berat', $ktg['berat_produk']);?>
+                            <div class="featured__item__pic set-bg"
+                                data-setbg="/uploads/<?= $ktg['gambar_produk']; ?>">
+                                <ul class="featured__item__pic__hover">
                                     <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                    <button type="submit"><li type="submit"><i class="fa fa-shopping-cart"></i></a></li></button>
+                                    <?php echo form_close(); ?>
+                                    <script src="https://kit.fontawesome.com/72ae031378.js" crossorigin="anonymous"></script>
+                                    <?php if($count == 0): ?>
+                                        <form action="/add_wishlist" method="post" enctype="multipart/form-data">
+                                            <input type="hidden" id="id_produk" name="id_produk" value=<?= $ktg['id_produk'] ?>>
+                                            <input type="hidden" id="harga_produk" name="harga_produk" value=<?= $ktg['harga_produk'] ?>>
+                                            <input type="hidden" id="nama_produk" name="nama_produk" value=<?= $ktg['nama_produk'] ?>>
+                                            <input type="hidden" id="gambar_produk" name="gambar_produk" value=<?= $ktg['gambar_produk'] ?>>
+                                            <input type="hidden" id="berat_produk" name="berat_produk" value=<?= $ktg['berat_produk'] ?>>
+                                            <button type="submit"><li type="submit"><i class="fa fa-heart-o"></i></a></li></button>
+                                        </form>
+                                    <?php elseif($count != 0): ?>
+                                        <?php foreach($wishlist as $wish): ?>
+                                            <?php foreach($wishlist as $wish): ?>
+                                                <?php if($wish['id_produk'] == $ktg['id_produk']): ?>
+                                                    <form action="/delete_wishlist/<?= $wish['id'] ?>" method="get" enctype="multipart/form-data">
+                                                        <button type="submit"><li type="submit"><i class="fa fa-heart"></i></a></li></button>
+                                                        <?php $sudah = 1 ?>
+                                                    </form>
+                                                <?php endif; ?>
+                                            <?php endforeach ?>
+                                            <?php if($sudah == 0): ?>
+                                                <form action="/add_wishlist" method="post" enctype="multipart/form-data">
+                                                    <input type="hidden" id="id_produk" name="id_produk" value=<?= $ktg['id_produk'] ?>>
+                                                    <input type="hidden" id="hargar_produk" name="harga_produk" value=<?= $ktg['harga_produk'] ?>>
+                                                    <input type="hidden" id="nama_produk" name="nama_produk" value=<?= $ktg['nama_produk'] ?>>
+                                                    <input type="hidden" id="gambar_produk" name="gambar_produk" value=<?= $ktg['gambar_produk'] ?>>
+                                                    <input type="hidden" id="berat_produk" name="berat_produk" value=<?= $ktg['berat_produk'] ?>>
+                                                    <button type="submit"><li type="submit"><i class="fa fa-heart-o"></i></a></li></button>
+                                                </form>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
                                 </ul>
                             </div>
                             <div class="product__item__text">
-                                <h6><a href="#"><?= $f->name_product; ?></a></h6>
-                                <h5><?= $f->price_product; ?></h5>
+                                <h6><a href="#"><?= $ktg['nama_produk']; ?></a></h6>
+                                <h5><?= "Rp ".number_format($ktg['harga_produk'],0,',','.'); ?></h5>
                             </div>
                         </div>
+                        <?php endif; ?>
                     </div>
                     <?php
                         $no++;
                     endforeach ?>
-
-                    <div class="product__pagination">
-                        <a href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#"><i class="fa fa-long-arrow-right"></i></a>
-                    </div>
+                </div>
+                <div class="product__pagination">
+                    <a href="#">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#"><i class="fa fa-long-arrow-right"></i></a>
                 </div>
             </div>
         </div>

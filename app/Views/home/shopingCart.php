@@ -99,7 +99,7 @@
         <div class="header__top">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-6">
                         <div class="header__top__left">
                             <ul>
                                 <li><i class="fa fa-envelope"></i> schoolshop@gmail.com</li>
@@ -107,7 +107,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-6">
                         <div class="header__top__right">
                             <div class="header__top__right__social">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
@@ -125,7 +125,11 @@
                                 </ul>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> Login</a>
+                                <?php if(logged_in()): ?>
+                                    <a href="/logout"><i class="fa fa-user"><?= user()->nama_lengkap; ?></i>Logout</a>
+                                <?php else: ?>
+                                    <a href="/login"><i class="fa fa-user"></i>Login</a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -136,56 +140,67 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="<?= base_url(); ?>/"><img src="/Assets/img/logo.png" alt=""></a>
+                        <a href="#"><img src="/Assets/img/logoToko.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <?php
+                    <div class="col-lg-12">
+                        <?php
                         if (session()->getflashdata('pesan')){
                             echo'<div class="alert alert-success alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
                             echo session()->getflashdata('pesan').(' Berhasil Dimasukkan Kedalam Keranjang');
                             echo'</div>';
                         }?>
+                    </div>
                     <nav class="header__menu">
                         <ul>
-                            <li><a href="<?= base_url(); ?>/">Home</a></li>
-                            <li class="active"><a href="<?= base_url(); ?>/shopGrid">Shop</a></li>
-                            <li><a href="#">Pages</a>
+                            <li class="<?= $section_navbar_title1; ?>"><a href="<?= base_url(''); ?>">Home</a></li>
+                            <li class="<?= $section_navbar_title2; ?>"><a href="<?= base_url('shopGrid'); ?>">Shop</a>
+                            </li>
+                            <li class="<?= $section_navbar_title3; ?>"><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="<?= base_url(); ?>/shopDetails">Shop Details</a></li>
                                     <li><a href="<?= base_url(); ?>/shopingCart">Shoping Cart</a></li>
                                     <li><a href="<?= base_url(); ?>/checkout">Check Out</a></li>
-                                    <li><a href="<?= base_url(); ?>/blogDetails">Blog Details</a></li>
+                                    <li><a href="<?= base_url(); ?>/view_order">Order</a></li>
                                 </ul>
                             </li>
-                            <li><a href="<?= base_url(); ?>/blog">Blog</a></li>
-                            <li><a href="<?= base_url(); ?>/contact">Contact</a></li>
+                            <?php if(in_groups('pelanggan')): ?>
+                                <li ><a href="/profile">Profile</a></li>
+                            <?php elseif(in_groups('admin')): ?>
+                                <li ><a href="/list_user/">Profile</a></li>
+                            <?php endif; ?>
+                            <?php if(in_groups('admin')): ?>
+                                <li ><a href="<?= base_url(); ?>/admin">Admin</a></li>
+                            <?php endif; ?>
                         </ul>
                     </nav>
                 </div>
                 <div class="col-lg-3">
                     <?php
-                    $keranjang = $cart->contents();
-                    $jml_cartBarang = 0;
-                    foreach ($keranjang as $key){
-                        $jml_cartBarang = $jml_cartBarang + 1;
-                    }
-                    ?>
-                    <?php
-                    $keranjang = $cart->contents();
-                    $totalCart = 0;
-                    foreach ($keranjang as $dps){
-                        $totalCart = $totalCart + $dps['subtotal'];
-                    }
+                        $keranjang = $cart->contents();
+                        $jml_cartBarang = 0;
+                        foreach ($keranjang as $key){
+                            $jml_cartBarang = $jml_cartBarang + 1;
+                        }
+                        ?>
+                        <?php
+                        $keranjang = $cart->contents();
+                        $totalCart = 0;
+                        foreach ($keranjang as $dps){
+                            $totalCart = $totalCart + $dps['subtotal'];
+                        }
                     ?>
                     <div class="header__cart">
                         <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                        <?php $count = 0;foreach($wishlist as $w): ?>
+                            <?php $count++ ?>
+                        <?php endforeach; ?>
+                        <li><a href="/view_wishlist"><i class="fa fa-heart"></i><span> <?= $count ?> </span></a></li>
                             <li><a href="shopingCart"><i class="fa fa-shopping-bag"></i> <span><?= $jml_cartBarang ?></span></a></li>
-
                         </ul>
-                        <div class="header__cart__price"><span><?= " Total Harga (Rp ".number_format($totalCart,0,',','.').")"?></span></div>
+                        <div class="header__cart__price"><span><?= "Rp ".number_format($totalCart,0,',','.')?></span></div>
                     </div>
                 </div>
             </div>
@@ -195,52 +210,6 @@
         </div>
     </header>
     <!-- Header Section End -->
-
-    <!-- Hero Section Begin -->
-    <section class="hero hero-normal">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="hero__categories">
-                        <div class="hero__categories__all">
-                            <i class="fa fa-bars"></i>
-                            <span>All departments</span>
-                        </div>
-                        <ul>
-                            <li><a href="#">Stationary</a></li>
-                            <li><a href="#">Uniforms</a></li>
-                            <li><a href="#">Shoes</a></li>
-                            <li><a href="#">Backpack</a></li>
-                            <li><a href="#">Belt</a></li>
-                            <li><a href="#">Tie</a></li>
-                            <li><a href="#">Hat</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-9">
-                    <div class="hero__search">
-                        <div class="hero__search__form">
-                            <form action="#">
-
-                                <input type="text" placeholder="What do yo u need?">
-                                <button type="submit" class="site-btn">SEARCH</button>
-                            </form>
-                        </div>
-                        <div class="hero__search__phone">
-                            <div class="hero__search__phone__icon">
-                                <i class="fa fa-phone"></i>
-                            </div>
-                            <div class="hero__search__phone__text">
-                                <h5>+62 851 6233 6233</h5>
-                                <span>support 24/7 time</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Hero Section End -->
 
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="/Assets/img/breadcrumb.jpg">
@@ -346,9 +315,9 @@
                             <li>Total <span><?= "Rp ".number_format($totalCart,0,',','.') ?></span></li>
                         </ul>
                         <?php foreach($keranjang as $pdf ) : ?>
-                            <?php if($pdf['id'] =! 0){ ?>
+                            <?php if($pdf['id'] =! 0): ?>
                                 <a href="/checkout" class="primary-btn">PROCEED TO CHECKOUT</a
-                            <?php }  ?>
+                            <?php endif;  ?>
                         <?php endforeach; ?>
                     </div>
                 </div>

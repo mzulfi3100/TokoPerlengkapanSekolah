@@ -62,7 +62,7 @@
                             </div>
                             <div class="header__top__right__auth">
                                 <?php if(logged_in()): ?>
-                                    <a href="/logout"><i class="fa fa-user"> <?= user()->nama_lengkap; ?></i>Logout</a>
+                                    <a href="/logout"><i class="fa fa-user"><?= user()->nama_lengkap; ?></i>Logout</a>
                                 <?php else: ?>
                                     <a href="/login"><i class="fa fa-user"></i>Login</a>
                                 <?php endif; ?>
@@ -102,7 +102,11 @@
                                     <li><a href="<?= base_url(); ?>/view_order">Order</a></li>
                                 </ul>
                             </li>
-                            <li ><a href="/list_user/">Profile</a></li>
+                            <?php if(in_groups('pelanggan')): ?>
+                                <li ><a href="/profile">Profile</a></li>
+                            <?php elseif(in_groups('admin')): ?>
+                                <li ><a href="/list_user/">Profile</a></li>
+                            <?php endif; ?>
                             <?php if(in_groups('admin')): ?>
                                 <li ><a href="<?= base_url(); ?>/admin">Admin</a></li>
                             <?php endif; ?>
@@ -126,7 +130,10 @@
                     ?>
                     <div class="header__cart">
                         <ul>
-                        <li><a href="/view_wishlist"><i class="fa fa-heart"></i></a></li>
+                        <?php $count = 0;foreach($wishlist as $w): ?>
+                            <?php $count++ ?>
+                        <?php endforeach; ?>
+                        <li><a href="/view_wishlist"><i class="fa fa-heart"></i><span> <?= $count ?> </span></a></li>
                             <li><a href="shopingCart"><i class="fa fa-shopping-bag"></i> <span><?= $jml_cartBarang ?></span></a></li>
                         </ul>
                         <div class="header__cart__price"><span><?= "Rp ".number_format($totalCart,0,',','.')?></span></div>

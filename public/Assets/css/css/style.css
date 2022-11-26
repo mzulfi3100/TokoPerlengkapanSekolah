@@ -952,6 +952,7 @@ ol {
 -----------------------*/
 
 .latest-product {
+	position: center;
 	padding-top: 80px;
 	padding-bottom: 0;
 }

@@ -10,7 +10,7 @@ class Katalog extends Model
     protected $table            = 'katalog';
     protected $primaryKey       = 'id_produk';
     protected $useAutoIncrement = true;
-    protected $allowedFields    = ['nama_produk', 'kategori_produk', 'harga_produk', 'stok_produk', 'deskripsi_produk', 'gambar_produk', 'featured_produk'];
+    protected $allowedFields    = ['nama_produk', 'harga_produk', 'berat_produk', 'deskripsi_produk', 'gambar_produk', 'featured_produk', 'product_found', 'id_kategori'];
     protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';

@@ -10,7 +10,7 @@ class WishlistModel extends Model
     protected $table            = 'wishlist';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
-    protected $allowedFields    = ['nama_produk', 'harga_produk', 'gambar_produk', "id_produk", 'id_user'];
+    protected $allowedFields    = ['nama_produk', 'harga_produk', 'gambar_produk', "berat_produk", "id_produk", 'id_user'];
     protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';

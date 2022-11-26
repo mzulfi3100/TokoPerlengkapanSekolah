@@ -112,14 +112,7 @@
                         <th scope="row">4</th>
                         <td>Jenis Kelamin</td>
                         <td><select name="jenis_kelamin" id="jenis_kelamin">
-                            <option class="form-control" value="<?= $jenis_kelamin ?> "  >
-                            <?php
-                            if ($jenis_kelamin == "laki-laki"){
-                                echo "- Laki-Laki -";
-                            }else if($jenis_kelamin == "perempuan"){
-                                echo "- Perempuan -";
-                            }
-                            ?></option>
+                            <option class="form-control" value="<?= $jenis_kelamin ?> ">- <?= $jenis_kelamin ?> -</option>
                             <option value="laki-laki">Laki-Laki</option>
                             <option value="perempuan">Perempuan</option>
                         </select></td>    

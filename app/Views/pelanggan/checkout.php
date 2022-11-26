@@ -55,8 +55,11 @@
                                 </ul>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="/login"><i class="fa fa-user"></i>
-                                    Login</a>
+                                <?php if(logged_in()): ?>
+                                    <a href="/logout"><i class="fa fa-user"><?= user()->nama_lengkap; ?></i>Logout</a>
+                                <?php else: ?>
+                                    <a href="/login"><i class="fa fa-user"></i>Login</a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -82,19 +85,25 @@
                     </div>
                     <nav class="header__menu">
                         <ul>
-                            <li class="<?= $section_navbar_title1; ?>"><a href="<?= base_url(); ?>/">Home</a></li>
-                            <li class="<?= $section_navbar_title2; ?>"><a href="<?= base_url(); ?>/dashboard">Shop</a>
+                            <li class="<?= $section_navbar_title1; ?>"><a href="<?= base_url(''); ?>">Home</a></li>
+                            <li class="<?= $section_navbar_title2; ?>"><a href="<?= base_url('shopGrid'); ?>">Shop</a>
                             </li>
                             <li class="<?= $section_navbar_title3; ?>"><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="<?= base_url(); ?>/shopDetails">Shop Details</a></li>
                                     <li><a href="<?= base_url(); ?>/shopingCart">Shoping Cart</a></li>
                                     <li><a href="<?= base_url(); ?>/checkout">Check Out</a></li>
-                                    <li><a href="<?= base_url(); ?>/blogDetails">Blog Details</a></li>
+                                    <li><a href="<?= base_url(); ?>/view_order">Order</a></li>
                                 </ul>
                             </li>
-                            <li><a href="<?= base_url(); ?>/profile">Profile</a></li>
-                            <li><a href="<?= base_url(); ?>/admin">Admin</a></li>
+                            <?php if(in_groups('pelanggan')): ?>
+                                <li ><a href="/profile">Profile</a></li>
+                            <?php elseif(in_groups('admin')): ?>
+                                <li ><a href="/list_user/">Profile</a></li>
+                            <?php endif; ?>
+                            <?php if(in_groups('admin')): ?>
+                                <li ><a href="<?= base_url(); ?>/admin">Admin</a></li>
+                            <?php endif; ?>
                         </ul>
                     </nav>
                 </div>
@@ -115,7 +124,10 @@
                     ?>
                     <div class="header__cart">
                         <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                        <?php $count = 0;foreach($wishlist as $w): ?>
+                            <?php $count++ ?>
+                        <?php endforeach; ?>
+                        <li><a href="/view_wishlist"><i class="fa fa-heart"></i><span> <?= $count ?> </span></a></li>
                             <li><a href="shopingCart"><i class="fa fa-shopping-bag"></i> <span><?= $jml_cartBarang ?></span></a></li>
                         </ul>
                         <div class="header__cart__price"><span><?= "Rp ".number_format($totalCart,0,',','.')?></span></div>
@@ -152,6 +164,7 @@
                                 <?php foreach($provinsi as $p) : ?>
                                     <option value="<?= $p->province_id ?>"><?= $p->province ?></option>
                                 <?php endforeach; ?>
+                                <input type="hidden" name="nama_provinsi" id="nama_provinsi" value="">
                             </select>
                         </div>
                         <div class="checkout__input">
@@ -159,20 +172,12 @@
                             <select class="checkout__input__select" id="kabupaten" name="kabupaten">
                                 <option>Select Kabupaten/Kota</option>
                             </select>
+                            <input type="hidden" name="nama_kabupaten" id="nama_kabupaten" value="">
                         </div>
                         <div class="checkout__input">
                             <p>Pilih Jasa Pengiriman<span>*</span></p>
                             <select class="checkout__input__select" id="jasa" name="jasa">
                                 <option>Select Jasa Pengiriman</option>
-                            </select>
-                        </div>
-                        <div class="checkout__input">
-                            <p>Pilih Pembayaran<span>*</span></p>
-                            <select class="checkout__input__select" id="bank" name="bank">
-                                <option>Select Pembayaran</option>
-                                <?php foreach($bank as $b) : ?>
-                                    <option value="<?= $b['id'] ?>"><?= $b['nama_bank']."(No Rek: ".$b['no_rek'].")" ?></option>
-                                <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
@@ -183,17 +188,21 @@
                             <ul>
                                 <li>Ongkir <span id="total_ongkir"> </span></li>
                                 <?php foreach($cart->contents() as $item){ ?>
-                                    <li> <?= $item['name']." (x".$item['qty'].")" ?><span>  <?= $item['price']*$item['qty'] ?></span></li>
+                                    <li> <?= $item['name']." (x".$item['qty'].")" ?><span>  <?= "Rp " . number_format($item['price']*$item['qty'],0,',','.'); ?></span></li>
                                 <?php } ?>
                             </ul>
                             <?php
                                 $keranjang = $cart->contents();
                                 $totalCart = 0;
+                                $berat = 0;
                                 foreach ($keranjang as $dps){
                                     $totalCart = $totalCart + $dps['subtotal'];
+                                    $berat = $berat + ($dps['options']['berat']*$dps['qty']);
                                 }
                             ?>
+                            <input type="hidden" name="berat" id="berat" value="<?= $berat ?>">
                             <input type="hidden" name="kurir" id="kurir" value="JNE">
+                            <input type="hidden" name="service" id="service" value="">
                             <input type="hidden" name="status" id="status" value="Menunggu Pembayaran">
                             <input type="hidden" name="total_keranjang" id="total_keranjang" value="<?=$totalCart?>">
                             <div class="checkout__order__subtotal">Total Keranjang <span><?= "Rp ".number_format($totalCart,0,',','.') ?></span></div>
@@ -299,7 +308,10 @@
             $('#jasa').empty();
             $('#total_ongkir').empty();
             var id_province = $(this).val();
+            var nama_province = $("#provinsi option:selected").text(); 
             console.log(id_province);
+            console.log(nama_province);
+            $('#nama_provinsi').val(nama_province);
             $.ajax({
                 url : "<?= base_url('getcity')?>",
                 type : 'GET',
@@ -323,13 +335,18 @@
             $('#jasa').empty();
             $('#total_ongkir').empty();
             var id_city = $(this).val();
+            var nama_kabupaten = $("#kabupaten option:selected").text(); 
+            var berat = $("#berat").val(); 
+            console.log(nama_kabupaten);
+            console.log(berat);
+            $('#nama_kabupaten').val(nama_kabupaten);
             $.ajax({
                 url : "<?= base_url('getcost')?>",
                 type : 'GET',
                 data : {
                     'origin': 21,
                     'destination': id_city,
-                    'weight': 1000,
+                    'weight': berat,
                     'courier': 'jne',
                 },
                 dataType : 'json',
@@ -337,7 +354,7 @@
                     console.log('jasa ')
                     console.log(data);
                     var results = data["rajaongkir"]["results"][0]["costs"];
-                    $('#kabupaten').append($("<option>").val(results[""]).text("Select Jasa Pengiriman"));
+                    $('#jasa').append($("<option>").val(results[""]).text("Select Jasa Pengiriman"));
 					for(var i = 0; i<results.length; i++)
 					{
 						var text = results[i]["description"]+"("+results[i]["service"]+")";
@@ -353,6 +370,9 @@
         });
         $('#jasa').on('change', function(){
             $('#total_ongkir').empty();
+            var service = $('option:selected', this).text();
+            $("#service").val(service);
+            console.log(service)
             var estimasi = $('option:selected', this).attr('etd');
             ongkir = parseInt($(this).val());
             $("#total_ongkir").append("Rp " + ongkir);

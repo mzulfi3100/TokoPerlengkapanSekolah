@@ -60,7 +60,7 @@
                         <th style="width: 8%">
                             Jasa Pengiriman
                         </th>
-                        <th style="width: 8%">
+                        <th style="width: 12%">
                             Total
                         </th>
                         <th style="width: 8%">
@@ -69,7 +69,7 @@
                         <th style="width: 10%">
                             Bukti Bayar
                         </th>
-                        <th style="width: 25%">
+                        <th style="width: 15%">
                             Aksi
                         </th>
                     </tr>
@@ -107,7 +107,7 @@
                             </a>
                         </td>
                         <td>
-                            <?= $chc['total_keranjang']+$chc['ongkir'] ?>
+                            <?= "Rp ".number_format($chc['total_keranjang']+$chc['ongkir'],0,',','.') ?>
                         </td>
                         <td>
                             <?= $chc['status'] ?>
@@ -121,15 +121,13 @@
                         </td>
                         <td class="project-actions">
                             <a href="#" method="post" class="btn btn-sm btn-primary btn-edit" data-id="<?= $chc['id']; ?>" data-status="<?= $chc['status']; ?>">
-                                Edit Status
+                                <i class="fas fa-edit"></i>
                             </a>
                             <a href="/detail_pesanan/<?= $chc["id"] ?> " method="get" class="btn btn-sm btn-warning">
-                                Detail
+                                <i class="fas fa-info"></i>
                             </a>
-                            <br>
-                            <br>
                             <a class="btn btn-danger btn-sm" href="/delete_pesanan/<?= $chc['id'] ?>" onclick="return confirm('Are you sure ?')">
-                                Hapus
+                                <i class="fas fa-trash"></i>
                             </a>
                         </td>
                     </tr>

@@ -52,8 +52,15 @@
                                 //option
                                 echo form_hidden('gambar', $ktg['gambar_produk']); ?>
                                 <button type="submit" class="mt-3 btn-success" style="width:100%">Tambah Keranjang</button>
-                                <a href="/shopDetails" style="width:100%" class="mt-3 btn btn-success">Detail</a>
                             <?php echo form_close(); ?>
+                            <form action="/add_wishlist" method="post" enctype="multipart/form-data">
+                                <input type="hidden" id="id_produk" name="id_produk" value=<?= $ktg['id_produk'] ?>>
+                                <input type="hidden" id="harga_produk" name="harga_produk" value=<?= $ktg['harga_produk'] ?>>
+                                <input type="hidden" id="nama_produk" name="nama_produk" value=<?= $ktg['nama_produk'] ?>>
+                                <input type="hidden" id="gambar_produk" name="gambar_produk" value=<?= $ktg['gambar_produk'] ?>>
+                                <button type="submit" class="mt-3 btn-success" style="width:100%">Tambah Wishlist</button>
+                                <a href="/shopDetails" style="width:100%" class="mt-3 btn btn-success">Detail</a>
+                            </form>
                             
                         </div>
                     </div>

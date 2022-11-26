@@ -36,17 +36,17 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
-$routes->get('/pegawai/dashboard', 'KatalogController::index');
-$routes->get('/list_katalog', 'KatalogController::list_katalog');
-$routes->get('/create_katalog', 'KatalogController::create_katalog');
-$routes->post('/store_katalog', 'KatalogController::store_katalog');
-$routes->get('/pesanan_masuk', 'Home::pesanan_masuk');
-$routes->get('/detail_pesanan/(:num)', 'Home::detail_pesanan/$1');
-$routes->post('/status_pesanan', 'Home::status_pesanan');
-$routes->get('/delete_pesanan/(:num)', 'Home::delete_pesanan/$1');
-$routes->get('/edit_katalog/(:num)', 'KatalogController::edit_katalog/$1');
-$routes->post('/update_katalog/(:num)', 'KatalogController::update_katalog/$1');
-$routes->get('/delete_katalog/(:num)', 'KatalogController::delete_katalog/$1');
+$routes->get('/pegawai/dashboard', 'KatalogController::index', ['filter' => 'role:pegawai']);
+$routes->get('/list_katalog', 'KatalogController::list_katalog', ['filter' => 'role:pegawai']);
+$routes->get('/create_katalog', 'KatalogController::create_katalog', ['filter' => 'role:pegawai']);
+$routes->post('/store_katalog', 'KatalogController::store_katalog', ['filter' => 'role:pegawai']);
+$routes->get('/pesanan_masuk', 'Home::pesanan_masuk', ['filter' => 'role:pegawai']);
+$routes->get('/detail_pesanan/(:num)', 'Home::detail_pesanan/$1', ['filter' => 'role:pegawai']);
+$routes->post('/status_pesanan', 'Home::status_pesanan', ['filter' => 'role:pegawai']);
+$routes->get('/delete_pesanan/(:num)', 'Home::delete_pesanan/$1', ['filter' => 'role:pegawai']);
+$routes->get('/edit_katalog/(:num)', 'KatalogController::edit_katalog/$1', ['filter' => 'role:pegawai']);
+$routes->post('/update_katalog/(:num)', 'KatalogController::update_katalog/$1', ['filter' => 'role:pegawai']);
+$routes->get('/delete_katalog/(:num)', 'KatalogController::delete_katalog/$1', ['filter' => 'role:pegawai']);
 $routes->get('/dashboard', 'PelangganController::index');
 $routes->get('/dashboard_cari', 'PelangganController::cari');
 $routes->post('/dashboard_search', 'PelangganController::search');
@@ -57,6 +57,8 @@ $routes->post('/login/process', 'Login::process');
 $routes->get('/shopGrid', 'Home::shopGrid');
 $routes->get('/shopingCart', 'ShopingCartController::index');
 $routes->get('/profile', 'Home::profile');
+$routes->get('/update_profile/(:num)', 'Home::update_profile/$1');
+$routes->post('/update_profile_process/(:num)', 'Home::update_profile_process/$1');
 $routes->get('/contact', 'Home::contact');
 $routes->get('/checkout', 'Home::checkout');
 $routes->get('/blog', 'Home::blog');
@@ -110,7 +112,6 @@ $routes->post('/store_checkout', 'Home::add_checkout');
 $routes->get('/login', 'form::login');
 $routes->get('/register', 'form::register');
 
-$routes->get('/user_list', 'home::list_user');
 $routes->get('/view_order', 'home::view_order');
 $routes->get('/delete_order/(:num)', 'Home::delete_order/$1');
 $routes->get('/detail_order/(:num)', 'Home::detail_order/$1');
@@ -125,6 +126,12 @@ $routes->get('/list_user', 'ProfileController::list_user', ['filter' => 'role:ad
 $routes->get('/edit_user/(:num)', 'ProfileController::edit_user/$1', ['filter' => 'role:admin']);
 $routes->post('/update_user/(:num)', 'ProfileController::update_user/$1', ['filter' => 'role:admin']);
 $routes->delete('/delete_user/(:num)', 'ProfileController::delete_user/$1', ['filter' => 'role:admin']);
+
+$routes->get('/featuredSection', 'featuredproductController::Section', ['filter' => 'role:admin']);
+$routes->get('/add_featured/(:num)', 'featuredproductController::add/$1', ['filter' => 'role:admin']);
+$routes->get('/delete_featured/(:num)', 'featuredproductController::delete/$1', ['filter' => 'role:admin']);
+$routes->get('/add_product/(:num)', 'productsfoundController::add/$1', ['filter' => 'role:admin']);
+$routes->get('/delete_product/(:num)', 'productsfoundController::delete/$1', ['filter' => 'role:admin']);
 /*
  * --------------------------------------------------------------------
  * Additional Routing

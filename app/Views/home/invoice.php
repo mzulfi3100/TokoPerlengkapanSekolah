@@ -59,12 +59,12 @@
                   <address>
                     <strong><?= $checkout['nama'] ?></strong><br>
                     <?= $checkout['alamat'] ?><br>  
+                    <?= $checkout['nama_provinsi'] ?><br>  
+                    <?= $checkout['nama_kabupaten'] ?><br>  
                   </address>
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-4 invoice-col">
-                  <b>Invoice</b><br>
-                  <br>
                   <b>Order ID:</b> <?= $checkout['id'] ?><br>
                   <?php foreach($tgl as $t): ?>
                     <b>Payment Due:</b> <?= $t['batas_bayar'] ?><br>
@@ -92,7 +92,7 @@
                         <tr>
                         <td><?= $psn->jumlah ?></td>
                         <td><?= $psn->nama_barang ?></td>
-                        <td><?= $psn->harga*$psn->jumlah ?></td>
+                        <td><?= "Rp ".number_format($psn->harga*$psn->jumlah,0,',','.') ?></td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>
@@ -127,15 +127,15 @@
                     <?php endforeach; ?>
                       <tr>
                         <th style="width:50%">Subtotal:</th>
-                        <td><?= $subtotal ?></td>
+                        <td><?= "Rp ".number_format($subtotal,0,',','.') ?></td>
                       </tr>
                       <tr>
                         <th>Ongkir:</th>
-                        <td><?= $checkout['ongkir'] ?></td>
+                        <td><?= "Rp ".number_format($checkout['ongkir'],0,',','.') ?></td>
                       </tr>
                       <tr>
                         <th>Total:</th>
-                        <td><?= $subtotal+$checkout['ongkir'] ?></td>
+                        <td><?= "Rp ".number_format($subtotal+$checkout['ongkir'],0,',','.') ?></td>
                       </tr>
                     </table>
                   </div>

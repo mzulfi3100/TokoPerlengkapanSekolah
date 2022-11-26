@@ -9,6 +9,7 @@ use App\Models\Checkout;
 use App\Models\wishlistModel;
 use App\Models\categoriesModel;
 use App\Models\productsfoundModel;
+use App\Models\ProfileModel;
 
 class Home extends BaseController
 {
@@ -22,10 +23,24 @@ class Home extends BaseController
     
     public function index()
     {
+        if(user()->role == "pegawai"){
+            return redirect()->to('/pegawai/dashboard');
+        }
+        
         $categories = new categoriesModel();
         $all_data = $categories->findAll();
         $katalogModel = new Katalog();
         $katalog = $katalogModel -> findAll();
+        $wishlistModel = new WishlistModel();
+        $wishlist = $wishlistModel->where('id_user', user()->id)->findAll();
+
+        $db = \config\Database::connect();
+        $sql = "SELECT *
+                FROM katalog, categories_home
+                WHERE katalog.id_kategori = categories_home.id" ;
+        $query   = $db->query($sql);
+        $result = $query->getResultArray();
+
         $data = [
             'section_navbar_title1' => 'active',
             'section_navbar_title2' => null,
@@ -33,6 +48,8 @@ class Home extends BaseController
             'hero' => 'hero hero-normal',
             'all_data' => $all_data,
             'katalog' => $katalog,
+            'featured' => $result,
+            'wishlist' => $wishlist,
             'cart' => \Config\Services::cart(),
         ];
 
@@ -41,28 +58,93 @@ class Home extends BaseController
 
     public function profile()
     {
+        $user = [
+            'email' => user()->email,
+            'username' => user()->username,
+        ];
+
+        $profileModel = new ProfileModel();
+        $wishlistModel = new WishlistModel();
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => null,
             'section_navbar_title3' => null,
             'section_navbar_title4' => 'active',
             'section_navbar_title5' => null,
+            'wishlist' => $wishlistModel->findAll(),
+            'user' => $user,
+            'profile' => $profileModel->find(user()->id),
             'cart' => \Config\Services::cart(),
         ];
         return view('home/profile', $data);
     }
 
+    public function update_profile($id_user)
+    {
+        $profileModel = new ProfileModel();
+        
+        $user = [
+            'email' => user()->email,
+            'username' => user()->username,
+        ];
+
+        $profileModel = new ProfileModel();
+        $wishlistModel = new WishlistModel();
+        $data = [
+            'section_navbar_title1' => null,
+            'section_navbar_title2' => null,
+            'section_navbar_title3' => null,
+            'section_navbar_title4' => 'active',
+            'section_navbar_title5' => null,
+            'wishlist' => $wishlistModel->findAll(),
+            'user' => $user,
+            'profile' => $profileModel->find(user()->id),
+            'cart' => \Config\Services::cart(),
+        ];
+
+        return view('home/edit_profile', $data);
+    }
+
+    public function update_profile_process($id_user)
+    {
+        $profileModel = new ProfileModel();
+        $email = $this->request->getPost('email');
+        $username = $this->request->getPost('username');
+        $alamat = $this->request->getPost('alamat');
+        $nama_lengkap = $this->request->getPost('nama_lengkap');
+        $no_telepon = $this->request->getPost('no_telepon');
+        $jenis_kelamin = $this->request->getPost('jenis_kelamin');
+
+        $data = [
+            'email' => $email,
+            'username' => $username,
+            'alamat' => $alamat,
+            'nama_lengkap' => $nama_lengkap,
+            'no_telepon' => $no_telepon,
+            'jenis_kelamin' => $jenis_kelamin,
+        ];
+
+        $profileModel->update($id_user, $data);
+        return redirect()->to('/profile');
+    }
+
     public function shopGrid()
     {
-        $productFound = new productsfoundModel();
-        $file = $productFound->findAll();
+        $katalogModel = new Katalog();
+        $categories = new categoriesModel();
+        $all_data = $categories->findAll();
+        $katalog = $katalogModel->findAll();
+        $wishlistModel = new WishlistModel();
+        $wishlist = $wishlistModel->where('id_user', user()->id)->findAll();
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => 'active',
             'section_navbar_title3' => null,
             'section_navbar_title4' => null,
             'section_navbar_title5' => null,
-            'file' => $file,
+            'all_data' => $all_data,
+            'wishlist' => $wishlist,
+            'katalog' => $katalog,
             'cart' => \Config\Services::cart(),
         ];
         return view('home/shopGrid', $data);
@@ -70,6 +152,7 @@ class Home extends BaseController
     public function checkout()
     {
         $bankModel = new Bank();
+        $wishlistModel = new WishlistModel();
         $provinsi = $this->rajaongkir('province');
         $data = [
             'section_navbar_title1' => null,
@@ -78,6 +161,7 @@ class Home extends BaseController
             'hero' => 'hero hero-normal',
             'cart' => \Config\Services::cart(),
             'bank' => $bankModel->findAll(),
+            'wishlist' => $wishlistModel->where('id_user', user()->id)->findAll(),
             'provinsi' => json_decode($provinsi)->rajaongkir->results,
         ];
         return view('pelanggan/checkout', $data);
@@ -197,11 +281,13 @@ class Home extends BaseController
     }
     public function admin()
     {
+        $wishlistModel = new WishlistModel();
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => null,
             'section_navbar_title3' => 'active',
             'hero' => 'hero hero-normal',
+            'wishlist' => $wishlistModel->where('id_user', user()->id)->findAll(),
             'cart' => \Config\Services::cart(),
         ];
         return view('home/admin', $data);
@@ -210,12 +296,13 @@ class Home extends BaseController
     {
         $categories = new categoriesModel();
         $all_data = $categories->findAll();
-
+        $wishlistModel = new WishlistModel();
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => null,
             'section_navbar_title3' => 'active',
             'hero' => 'hero hero-normal',
+            'wishlist' => $wishlistModel->where('id_user', user()->id)->findAll(),
             'all_data' => $all_data,
             'cart' => \Config\Services::cart(),
         ];
@@ -226,11 +313,13 @@ class Home extends BaseController
     {
         $categories = new categoriesModel();
         $data_categories = $categories->find($id);
+        $wishlistModel = new WishlistModel();
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => null,
             'section_navbar_title3' => 'active',
             'hero' => 'hero hero-normal',
+            'wishlist' =>  $wishlistModel->where('id_user', user()->id)->findAll(),
             'data_categories' => $data_categories,
             'cart' => \Config\Services::cart(),
         ];
@@ -238,11 +327,13 @@ class Home extends BaseController
     }
     public function add_categories()
     {
+        $wishlistModel = new WishlistModel();
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => null,
             'section_navbar_title3' => 'active',
             'hero' => 'hero hero-normal',
+            'wishlist' =>  $wishlistModel->where('id_user', user()->id)->findAll(),
             'cart' => \Config\Services::cart(),
 
         ];
@@ -320,7 +411,7 @@ class Home extends BaseController
             'qty'     => 1,
             'price'   => $this->request->getPost('price'),
             'name'    => $this->request->getPost('name'),
-            'options' => array('gambar' => $this->request->getPost('gambar'))
+            'options' => array('gambar' => $this->request->getPost('gambar'), 'berat' => $this->request->getPost('berat'))
         ));
         session()->setflashdata('pesan', $this->request->getPost('name'));
         return redirect()->to(base_url('home'));
@@ -358,6 +449,7 @@ class Home extends BaseController
         $wishlistModel = new wishlistModel();
         $id_produk = $this->request->getPost('id_produk');
         $nama_produk = $this->request->getPost('nama_produk');
+        $berat_produk = $this->request->getPost('berat_produk');
         $harga_produk = $this->request->getPost('harga_produk');
         $gambar_produk = $this->request->getPost('gambar_produk');
         $id_user = user()->id;
@@ -365,11 +457,12 @@ class Home extends BaseController
             'id_produk' => $id_produk,
             'nama_produk' => $nama_produk,
             'harga_produk' => $harga_produk,
+            'berat_produk' => $berat_produk,
             'gambar_produk' => $gambar_produk,
             'id_user' => $id_user,
         ];
         $wishlistModel->save($data);
-        return redirect()->to(base_url('/view_wishlist'));
+        return redirect()->back()->withInput();
     }
 
     public function view_wishlist()
@@ -392,7 +485,7 @@ class Home extends BaseController
     {
         $wishlistModel = new wishlistModel();
         $wishlistModel->delete($id_wishlist);
-        return redirect()->to(base_url('/view_wishlist'));
+        return redirect()->back()->withInput();
     }
 
     public function add_checkout()
@@ -454,11 +547,13 @@ class Home extends BaseController
     {
         $checkoutModel = new checkout();
         $checkout = $checkoutModel->where('id_user', user()->id)->findAll();
+        $wishlistModel = new WishlistModel();
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => null,
-            'section_navbar_title3' => null,
+            'section_navbar_title3' => 'active',
             'hero' => 'hero hero-normal',
+            'wishlist' =>  $wishlistModel->where('id_user', user()->id)->findAll(),
             'checkout' => $checkout,
             'cart' => \Config\Services::cart()      
         ]; 
@@ -489,6 +584,7 @@ class Home extends BaseController
 
         $pesananModel = new Pesanan();
         $bankModel = new Bank();
+        $wishlistModel = new WishlistModel();
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => null,
@@ -498,6 +594,7 @@ class Home extends BaseController
             'checkout' => $checkoutModel->find($id_order),
             'pesanan' => $query_psn->getResult(),
             'bank' => $bankModel->findAll(),
+            'wishlist' => $wishlistModel->where('id_user', user()->id)->findAll(),
             'tgl' => $tgl,
         ];
         return view('home/invoice', $data);
@@ -536,6 +633,7 @@ class Home extends BaseController
 
     public function bukti_bayar($id_order)
     {
+        $wishlistModel = new WishlistModel();
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => null,
@@ -543,6 +641,7 @@ class Home extends BaseController
             'hero' => 'hero hero-normal',
             'cart' => \Config\Services::cart(),
             'id_order' => $id_order,
+            'wishlist' => $wishlistModel->where('id_user', user()->id)->findAll(),
         ];
         return view('home/bukti_bayar', $data);
     }
@@ -551,6 +650,7 @@ class Home extends BaseController
     {
         $checkoutModel = new Checkout();
         $checkout = $checkoutModel->where('id', $id_order)->findAll();
+        $wishlistModel = new WishlistModel();
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => null,
@@ -559,6 +659,7 @@ class Home extends BaseController
             'cart' => \Config\Services::cart(),
             'id_order' => $id_order,
             'checkout' => $checkout,
+            'wishlist' => $wishlistModel->where('id_user', user()->id)->findAll(),
         ];
         return view('home/update_bukti_bayar', $data);
     }
@@ -660,26 +761,5 @@ class Home extends BaseController
             'tgl' => $tgl,
         ];
         return view('pegawai/pesanan/invoice', $data);
-    }
-
-    public function list_user()
-    {
-        $db = \config\Database::connect();
-        $builder = $db->table('users');
-        $builder->select('users.id as userid, username, email, name');
-        $builder->join('auth_groups_users', 'auth_groups_users.user_id = users.id');
-        $builder->join('auth_groups', 'auth_groups.id = auth_groups_users.group_id');
-        $query = $builder->get();
-        // $users = new \Myth\Auth\Models\UserModel();
-        $data = [
-            'section_navbar_title1' => null,
-            'section_navbar_title2' => null,
-            'section_navbar_title3' => null,
-            'hero' => 'hero hero-normal',
-            'cart' => \Config\Services::cart(),
-            // 'users' => $users->findAll(),
-            'users' => $query->getResult(),
-        ];
-        return view('home/list_user', $data);
     }
 }

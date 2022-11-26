@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="zxx">
 
 <head>
@@ -93,8 +93,8 @@
                                     <li><a href="<?= base_url(); ?>/blogDetails">Blog Details</a></li>
                                 </ul>
                             </li>
-                            <li><a href="<?= base_url(); ?>/profile">Profile</a></li>
-                            <li><a href="<?= base_url(); ?>/admin">Admin</a></li>
+                            <li class="<?= $section_navbar_title4; ?>"><a href="<?= base_url(); ?>/blog">Blog</a></li>
+                            <li class="<?= $section_navbar_title5; ?>"><a href="<?= base_url(); ?>/admin">Admin</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -137,12 +137,8 @@
                 <div class="row">
                     <div class="col-lg-8 col-md-6">
                         <div class="checkout__input">
-                            <p>Nama<span>*</span></p>
-                            <input type="text" name="nama" id="nama" placeholder="Masukkan Nama" class="checkout__input__add">
-                        </div>
-                        <div class="checkout__input">
                             <p>Alamat<span>*</span></p>
-                            <input type="text" name="alamat" id="alamat" placeholder="Masukkan Alamat" class="checkout__input__add">
+                            <input type="text" name="alamat" id="alamat" placeholder="a" class="checkout__input__add">
                             <input type="text" name="keterangan" id="keterangan" placeholder="Keterangan (opsional)">
                         </div>
                         <div class="checkout__input">
@@ -150,9 +146,8 @@
                             <select class="checkout__input__select" id="provinsi" name="provinsi">
                                 <option>Select Provinsi</option>
                                 <?php foreach($provinsi as $p) : ?>
-                                    <option value="<?= $p->province_id ?>"><?= $p->province ?></option>
+                                    <option value="<?= $p->province ?>"><?= $p->province ?></option>
                                 <?php endforeach; ?>
-                                <input type="hidden" name="nama_provinsi" id="nama_provinsi" value="">
                             </select>
                         </div>
                         <div class="checkout__input">
@@ -160,7 +155,6 @@
                             <select class="checkout__input__select" id="kabupaten" name="kabupaten">
                                 <option>Select Kabupaten/Kota</option>
                             </select>
-                            <input type="hidden" name="nama_kabupaten" id="nama_kabupaten" value="">
                         </div>
                         <div class="checkout__input">
                             <p>Pilih Jasa Pengiriman<span>*</span></p>
@@ -175,9 +169,6 @@
                             <div class="checkout__order__products">Produk <span>Total</span></div>
                             <ul>
                                 <li>Ongkir <span id="total_ongkir"> </span></li>
-                                <?php foreach($cart->contents() as $item){ ?>
-                                    <li> <?= $item['name']." (x".$item['qty'].")" ?><span>  <?= $item['price']*$item['qty'] ?></span></li>
-                                <?php } ?>
                             </ul>
                             <?php
                                 $keranjang = $cart->contents();
@@ -186,9 +177,7 @@
                                     $totalCart = $totalCart + $dps['subtotal'];
                                 }
                             ?>
-                            <input type="hidden" name="kurir" id="kurir" value="JNE">
-                            <input type="hidden" name="service" id="service" value="">
-                            <input type="hidden" name="status" id="status" value="Menunggu Pembayaran">
+                            <input type="hidden" name="ongkir" id="ongkir" value="">
                             <input type="hidden" name="total_keranjang" id="total_keranjang" value="<?=$totalCart?>">
                             <div class="checkout__order__subtotal">Total Keranjang <span><?= "Rp ".number_format($totalCart,0,',','.') ?></span></div>
                             <button class="primary-btn">PESAN</button>
@@ -293,10 +282,6 @@
             $('#jasa').empty();
             $('#total_ongkir').empty();
             var id_province = $(this).val();
-            var nama_province = $("#provinsi option:selected").text(); 
-            console.log(id_province);
-            console.log(nama_province);
-            $('#nama_provinsi').val(nama_province);
             $.ajax({
                 url : "<?= base_url('getcity')?>",
                 type : 'GET',
@@ -320,9 +305,6 @@
             $('#jasa').empty();
             $('#total_ongkir').empty();
             var id_city = $(this).val();
-            var nama_kabupaten = $("#kabupaten option:selected").text(); 
-            console.log(nama_kabupaten);
-            $('#nama_kabupaten').val(nama_kabupaten);
             $.ajax({
                 url : "<?= base_url('getcost')?>",
                 type : 'GET',
@@ -337,12 +319,12 @@
                     console.log('jasa ')
                     console.log(data);
                     var results = data["rajaongkir"]["results"][0]["costs"];
-                    $('#jasa').append($("<option>").val(results[""]).text("Select Jasa Pengiriman"));
+                    $('#kabupaten').append($("<option>").val(results[""]).text("Select Jasa Pengiriman"));
 					for(var i = 0; i<results.length; i++)
 					{
 						var text = results[i]["description"]+"("+results[i]["service"]+")";
 						$("#jasa").append($('<option>',{
-							value : results[i]["cost"][0]["value"],
+							value : text,
 							text : text,
 							etd : results[i]["cost"][0]["etd"]
 						}));
@@ -353,16 +335,14 @@
         });
         $('#jasa').on('change', function(){
             $('#total_ongkir').empty();
-            var service = $('option:selected', this).text();
-            $("#service").val(service);
-            console.log(service)
             var estimasi = $('option:selected', this).attr('etd');
             ongkir = parseInt($(this).val());
             $("#total_ongkir").append("Rp " + ongkir);
+            $("#ongkir").val(ongkir);
         });
     });
     </script>
 
 </body>
 
-</html>
+</html> -->

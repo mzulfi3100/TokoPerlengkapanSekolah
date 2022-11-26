@@ -73,7 +73,7 @@
     </div>
 </section>
 
-<div class="p-4">
+<div class="container mt-4">
     <!-- <a href="/create_user" type="button" class="btn btn-primary mb-3">Tambah </a> -->
     <h4>Profile User</h4> 
     <table class="table table-striped p-3">

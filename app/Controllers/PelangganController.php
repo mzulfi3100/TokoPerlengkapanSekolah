@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\Katalog;
+use App\Models\categoriesModel;
+use App\Models\WishlistModel;
 
 class PelangganController extends BaseController
 {
@@ -33,6 +35,9 @@ class PelangganController extends BaseController
     public function cari()
     {
         $katalogModel = new Katalog();
+        $categories = new categoriesModel();
+        $wishlistModel = new WishlistModel();
+        $all_data = $categories->findAll();
         $cari = $this->request->getGet('cari');
         $katalog = $katalogModel->where('nama_produk', $cari)->findAll();
 
@@ -43,10 +48,12 @@ class PelangganController extends BaseController
             'section_navbar_title4' => null,
             'section_navbar_title5' => null,
             'katalog' => $katalog,
+            'all_data' => $all_data,
+            'wishlist' => $wishlistModel->where('id_user', user()->id)->findAll(),
             'cart' => \Config\Services::cart(),
         ];
 
-        return view('pelanggan/index', $data);
+        return view('home/shopGrid', $data);
     }
 
     public function search()
@@ -56,6 +63,9 @@ class PelangganController extends BaseController
         $max =  $this->request->getPost('max');
         $sql = "harga_produk >= $min AND harga_produk <= $max";
         $katalog = $katalogModel->where($sql)->findAll();
+        $categories = new categoriesModel();
+        $wishlistModel = new WishlistModel();
+        $all_data = $categories->findAll();
 
         $data = [
             'section_navbar_title1' => null,
@@ -64,10 +74,12 @@ class PelangganController extends BaseController
             'section_navbar_title4' => null,
             'section_navbar_title5' => null,
             'katalog' => $katalog,
+            'all_data' => $all_data,
+            'wishlist' => $wishlistModel->where('id_user', user()->id)->findAll(),
             'cart' => \Config\Services::cart(),
         ];
 
-        return view('pelanggan/index', $data);
+        return view('home/shopGrid', $data);
     }
 
     public function beli_produk()
@@ -86,7 +98,7 @@ class PelangganController extends BaseController
     {
         $katalogModel = new katalog();
         $kategori = $this->request->getGet('kategori');
-        $katalog = $katalogModel -> where('kategori_produk', $kategori) -> findAll();
+        $katalog = $katalogModel -> where('id_kategori', $kategori) -> findAll();
 
         $data = [
             'section_navbar_title1' => null,
@@ -98,6 +110,6 @@ class PelangganController extends BaseController
             'cart' => \Config\Services::cart(),
         ];
 
-        return view('pelanggan/index', $data);
+        return view('home/shopGrid', $data);
     }
 }

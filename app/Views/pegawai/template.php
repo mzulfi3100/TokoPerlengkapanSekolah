@@ -72,7 +72,7 @@
           </li>
           <li class="nav-item">
             <a href="/logout" class="nav-link">
-              <i class="nav-icon "></i>
+              <i class="nav-icon fas fa-door-open"></i>
               <p>
                 Logout
               </p>
