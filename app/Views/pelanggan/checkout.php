@@ -54,9 +54,14 @@
                                     <li><a href="#">English</a></li>
                                 </ul>
                             </div>
-                            <div class="header__top__right__auth">
+                            <div class="header__top__right__language">
                                 <?php if(logged_in()): ?>
-                                    <a href="/logout"><i class="fa fa-user"><?= user()->nama_lengkap; ?></i>Logout</a>
+                                    <div><i class="fa fa-user"></i>
+                                        &ensp; <?= user()->username; ?></div>
+                                    <!-- <a href="#"></a> -->
+                                    <ul>
+                                        <li><a href="<?= base_url('logout') ?>">Logout</a></li>
+                                    </ul>
                                 <?php else: ?>
                                     <a href="/login"><i class="fa fa-user"></i>Login</a>
                                 <?php endif; ?>
@@ -140,80 +145,124 @@
         </div>
     </header>
     <!-- Header Section End -->
-<body>
-<div class="container">
-    <div class = "p-5">
-        <div class="checkout__form">
-            <h4>CHECKOUT</h4>
-            <form action="/store_checkout" method="post" enctype="multipart/form-data">
-                <div class="row">
-                    <div class="col-lg-8 col-md-6">
-                        <div class="checkout__input">
-                            <p>Nama<span>*</span></p>
-                            <input type="text" name="nama" id="nama" placeholder="Masukkan Nama" class="checkout__input__add">
+<!-- Hero Section Begin -->
+<section class="<?= $hero; ?>">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="hero__categories">
+                        <div class="hero__categories__all">
+                            <i class="fa fa-bars"></i>
+                            <span>Kategori Produk</span>
                         </div>
-                        <div class="checkout__input">
-                            <p>Alamat<span>*</span></p>
-                            <input type="text" name="alamat" id="alamat" placeholder="Masukkan Alamat" class="checkout__input__add">
-                            <input type="text" name="keterangan" id="keterangan" placeholder="Keterangan (opsional)">
-                        </div>
-                        <div class="checkout__input">
-                            <p>Pilih Provinsi<span>*</span></p>
-                            <select class="checkout__input__select" id="provinsi" name="provinsi">
-                                <option>Select Provinsi</option>
-                                <?php foreach($provinsi as $p) : ?>
-                                    <option value="<?= $p->province_id ?>"><?= $p->province ?></option>
-                                <?php endforeach; ?>
-                                <input type="hidden" name="nama_provinsi" id="nama_provinsi" value="">
-                            </select>
-                        </div>
-                        <div class="checkout__input">
-                            <p>Pilih Kabupaten/Kota<span>*</span></p>
-                            <select class="checkout__input__select" id="kabupaten" name="kabupaten">
-                                <option>Select Kabupaten/Kota</option>
-                            </select>
-                            <input type="hidden" name="nama_kabupaten" id="nama_kabupaten" value="">
-                        </div>
-                        <div class="checkout__input">
-                            <p>Pilih Jasa Pengiriman<span>*</span></p>
-                            <select class="checkout__input__select" id="jasa" name="jasa">
-                                <option>Select Jasa Pengiriman</option>
-                            </select>
-                        </div>
+                        <ul>
+                            <?php $no = 1; foreach($all_data as $all): ?>
+                                <form id="input<?= $no ?>" action="/dashboard_kategori" method="get">
+                                    <input type="hidden" name="kategori" id="kategori" value="<?= $all->id ?>">
+                                    <li><a href="javascript:;" onclick="document.getElementById('input<?= $no ?>').submit();"><?= $all->name ?></a></li>
+                                </form>
+                                <?php $no++ ?>
+                            <?php endforeach; ?>
+                        </ul>
                     </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="checkout__order">
-                            <h4>Pesananmu</h4>
-                            <div class="checkout__order__products">Produk <span>Total</span></div>
-                            <ul>
-                                <li>Ongkir <span id="total_ongkir"> </span></li>
-                                <?php foreach($cart->contents() as $item){ ?>
-                                    <li> <?= $item['name']." (x".$item['qty'].")" ?><span>  <?= "Rp " . number_format($item['price']*$item['qty'],0,',','.'); ?></span></li>
-                                <?php } ?>
-                            </ul>
-                            <?php
-                                $keranjang = $cart->contents();
-                                $totalCart = 0;
-                                $berat = 0;
-                                foreach ($keranjang as $dps){
-                                    $totalCart = $totalCart + $dps['subtotal'];
-                                    $berat = $berat + ($dps['options']['berat']*$dps['qty']);
-                                }
-                            ?>
-                            <input type="hidden" name="berat" id="berat" value="<?= $berat ?>">
-                            <input type="hidden" name="kurir" id="kurir" value="JNE">
-                            <input type="hidden" name="service" id="service" value="">
-                            <input type="hidden" name="status" id="status" value="Menunggu Pembayaran">
-                            <input type="hidden" name="total_keranjang" id="total_keranjang" value="<?=$totalCart?>">
-                            <div class="checkout__order__subtotal">Total Keranjang <span><?= "Rp ".number_format($totalCart,0,',','.') ?></span></div>
-                            <button class="primary-btn">PESAN</button>
+                </div>
+                <div class="col-lg-9">
+                    <div class="hero__search">
+                        <div class="hero__search__form">
+                            <form action="/dashboard_cari" method="get">
+                                <input type="text" name="cari" placeholder="What do yo u need?">
+                                <button type="submit" class="site-btn">SEARCH</button>
+                            </form>
+                        </div>
+                        <div class="hero__search__phone">
+                            <div class="hero__search__phone__icon">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="hero__search__phone__text">
+                                <h5>+62 851 6233 6233</h5>
+                                <span>support 24/7 time</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
-    </div>
-</div> 
+    </section>
+    <!-- Hero Section End -->
+
+    <div class="container">
+        <div class = "p-5">
+            <div class="checkout__form">
+                <h4>CHECKOUT</h4>
+                <form action="/store_checkout" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-6">
+                            <div class="checkout__input">
+                                <p>Nama<span>*</span></p>
+                                <input type="text" name="nama" id="nama" placeholder="Masukkan Nama" class="checkout__input__add">
+                            </div>
+                            <div class="checkout__input">
+                                <p>Alamat<span>*</span></p>
+                                <input type="text" name="alamat" id="alamat" placeholder="Masukkan Alamat" class="checkout__input__add">
+                                <input type="text" name="keterangan" id="keterangan" placeholder="Keterangan (opsional)">
+                            </div>
+                            <div class="checkout__input">
+                                <p>Pilih Provinsi<span>*</span></p>
+                                <select class="checkout__input__select" id="provinsi" name="provinsi">
+                                    <option>Select Provinsi</option>
+                                    <?php foreach($provinsi as $p) : ?>
+                                        <option value="<?= $p->province_id ?>"><?= $p->province ?></option>
+                                    <?php endforeach; ?>
+                                    <input type="hidden" name="nama_provinsi" id="nama_provinsi" value="">
+                                </select>
+                            </div>
+                            <div class="checkout__input">
+                                <p>Pilih Kabupaten/Kota<span>*</span></p>
+                                <select class="checkout__input__select" id="kabupaten" name="kabupaten">
+                                    <option>Select Kabupaten/Kota</option>
+                                </select>
+                                <input type="hidden" name="nama_kabupaten" id="nama_kabupaten" value="">
+                            </div>
+                            <div class="checkout__input">
+                                <p>Pilih Jasa Pengiriman<span>*</span></p>
+                                <select class="checkout__input__select" id="jasa" name="jasa">
+                                    <option>Select Jasa Pengiriman</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="checkout__order">
+                                <h4>Pesananmu</h4>
+                                <div class="checkout__order__products">Produk <span>Total</span></div>
+                                <ul>
+                                    <li>Ongkir <span id="total_ongkir"> </span></li>
+                                    <?php foreach($cart->contents() as $item){ ?>
+                                        <li> <?= $item['name']." (x".$item['qty'].")" ?><span>  <?= "Rp " . number_format($item['price']*$item['qty'],0,',','.'); ?></span></li>
+                                    <?php } ?>
+                                </ul>
+                                <?php
+                                    $keranjang = $cart->contents();
+                                    $totalCart = 0;
+                                    $berat = 0;
+                                    foreach ($keranjang as $dps){
+                                        $totalCart = $totalCart + $dps['subtotal'];
+                                        $berat = $berat + ($dps['options']['berat']*$dps['qty']);
+                                    }
+                                ?>
+                                <input type="hidden" name="berat" id="berat" value="<?= $berat ?>">
+                                <input type="hidden" name="kurir" id="kurir" value="JNE">
+                                <input type="hidden" name="service" id="service" value="">
+                                <input type="hidden" name="status" id="status" value="Menunggu Pembayaran">
+                                <input type="hidden" name="total_keranjang" id="total_keranjang" value="<?=$totalCart?>">
+                                <div class="checkout__order__subtotal">Total Keranjang <span><?= "Rp ".number_format($totalCart,0,',','.') ?></span></div>
+                                <button class="primary-btn">PESAN</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> 
 
 <!-- Footer Section Begin -->
 <footer class="footer spad">

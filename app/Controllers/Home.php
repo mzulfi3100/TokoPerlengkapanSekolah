@@ -62,15 +62,16 @@ class Home extends BaseController
             'email' => user()->email,
             'username' => user()->username,
         ];
-
+        $categories = new categoriesModel();
+        $all_data = $categories->findAll();
         $profileModel = new ProfileModel();
         $wishlistModel = new WishlistModel();
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => null,
             'section_navbar_title3' => null,
-            'section_navbar_title4' => 'active',
-            'section_navbar_title5' => null,
+            'hero' => 'hero hero-normal',
+            'all_data' => $all_data,
             'wishlist' => $wishlistModel->findAll(),
             'user' => $user,
             'profile' => $profileModel->find(user()->id),
@@ -140,8 +141,7 @@ class Home extends BaseController
             'section_navbar_title1' => null,
             'section_navbar_title2' => 'active',
             'section_navbar_title3' => null,
-            'section_navbar_title4' => null,
-            'section_navbar_title5' => null,
+            'hero' => 'hero hero-normal',
             'all_data' => $all_data,
             'wishlist' => $wishlist,
             'katalog' => $katalog,
@@ -154,11 +154,14 @@ class Home extends BaseController
         $bankModel = new Bank();
         $wishlistModel = new WishlistModel();
         $provinsi = $this->rajaongkir('province');
+        $categories = new categoriesModel();
+        $all_data = $categories->findAll();
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => 'active',
             'section_navbar_title3' => null,
             'hero' => 'hero hero-normal',
+            'all_data' => $all_data,
             'cart' => \Config\Services::cart(),
             'bank' => $bankModel->findAll(),
             'wishlist' => $wishlistModel->where('id_user', user()->id)->findAll(),
@@ -546,6 +549,8 @@ class Home extends BaseController
     public function view_order()
     {
         $checkoutModel = new checkout();
+        $categories = new categoriesModel();
+        $all_data = $categories->findAll();
         $checkout = $checkoutModel->where('id_user', user()->id)->findAll();
         $wishlistModel = new WishlistModel();
         $data = [
@@ -553,6 +558,7 @@ class Home extends BaseController
             'section_navbar_title2' => null,
             'section_navbar_title3' => 'active',
             'hero' => 'hero hero-normal',
+            'all_data' => $all_data,
             'wishlist' =>  $wishlistModel->where('id_user', user()->id)->findAll(),
             'checkout' => $checkout,
             'cart' => \Config\Services::cart()      
@@ -585,6 +591,8 @@ class Home extends BaseController
         $pesananModel = new Pesanan();
         $bankModel = new Bank();
         $wishlistModel = new WishlistModel();
+        $categories = new categoriesModel();
+        $all_data = $categories->findAll();
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => null,
@@ -596,6 +604,7 @@ class Home extends BaseController
             'bank' => $bankModel->findAll(),
             'wishlist' => $wishlistModel->where('id_user', user()->id)->findAll(),
             'tgl' => $tgl,
+            'all_data' => $all_data,
         ];
         return view('home/invoice', $data);
     }

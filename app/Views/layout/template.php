@@ -60,9 +60,14 @@
                                     <li><a href="#">English</a></li>
                                 </ul>
                             </div>
-                            <div class="header__top__right__auth">
+                            <div class="header__top__right__language">
                                 <?php if(logged_in()): ?>
-                                    <a href="/logout"><i class="fa fa-user"><?= user()->nama_lengkap; ?></i>Logout</a>
+                                    <div><i class="fa fa-user"></i>
+                                        &ensp; <?= user()->username; ?></div>
+                                    <!-- <a href="#"></a> -->
+                                    <ul>
+                                        <li><a href="<?= base_url('logout') ?>">Logout</a></li>
+                                    </ul>
                                 <?php else: ?>
                                     <a href="/login"><i class="fa fa-user"></i>Login</a>
                                 <?php endif; ?>
@@ -146,6 +151,51 @@
         </div>
     </header>
     <!-- Header Section End -->
+
+    <!-- Hero Section Begin -->
+    <section class="<?= $hero; ?>">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="hero__categories">
+                        <div class="hero__categories__all">
+                            <i class="fa fa-bars"></i>
+                            <span>Kategori Produk</span>
+                        </div>
+                        <ul>
+                            <?php $no = 1; foreach($all_data as $all): ?>
+                                <form id="input<?= $no ?>" action="/dashboard_kategori" method="get">
+                                    <input type="hidden" name="kategori" id="kategori" value="<?= $all->id ?>">
+                                    <li><a href="javascript:;" onclick="document.getElementById('input<?= $no ?>').submit();"><?= $all->name ?></a></li>
+                                </form>
+                                <?php $no++ ?>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="hero__search">
+                        <div class="hero__search__form">
+                            <form action="/dashboard_cari" method="get">
+                                <input type="text" name="cari" placeholder="What do yo u need?">
+                                <button type="submit" class="site-btn">SEARCH</button>
+                            </form>
+                        </div>
+                        <div class="hero__search__phone">
+                            <div class="hero__search__phone__icon">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="hero__search__phone__text">
+                                <h5>+62 851 6233 6233</h5>
+                                <span>support 24/7 time</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
 
     <?= $this->renderSection('content'); ?>
 
