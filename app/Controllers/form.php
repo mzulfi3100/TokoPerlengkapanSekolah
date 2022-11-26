@@ -15,4 +15,17 @@ class form extends BaseController
 
         return view('registration/register');
     }
+    public function forgot()
+    {
+
+        return view('registration/forgot');
+    }
+    public function reset_password()
+    {
+        $token = $this->request->getGet('token');
+        $data = [
+            'token' => $token,
+        ];
+        return view('registration/reset', $data);
+    }
 }

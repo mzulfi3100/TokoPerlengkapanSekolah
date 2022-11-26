@@ -111,6 +111,8 @@ $routes->post('/store_checkout', 'Home::add_checkout');
 
 $routes->get('/login', 'form::login');
 $routes->get('/register', 'form::register');
+$routes->get('/forgot', 'form::forgot');
+$routes->get('/reset-password', 'form::reset_password');
 
 $routes->get('/view_order', 'home::view_order');
 $routes->get('/delete_order/(:num)', 'Home::delete_order/$1');

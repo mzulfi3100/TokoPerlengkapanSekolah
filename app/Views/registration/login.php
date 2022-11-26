@@ -13,6 +13,7 @@
                     <figure><img class="sampul" src="Assets/login/images/signin-image.jpg" alt="sing up image">
                     </figure>
                     <a href="<?= base_url('register') ?>" class="signup-image-link">Create an account</a>
+                    <a href="<?= base_url('forgot') ?>" class="signup-image-link">Forgot Password</a>
                 </div>
 
                 <div class="signin-form">
