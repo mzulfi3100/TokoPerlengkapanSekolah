@@ -344,6 +344,7 @@ class Home extends BaseController
             'wishlist' => $wishlistModel->where('id_user', user()->id)->findAll(),
             'all_data' => $all_data,
             'pager' => $categories->pager,
+            'nomor' =>  nomor($this->request->getVar('page_categories'), 10),
             'cart' => \Config\Services::cart(),
         ];
         return view('home/categoriesSection', $data);
