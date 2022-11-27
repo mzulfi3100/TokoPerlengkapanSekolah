@@ -71,6 +71,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="/list_bank" class="nav-link">
+              <i class="nav-icon fas fa-credit-card"></i>
+              <p>
+                Bank
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="/logout" class="nav-link">
               <i class="nav-icon fas fa-door-open"></i>
               <p>

@@ -35,8 +35,8 @@
                     <input type="text" name="nama_produk" class="form-control" id="nama_produk" >
                   </div>
                   <div class="form-group">
-                    <label for="kategori_produk">Kategori Produk</label>
-                    <select class="form-control" name="kategori_produk" id="kategori_produk">
+                    <label for="id_kategori">Kategori Produk</label>
+                    <select class="form-control" name="id_kategori" id="id_kategori">
                       <option>- Pilih Kategori -</option>
                       <?php foreach($all_data as $all): ?>
                         <option value="<?= $all->id ?>"><?= $all->name ?></option>

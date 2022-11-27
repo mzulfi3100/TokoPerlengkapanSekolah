@@ -29,6 +29,8 @@ class ShopingCartController extends BaseController
             'section_navbar_title1' => null,
             'section_navbar_title2' => null,
             'section_navbar_title3' => null,
+            'section_navbar_title4' => null,
+            'section_navbar_title5' => null,
             'hero' => 'hero hero-normal',
             'cart' => \Config\Services::cart(),
         ];

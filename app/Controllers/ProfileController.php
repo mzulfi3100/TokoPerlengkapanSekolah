@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use \Myth\Auth\Models\UserModel;
 use App\Models\WishlistModel;
 use App\Models\ProfileModel;
+use App\Models\categoriesModel;
 
 class ProfileController extends BaseController
 {
@@ -24,7 +25,9 @@ class ProfileController extends BaseController
         $profileModel = new ProfileModel();
         $userProfile = $profileModel -> findAll();
         $wishlistModel = new WishlistModel();
-        $wishlist = $wishlistModel -> findAll();
+        $wishlist = $wishlistModel -> where('id_user', user()->id)->findAll();
+        $categories = new categoriesModel();
+        $all_data = $categories->findAll();
 
         $data = [
             'section_navbar_title1' => null,
@@ -32,10 +35,12 @@ class ProfileController extends BaseController
             'section_navbar_title3' => null,
             'section_navbar_title4' => 'active',
             'section_navbar_title5' => null,
+            'hero' => 'hero hero-normal',
             'cart' => \Config\Services::cart(),
             'userProfile' => $userProfile,
             'wishlist' => $wishlist,
             'title' => 'User Profile',
+            'all_data' => $all_data,
         ];
 
         return view('profile/list_user', $data);
@@ -52,7 +57,9 @@ class ProfileController extends BaseController
     public function edit_user($id)
     {
         $wishlistModel = new WishlistModel();
-        $wishlist = $wishlistModel -> findAll();
+        $wishlist = $wishlistModel -> where('id_user', user()->id)->findAll();
+        $categories = new categoriesModel();
+        $all_data = $categories->findAll();
         $profileModel = new ProfileModel();
         $userProfile = $profileModel -> find($id);
 
@@ -62,9 +69,11 @@ class ProfileController extends BaseController
             'section_navbar_title3' => null,
             'section_navbar_title4' => 'active',
             'section_navbar_title5' => null,
+            'hero' => 'hero hero-normal',
             'cart' => \Config\Services::cart(),
             'wishlist' => $wishlist,
             'title' => "Edit Profil",
+            'all_data' => $all_data,
         ];
         return view('temps/header', $data)
         .view('profile/edit_user', $userProfile);

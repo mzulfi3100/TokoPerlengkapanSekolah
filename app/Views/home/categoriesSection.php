@@ -46,7 +46,7 @@
                     foreach ($all_data as $t) : ?>
                     <tr>
                         <th scope=" row"><?= $no; ?></th>
-                        <td> <img src="/Assets/img/categories/<?= $t->images; ?>" alt=""></img></td>
+                        <td> <img src="/Assets/img/categories/<?= $t->images; ?>" alt="" width="200px" height="200px"></img></td>
                         <td><?= $t->name; ?></td>
                         <td>
                             <a href="<?= base_url('edit_categories') . '/' . $t->id ?>"><button type="button"

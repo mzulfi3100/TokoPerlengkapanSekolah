@@ -1308,7 +1308,7 @@ ol {
 .product__item__pic__hover {
 	position: absolute;
 	left: 0;
-	bottom: -50px;
+	bottom: -100px;
 	width: 100%;
 	text-align: center;
 	-webkit-transition: all, 0.5s;
@@ -1548,7 +1548,7 @@ ol {
 .product__item__pic__hover {
 	position: absolute;
 	left: 0;
-	bottom: -50px;
+	bottom: -200px;
 	width: 100%;
 	text-align: center;
 	-webkit-transition: all, 0.5s;
@@ -2090,7 +2090,7 @@ ol {
 }
 
 .shoping__cart__table table tbody tr td.order__item__aksi{
-	width: 700px;
+	width: 200px;
 }
 
 /*

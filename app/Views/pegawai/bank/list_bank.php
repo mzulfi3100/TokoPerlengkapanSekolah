@@ -7,12 +7,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-            <h1>Data Katalog</h1>
+            <h1>Data Bank</h1>
             </div>
             <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Data Katalog</li>
+                <li class="breadcrumb-item active">Data Bank</li>
             </ol>
             </div>
         </div>
@@ -36,17 +36,17 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Data Katalog</h3>
+            <h3 class="card-title">Data Bank</h3>
             <div class="text-right">
-                <a class="btn btn-primary btn-sm" href="/create_katalog">
+                <a class="btn btn-primary btn-sm" href="/create_bank">
                     <i class="fas fa-plus">
                     </i>
-                    Tambah Katalog
+                    Tambah Bank
                 </a>
             </div>
         </div>
         <div class="card-header">
-            <form action="/search_katalog" method="get">
+            <form action="/search_bank" method="get">
                 <div class="float-left">
                     <input type="text" name="keyword" value="" class="form-control" style="width:155pt" placeholder="Keyword pencarian">
                 </div>
@@ -63,22 +63,10 @@
                             No
                         </th>
                         <th style="width: 10%">
-                            Nama Produk
-                        </th>
-                        <th style="width: 13%">
-                            Kategori Produk
+                            Nama Bank
                         </th>
                         <th style="width: 10%">
-                            Harga Produk
-                        </th>
-                        <th style="width: 10%">
-                            Berat Produk
-                        </th>
-                        <th style="width: 15%">
-                            Deskripsi Produk
-                        </th>
-                        <th style="width: 15%">
-                            Gambar Produk
+                            No Rekening
                         </th>
                         <th style="width: 10%">
                             Aksi
@@ -86,37 +74,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($katalog as $ktg): ?>
+                    <?php foreach($bank as $b): ?>
                     <tr>
                         <td>
                             <?= $nomor++?>
                         </td>
                         <td>
                             <a>
-                                <?= $ktg['nama_produk'] ?>
+                                <?= $b['nama_bank'] ?>
                             </a>
                         </td>
-                            <td>
-                                <?= $ktg['name'] ?>
-                            </td>
                         <td>
-                            <?= "Rp " . number_format($ktg['harga_produk'],0,',','.');  ?>
-                        </td>
-                        <td>
-                            <?= $ktg['berat_produk']."g" ?>
-                        </td>
-                        <td>
-                            <?= $ktg['deskripsi_produk'] ?>
-                        </td>
-                        <td>
-                            <img src="/uploads/<?= $ktg['gambar_produk'] ?>" widht="100x" height="100px">
+                            <?= $b['no_rek'] ?>
                         </td>
                         <td class="project-actions">
-                            <a class="btn btn-info btn-sm" href="/edit_katalog/<?= $ktg['id_produk'] ?>">
+                            <a class="btn btn-info btn-sm" href="/edit_bank/<?= $b['id'] ?>">
                                 <i class="fas fa-pencil-alt">
                                 </i>
                             </a>
-                            <a class="btn btn-danger btn-sm" href="/delete_katalog/<?= $ktg['id_produk'] ?>" onclick="return confirm('Are you sure ?')">
+                            <a class="btn btn-danger btn-sm" href="/delete_bank/<?= $b['id'] ?>" onclick="return confirm('Are you sure ?')">
                                 <i class="fas fa-trash">
                                 </i>
                             </a>
@@ -127,7 +103,7 @@
             </table>
         </div>
         <div class="ml-4">
-            <?= $pager->links('katalog', 'bootstrap_pagination') ?>
+            <?= $pager->links('bank', 'bootstrap_pagination') ?>
         </div>
     <!-- /.card-body -->
     </div>

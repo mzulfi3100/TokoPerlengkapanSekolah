@@ -4,21 +4,27 @@ namespace App\Controllers;
 
 use App\Models\Katalog;
 use App\Models\WishlistModel;
+use App\Models\categoriesModel;
 
 class productsfoundController extends BaseController
 {
 
     public function Found()
     {
+        $categories = new categoriesModel();
+        $all_data = $categories->findAll();
         $katalogModel = new Katalog();
         $katalog = $katalogModel->findAll();
         $wishlistModel = new WishlistModel();
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => null,
-            'section_navbar_title3' => 'active',
+            'section_navbar_title3' => null,
+            'section_navbar_title4' => null,
+            'section_navbar_title5' => 'active',
             'hero' => 'hero hero-normal',
-            'wishlist' => $wishlistModel->findAll(),
+            'wishlist' => $wishlistModel->where('id_user', user()->id)->findAll(),
+            'all_data' => $all_data,
             'katalog' => $katalog,
             'cart' => \Config\Services::cart(),
         ];

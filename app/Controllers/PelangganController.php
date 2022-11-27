@@ -16,20 +16,7 @@ class PelangganController extends BaseController
 
     public function index()
     {
-        $katalogModel = new Katalog();
-        $katalog = $katalogModel -> findAll();
-
-        $data = [
-            'section_navbar_title1' => null,
-            'section_navbar_title2' => 'active',
-            'section_navbar_title3' => null,
-            'section_navbar_title4' => null,
-            'section_navbar_title5' => null,
-            'katalog' => $katalog,
-            'cart' => \Config\Services::cart(),
-        ];
-
-        return view('pelanggan/index', $data);
+        
     }
 
     public function cari()
@@ -39,7 +26,7 @@ class PelangganController extends BaseController
         $wishlistModel = new WishlistModel();
         $all_data = $categories->findAll();
         $cari = $this->request->getGet('cari');
-        $katalog = $katalogModel->where('nama_produk', $cari)->findAll();
+        $katalog = $katalogModel->like('nama_produk', $cari)->paginate(20);
 
         $data = [
             'section_navbar_title1' => null,
@@ -47,8 +34,10 @@ class PelangganController extends BaseController
             'section_navbar_title3' => null,
             'section_navbar_title4' => null,
             'section_navbar_title5' => null,
+            'hero' => 'hero hero-normal',
             'katalog' => $katalog,
             'all_data' => $all_data,
+            'pager' => $katalogModel->pager,
             'wishlist' => $wishlistModel->where('id_user', user()->id)->findAll(),
             'cart' => \Config\Services::cart(),
         ];
@@ -62,7 +51,7 @@ class PelangganController extends BaseController
         $min =  $this->request->getPost('min');
         $max =  $this->request->getPost('max');
         $sql = "harga_produk >= $min AND harga_produk <= $max";
-        $katalog = $katalogModel->where($sql)->findAll();
+        $katalog = $katalogModel->where($sql)->paginate(20);
         $categories = new categoriesModel();
         $wishlistModel = new WishlistModel();
         $all_data = $categories->findAll();
@@ -73,6 +62,8 @@ class PelangganController extends BaseController
             'section_navbar_title3' => null,
             'section_navbar_title4' => null,
             'section_navbar_title5' => null,
+            'hero' => 'hero hero-normal',
+            'pager' => $katalogModel->pager,
             'katalog' => $katalog,
             'all_data' => $all_data,
             'wishlist' => $wishlistModel->where('id_user', user()->id)->findAll(),
@@ -82,32 +73,26 @@ class PelangganController extends BaseController
         return view('home/shopGrid', $data);
     }
 
-    public function beli_produk()
-    {
-        $data = [
-            'section_navbar_title1' => null,
-            'section_navbar_title2' => 'active',
-            'section_navbar_title3' => null,
-            'section_navbar_title4' => null,
-            'section_navbar_title5' => null,
-        ];
-        return view('pelanggan/beli_produk', $data);
-    }
-
     public function kategori()
     {
         $katalogModel = new katalog();
         $kategori = $this->request->getGet('kategori');
-        $katalog = $katalogModel -> where('id_kategori', $kategori) -> findAll();
-
+        $katalog = $katalogModel -> where('id_kategori', $kategori) -> paginate(20);
+        $categories = new categoriesModel();
+        $all_data = $categories->findAll();
+        $wishlistModel = new WishlistModel();
         $data = [
             'section_navbar_title1' => null,
             'section_navbar_title2' => 'active',
             'section_navbar_title3' => null,
             'section_navbar_title4' => null,
             'section_navbar_title5' => null,
+            'hero' => 'hero hero-normal',
             'katalog' => $katalog,
+            'all_data' => $all_data,
+            'pager' => $katalogModel->pager,
             'cart' => \Config\Services::cart(),
+            'wishlist' => $wishlistModel->where('id_user', user()->id)->findAll(),
         ];
 
         return view('home/shopGrid', $data);

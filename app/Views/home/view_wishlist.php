@@ -19,6 +19,17 @@
     </section>
     <!-- Breadcrumb Section End -->
 
+    <div class="container mt-5">
+        <form action="/search_wishlist" method="get">
+            <div class="float-left">
+                <input type="text" name="keyword" value="" class="form-control" style="width:155pt" placeholder="Keyword pencarian">
+            </div>
+            <div class="float-left ml-2">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+    </div> 
+
     <!-- Shoping Cart Section Begin -->
     <section class="shoping-cart spad">
 
@@ -64,6 +75,13 @@
 
                             </tbody>
                         </table>
+                    </div>
+                    <div class="product__pagination">
+                        <?= $pager->links() ?>
+                        <!-- <a href="#">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#"><i class="fa fa-long-arrow-right"></i></a> -->
                     </div>
                 </div>
             </div>

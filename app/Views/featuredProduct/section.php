@@ -45,7 +45,7 @@
                         <th scope=" row"><?= $no; ?></th>
                         <td> <img src="/uploads/<?= $ktg['gambar_produk']; ?>" width= "200px" height= "200px" alt=""></img></td>
                         <td><?= $ktg['nama_produk']; ?></td>
-                        <td><?= $ktg['harga_produk']; ?></td>
+                        <td><?= "Rp " . number_format($ktg['harga_produk'],0,',','.'); ?></td>
                         <td>
                             <?php if($ktg['featured_produk']  == "no"): ?>
                             <a href="<?= base_url('add_featured') . '/' . $ktg['id_produk'] ?>"><button type="button"

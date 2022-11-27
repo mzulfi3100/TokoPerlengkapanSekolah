@@ -61,6 +61,25 @@
           </div>
           <!-- /.col -->
 
+          <!-- /.col -->
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-credit-card"></i></span>
+
+              <div class="info-box-content">
+                <?php $count = 0; foreach($bank as $b): ?>
+                  <?php $count++ ?>
+                <?php endforeach; ?>
+                <span class="info-box-text">Bank</span>
+                <span class="info-box-number"><?= $count ?></span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+
+
           <!-- fix for small devices only -->
           <div class="clearfix hidden-md-up"></div>
 

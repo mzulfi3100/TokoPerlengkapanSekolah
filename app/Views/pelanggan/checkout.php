@@ -93,21 +93,14 @@
                             <li class="<?= $section_navbar_title1; ?>"><a href="<?= base_url(''); ?>">Home</a></li>
                             <li class="<?= $section_navbar_title2; ?>"><a href="<?= base_url('shopGrid'); ?>">Shop</a>
                             </li>
-                            <li class="<?= $section_navbar_title3; ?>"><a href="#">Pages</a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="<?= base_url(); ?>/shopDetails">Shop Details</a></li>
-                                    <li><a href="<?= base_url(); ?>/shopingCart">Shoping Cart</a></li>
-                                    <li><a href="<?= base_url(); ?>/checkout">Check Out</a></li>
-                                    <li><a href="<?= base_url(); ?>/view_order">Order</a></li>
-                                </ul>
-                            </li>
+                            <li class="<?= $section_navbar_title3; ?>"><a href="<?= base_url(); ?>/view_order">Order</a></li>
                             <?php if(in_groups('pelanggan')): ?>
-                                <li ><a href="/profile">Profile</a></li>
+                                <li class="<?= $section_navbar_title4; ?>"><a href="/profile">Profile</a></li>
                             <?php elseif(in_groups('admin')): ?>
-                                <li ><a href="/list_user/">Profile</a></li>
+                                <li class="<?= $section_navbar_title4; ?>"><a href="/list_user/">Profile</a></li>
                             <?php endif; ?>
                             <?php if(in_groups('admin')): ?>
-                                <li ><a href="<?= base_url(); ?>/admin">Admin</a></li>
+                                <li class="<?= $section_navbar_title5; ?>" ><a href="<?= base_url(); ?>/admin">Admin</a></li>
                             <?php endif; ?>
                         </ul>
                     </nav>
@@ -349,7 +342,8 @@
     <script src="/Assets/js/js/owl.carousel.min.js"></script>
     <script src="https://kit.fontawesome.com/72ae031378.js" crossorigin="anonymous"></script>
 
-    <script>
+    
+<script>
     $('document').ready(function(){
         var ongkir = 0;
         $("#provinsi").on('change', function(){
@@ -428,7 +422,8 @@
         });
     });
     </script>
-
 </body>
 
 </html>
+
+

@@ -38,6 +38,16 @@
         <div class="card-header">
             <h3 class="card-title">Data Pesanan Masuk</h3>
         </div>
+        <div class="card-header">
+            <form action="/search_pesanan" method="get">
+                <div class="float-left">
+                    <input type="text" name="keyword" value="" class="form-control" style="width:155pt" placeholder="Keyword pencarian">
+                </div>
+                <div class="float-left ml-2">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                </div>
+            </form> 
+        </div>
         <div class="card-body p-0">
             <table class="table table-striped projects">
                 <thead>
@@ -79,7 +89,7 @@
                     <?php foreach($checkout as $chc): ?>
                     <tr>
                         <td>
-                            <?= $i++ ?>
+                            <?= $nomor++ ?>
                         </td>
                         <td>
                             <a>
@@ -134,6 +144,9 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
+        </div>
+        <div class="ml-4">
+            <?= $pager->links('checkout', 'bootstrap_pagination') ?>
         </div>
     <!-- /.card-body -->
     </div>

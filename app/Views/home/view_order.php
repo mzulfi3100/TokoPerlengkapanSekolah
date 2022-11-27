@@ -19,9 +19,19 @@
     </section>
     <!-- Breadcrumb Section End -->
 
+    <div class="container mt-5">
+        <form action="/search_order" method="get">
+            <div class="float-left">
+                <input type="text" name="keyword" value="" class="form-control" style="width:155pt" placeholder="Keyword pencarian">
+            </div>
+            <div class="float-left ml-2">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+    </div> 
+
     <!-- Shoping Cart Section Begin -->
     <section class="shoping-cart spad">
-
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -59,15 +69,20 @@
                                     </td>
                                     <td class="order__item__aksi">
                                         <?php if($cot['bukti_bayar'] == null ): ?>
-                                            <a  href="<?= base_url('bukti_bayar/'.$cot['id'])?>" class="btn btn-sm btn-info">Upload Bukti Bayar</a>
+                                            <a  href="<?= base_url('bukti_bayar/'.$cot['id'])?>" class="btn btn-sm btn-info ">
+                                            <i class="fa fa-upload" aria-hidden="true"></i></a>
                                         <?php elseif($cot['status'] == "Menunggu Pembayaran"): ?>
-                                            <a  href="<?= base_url('update_bukti_bayar/'.$cot['id'])?>" class="btn btn-sm btn-info">Update Bukti Bayar</a>
+                                            <a  href="<?= base_url('update_bukti_bayar/'.$cot['id'])?>" class="btn btn-sm btn-info ">
+                                            <i class="fa fa-upload" aria-hidden="true"></i></a>
                                         <?php endif; ?>
-                                        <a href="/detail_order/<?= $cot["id"] ?> " method="get" class="btn btn-sm btn-warning">Detail</a>
+                                        <a href="/detail_order/<?= $cot["id"] ?> " method="get" class="btn btn-sm btn-warning">
+                                        <i class="fa fa-info" aria-hidden="true"></i></a>
                                         <?php if($cot['status'] == "Menunggu Pembayaran"): ?>
-                                            <a  href="<?= base_url('delete_order/'.$cot['id'])?>" class="btn btn-sm btn-danger">Batalkan</a>
+                                            <a  href="<?= base_url('delete_order/'.$cot['id'])?>" class="btn btn-sm btn-danger">
+                                            <i class="fa fa-trash" aria-hidden="true"></i></a>
                                         <?php elseif($cot['status'] == "Dalam Proses Pengiriman"): ?>
-                                            <a  href="<?= base_url('finish_order/'.$cot['id'])?>" class="btn btn-sm btn-danger">Selesai</a>
+                                            <a  href="<?= base_url('finish_order/'.$cot['id'])?>" class="btn btn-sm btn-danger">
+                                            Selesai</a>
                                         <?php endif; ?>
                                     </td>
                                 </tr>
@@ -75,6 +90,9 @@
 
                             </tbody>
                         </table>
+                    </div>
+                    <div class="product__pagination">
+                        <?= $pager->links() ?>
                     </div>
                 </div>
             </div>
