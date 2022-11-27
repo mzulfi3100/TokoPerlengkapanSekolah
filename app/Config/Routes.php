@@ -50,8 +50,6 @@ $routes->get('/delete_katalog/(:num)', 'KatalogController::delete_katalog/$1', [
 $routes->get('/dashboard_cari', 'PelangganController::cari');
 $routes->post('/dashboard_search', 'PelangganController::search');
 
-$routes->post('/register/process', 'Register::process');
-$routes->post('/login/process', 'Login::process');
 $routes->get('/shopGrid', 'Home::shopGrid');
 $routes->get('/shopingCart', 'ShopingCartController::index');
 $routes->get('/profile', 'Home::profile');
@@ -135,6 +133,9 @@ $routes->get('/search_katalog', 'KatalogController::search', ['filter' => 'role:
 $routes->get('/search_pesanan', 'Home::search_pesanan', ['filter' => 'role:pegawai']);
 $routes->get('/search_order', 'Home::search_order');
 $routes->get('/search_wishlist', 'Home::search_wishlist');
+$routes->get('/search_featured', 'Home::search_featured', ['filter' => 'role:admin']);
+$routes->get('/search_categories', 'Home::search_categories', ['filter' => 'role:admin']);
+$routes->get('/search_found', 'Home::search_found', ['filter' => 'role:admin']);
 
 $routes->get('/list_bank', 'Home::list_bank', ['filter' => 'role:pegawai']);
 $routes->get('/create_bank', 'Home::create_bank', ['filter' => 'role:pegawai']);

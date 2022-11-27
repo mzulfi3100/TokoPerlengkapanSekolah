@@ -14,7 +14,7 @@ class productsfoundController extends BaseController
         $categories = new categoriesModel();
         $all_data = $categories->findAll();
         $katalogModel = new Katalog();
-        $katalog = $katalogModel->findAll();
+        $katalog = $katalogModel->paginate(10, 'found');
         $wishlistModel = new WishlistModel();
         $data = [
             'section_navbar_title1' => null,
@@ -26,6 +26,8 @@ class productsfoundController extends BaseController
             'wishlist' => $wishlistModel->where('id_user', user()->id)->findAll(),
             'all_data' => $all_data,
             'katalog' => $katalog,
+            'pager' => $katalogModel->pager,
+            'nomor' =>  nomor($this->request->getVar('page_found'), 10),
             'cart' => \Config\Services::cart(),
         ];
 

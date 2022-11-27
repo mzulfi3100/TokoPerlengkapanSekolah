@@ -332,7 +332,7 @@ class Home extends BaseController
     public function categoriesSection()
     {
         $categories = new categoriesModel();
-        $all_data = $categories->findAll();
+        $all_data = $categories->paginate(10, 'categories');
         $wishlistModel = new WishlistModel();
         $data = [
             'section_navbar_title1' => null,
@@ -343,6 +343,7 @@ class Home extends BaseController
             'hero' => 'hero hero-normal',
             'wishlist' => $wishlistModel->where('id_user', user()->id)->findAll(),
             'all_data' => $all_data,
+            'pager' => $categories->pager,
             'cart' => \Config\Services::cart(),
         ];
         return view('home/categoriesSection', $data);
@@ -599,6 +600,83 @@ class Home extends BaseController
             'cart' => \Config\Services::cart()      
         ]; 
         return view('home/view_wishlist', $data);
+    }
+
+    public function search_featured()
+    {
+        $keyword = $this->request->getGet('keyword');
+        $categories = new categoriesModel();
+        $all_data = $categories->findAll();
+        $wishlistModel = new wishlistModel();
+        $wishlist = $wishlistModel->where('id_user', user()->id)->findAll();
+
+        $katalogModel = new Katalog();
+        $katalog = $katalogModel->like('nama_produk', $keyword)->paginate(10, 'featured');
+        $data = [
+            'section_navbar_title1' => null,
+            'section_navbar_title2' => null,
+            'section_navbar_title3' => null,
+            'section_navbar_title4' => null,
+            'section_navbar_title5' => 'active',
+            'hero' => 'hero hero-normal',
+            'wishlist' => $wishlist,
+            'all_data' => $all_data,
+            'katalog' => $katalog,
+            'pager' => $katalogModel->pager,
+            'nomor' =>  nomor($this->request->getVar('page_featured'), 10),
+            'cart' => \Config\Services::cart()      
+        ]; 
+        return view('featuredProduct/section', $data);
+    }
+
+    public function search_categories()
+    {
+        $keyword = $this->request->getGet('keyword');
+        $categories = new categoriesModel();
+        $all_data = $categories->like('name', $keyword)->paginate(10, 'categories');
+        $wishlistModel = new wishlistModel();
+        $wishlist = $wishlistModel->where('id_user', user()->id)->findAll();
+        $data = [
+            'section_navbar_title1' => null,
+            'section_navbar_title2' => null,
+            'section_navbar_title3' => null,
+            'section_navbar_title4' => null,
+            'section_navbar_title5' => 'active',
+            'hero' => 'hero hero-normal',
+            'wishlist' => $wishlist,
+            'all_data' => $all_data,
+            'pager' => $categories->pager,
+            'nomor' =>  nomor($this->request->getVar('page_categories'), 10),
+            'cart' => \Config\Services::cart()      
+        ]; 
+        return view('home/categoriesSection', $data);
+    }
+
+    public function search_found()
+    {
+        $keyword = $this->request->getGet('keyword');
+        $categories = new categoriesModel();
+        $all_data = $categories->findAll();
+        $wishlistModel = new wishlistModel();
+        $wishlist = $wishlistModel->where('id_user', user()->id)->findAll();
+
+        $katalogModel = new Katalog();
+        $katalog = $katalogModel->like('nama_produk', $keyword)->paginate(10, 'found');
+        $data = [
+            'section_navbar_title1' => null,
+            'section_navbar_title2' => null,
+            'section_navbar_title3' => null,
+            'section_navbar_title4' => null,
+            'section_navbar_title5' => 'active',
+            'hero' => 'hero hero-normal',
+            'wishlist' => $wishlist,
+            'all_data' => $all_data,
+            'katalog' => $katalog,
+            'pager' => $katalogModel->pager,
+            'nomor' =>  nomor($this->request->getVar('page_found'), 10),
+            'cart' => \Config\Services::cart()      
+        ]; 
+        return view('productFound/foundSection', $data);
     }
 
     public function delete_wishlist($id_wishlist)

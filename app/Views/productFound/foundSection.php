@@ -19,6 +19,7 @@
     </div>
 </section>
 <!-- Breadcrumb Section End -->
+
 <!-- Checkout Section Begin -->
 <section class="checkout spad">
     <div class="container">
@@ -27,6 +28,16 @@
         </div>
         <div class="admin">
             <h4>Add Product Found</h4>
+            <div class="container mt-5 mb-7">
+                <form action="/search_found" method="get">
+                    <div class="float-left">
+                        <input type="text" name="keyword" value="" class="form-control" style="width:155pt" placeholder="Keyword pencarian">
+                    </div>
+                    <div class="float-left ml-2">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                    </div>
+                </form>
+            </div> 
             <table class="table mt-5">
                 <thead>
                     <tr>
@@ -39,10 +50,9 @@
                 </thead>
                 <tbody class="isi">
                     <?php
-                    $no = 1;
                     foreach ($katalog as $ktg) : ?>
                     <tr>
-                        <th scope=" row"><?= $no; ?></th>
+                        <th scope=" row"><?= $nomor++; ?></th>
                         <td> <img src="/uploads/<?= $ktg['gambar_produk']; ?>" width= "200px" height= "200px" alt=""></img></td>
                         <td><?= $ktg['nama_produk']; ?></td>
                         <td><?= "Rp " . number_format($ktg['harga_produk'],0,',','.'); ?></td>
@@ -61,10 +71,13 @@
                         </td>
                     </tr>
                     <?php
-                        $no++;
                     endforeach ?>
                 </tbody>
             </table>
-
+            </div>
+        <div class="product__pagination">
+            <?= $pager->links('found') ?>
+        </div>
+    </div>
 </section>
 <?= $this->endSection(); ?>
