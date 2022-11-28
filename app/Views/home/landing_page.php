@@ -118,6 +118,10 @@
                                     </ul>
                                     
                                     </div>
+                                    <div class="product__item__text">
+                                        <h6><a href="#"><?= $ftr['nama_produk']; ?></a></h6>
+                                        <h5><?= "Rp ".number_format($ftr['harga_produk'],0,',','.'); ?></h5>
+                                    </div>
                                 </div>
                             </div>
                     <?php  }  ?>
